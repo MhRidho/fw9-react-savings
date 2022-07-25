@@ -646,6 +646,12 @@ summary div.people div p {
 
 
 /* FOOTER */
+.foot-last {
+    background-color: #6379F4;
+    color: white;
+}
+
+
 footer {
     background-color: #6379F4;
     padding-top: 80px;

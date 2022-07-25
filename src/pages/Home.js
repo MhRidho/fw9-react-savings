@@ -208,7 +208,7 @@ const Home = () => {
                     </Container>
                 </section>
 
-                <footer>
+                {/* <footer>
                     <Container class="px-5 ms-2">
                         <Row>
                             <Col>
@@ -226,7 +226,22 @@ const Home = () => {
                             </Col>
                         </Row>
                     </Container>
-                </footer>
+                </footer> */}
+
+                <Navbar className="p-3 foot-last">
+                    <Container className="px-5">
+                        <span>2020 Zwallet. All right reserved.</span>
+                        <aside className="d-flex">
+                            <div className="d-flex flex-column align-content-center me-4">
+                                <span>+62 5637 8882 9901</span>
+                            </div>
+                            <span>contact@zwallet.com</span>
+                        </aside>
+                    </Container>
+                </Navbar>
+
+
+
             </div>
         </>
     )

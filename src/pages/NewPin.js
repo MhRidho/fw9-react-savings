@@ -64,7 +64,7 @@ const Home = () => {
                             </Col>
 
                             <Col className="ms-md-3">
-                                <Row className="d-flex justify-content-between rounded-4 py-5 px-4 bg-white mt-1">
+                                <Row className="d-flex justify-content-between rounded-4 pt-5 px-4 bg-white mt-1 pad-bot-253px">
                                     <Col className="pb-2 f-color-g">
                                         <div class="d-flex justify-content-between mb-2">
                                             <h1 class="fs-18px fw-bold">Change PIN</h1>
@@ -120,25 +120,17 @@ const Home = () => {
                     </Container>
                 </section>
 
-                <footer>
-                    <Container class="px-5 ms-2">
-                        <Row>
-                            <Col>
-                                <span>2020 Zwallet. All right reserved.</span>
-                            </Col>
-                            <Col>
-                                <Row className="d-flex justify-content-end">
-                                    <Col md={8} className="d-flex justify-content-end">
-                                        <span>+62 5637 8882 9901</span>
-                                    </Col>
-                                    <Col md={4} className="d-flex justify-content-end">
-                                        <span>contact@zwallet.com</span>
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
+                <Navbar className="p-3 foot-last">
+                    <Container className="px-5">
+                        <span>2020 Zwallet. All right reserved.</span>
+                        <aside className="d-flex">
+                            <div className="d-flex flex-column align-content-center me-4">
+                                <span>+62 5637 8882 9901</span>
+                            </div>
+                            <span>contact@zwallet.com</span>
+                        </aside>
                     </Container>
-                </footer>
+                </Navbar>
             </div>
         </>
     )
