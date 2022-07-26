@@ -6,8 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, InputGroup, Form, Stack } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import { FiMail, FiLock } from 'react-icons/fi';
-import Group57 from '../assets/img/Group-57.png';
 import { Link } from 'react-router-dom';
+import WallAuth from '../components/WallAuth';
 
 const Login = () => {
     return (
@@ -19,22 +19,7 @@ const Login = () => {
             {/* START HOME LOGIN */}
             <Container fluid>
                 <Row>
-                    <Col md={7} className="pb-md-5 ps-md-5 cover pt-5">
-                        <h1 className="ms-md-5"><Link className="home-wallet marleft-40px" to={'/landing'}>Savings</Link>
-                        </h1>
-                        <img src={Group57} alt="Group-57" className="ms-md-5" />
-                        <div className="ms-md-5">
-                            <div className="marleft-40px">
-                                <h1 className="text-light fw-700 fs-24px">App that Covering Banking Needs.</h1>
-                                <p className="mt-4 text-white fw-400 fs-16px">Zwallet is an application that focussing in banking
-                                    needs
-                                    for all users<br />
-                                    in the world. Always updated and always following world trends.<br />
-                                    5000+ users registered in Zwallet everyday with worldwide<br />
-                                    users coverage.</p>
-                            </div>
-                        </div>
-                    </Col>
+                    <WallAuth />
 
                     <Col md={5} >
                         <Row className="mx-4">
@@ -74,16 +59,16 @@ const Login = () => {
                                         />
                                     </InputGroup>
                                     <Stack direction="horizontal" gap={3}>
-                                        <div className="ms-auto mt-3 pb-5"><Link className="a-menu fs-14px fw-600" to={'/resetpassword'}>Forgot password?</Link></div>
+                                        <div className="ms-auto mt-3 pb-5"><Link className="a-menu fs-14px fw-600" to={'/reset-password'}>Forgot password?</Link></div>
                                     </Stack>
                                     <div className="d-grid gap-2 pt-5">
-                                        <Link className='btn btn-secondary btn-lg ent-email' to={"/Home"}>
+                                        <Link className='btn btn-secondary btn-lg ent-email' to={"/home"}>
                                             Login
                                         </Link>
                                     </div>
                                     <div className="form-check form-check-reverse position-relative text-center mt-5">
                                         <label className="form-check-label" for="reverseCheck1">
-                                            Don't have an account? Let's <Link className='u-none' to={"/SignUp"}>Sign Up</Link>
+                                            Don't have an account? Let's <Link className='u-none' to={"/sign-up"}>Sign Up</Link>
                                         </label>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 /* ----------------NEW------------------ */
 .background-home {
-    background-color: #E5E5E5;
+    background-color: #7858A6;
 }
 
 .cover {
@@ -9,7 +9,11 @@
 }
 
 .bg-web {
-    background-color: #6379F4;
+    background-color: #4C3575;
+}
+
+.bg-web:hover {
+    background-color: #371B58;
 }
 
 .cover h1 {
@@ -280,6 +284,7 @@
 }
 
 .u-none-back {
+    background-color: #4C3575;
     color: white;
     font-weight: 700;
     font-size: 18px;
@@ -290,9 +295,15 @@
     font-weight: 600;
     font-size: 16px;
     text-decoration: none;
+    color: #371B58;
+}
+
+.u-none-back-manage:hover {
+    color: #7858A6;
 }
 
 .u-none-back:hover {
+    background-color: #371B58;
     color: white;
     font-weight: 700;
     font-size: 18px;
@@ -303,6 +314,15 @@
     border: unset;
 }
 
+.download-pdf:hover {
+    color: white !important;
+    background-color: #4C3575 !important;
+}
+
+.button-share:hover {
+    color: white !important;
+    background-color: #4C3575 !important;
+}
 
 
 
@@ -378,7 +398,7 @@ section {
 }
 
 .main-section {
-    background-color: #6379F4;
+    background-color: #4C3575;
     color: white;
 }
 
@@ -389,6 +409,10 @@ section {
     font-size: 18px;
     height: 3.2rem;
     width: 11rem;
+}
+
+.btn-main-section:hover {
+    background-color: #371B58;
 }
 
 footer {
@@ -406,14 +430,14 @@ footer {
 
 .ank-menu {
     text-decoration: none;
-    color: #3A3D42CC;
+    color: #371B58;
     font-weight: 700;
     font-size: 18px;
 }
 
 .ank-menu:hover {
-    color: #6379F4;
-    border-left: 5px solid #6379F4;
+    color: #7858A6;
+    border-left: 5px solid #7858A6;
 }
 
 

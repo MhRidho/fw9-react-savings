@@ -1,12 +1,13 @@
 import { React } from 'react'
-import { Container, Navbar, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Robert52 from '../assets/img/Robert52.png';
 import Success from '../assets/img/success.png';
 import Sam70 from '../assets/img/sam70.png';
-import { FiBell, FiArrowUp, FiPlus, FiGrid, FiUser, FiLogOut, FiDownload, FiShare2 } from 'react-icons/fi';
+import { FiArrowUp, FiPlus, FiGrid, FiUser, FiLogOut, FiDownload, FiShare2 } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
+import Nav from '../components/navbar';
+import Footer from '../components/Footer';
 
 const Home = () => {
     return (
@@ -16,27 +17,7 @@ const Home = () => {
             </Helmet>
 
             <div className='background-home'>
-                <div className="header-home">
-                    <Navbar className="bg-white py-5 rounded-bottom shadow p-3 mb-5 bg-body">
-                        <Container className="px-5">
-                            <Link className="nav-link fw-bold fs-29px color-web logo-saving" aria-current="page"
-                                to={'/landing'}>Savings</Link>
-                            <aside className="d-flex">
-                                <Col md={3}>
-                                    <img src={Robert52} alt="Robert52.png" className="me-4" />
-                                </Col>
-                                <div className="d-flex flex-column align-content-center me-4">
-                                    <div className="name">
-                                        <h1 className="fs-18px fw-bold">Robert Chandler</h1>
-                                        <p className="fs-13px">+62 8139 3877 7946</p>
-                                    </div>
-                                </div>
-                                <Link className="a-menu d-flex justify-content-center align-items-center"
-                                    to={"/landing"}><FiBell /></Link>
-                            </aside>
-                        </Container>
-                    </Navbar>
-                </div>
+                <Nav />
 
                 <section>
                     <Container>
@@ -49,16 +30,16 @@ const Home = () => {
                                                 <Link className="ank-menu" to={'/home'}><FiGrid className='mx-4 fs-24px' />Dashboard</Link>
                                             </li>
                                             <li className="nav-item">
-                                                <Link className="ank-menu" to={'/searchreceiver'}><FiArrowUp className='mx-4 fs-24px' />Transfer</Link>
+                                                <Link className="ank-menu" to={'/search-receiver'}><FiArrowUp className='mx-4 fs-24px' />Transfer</Link>
                                             </li>
                                             <li className="nav-item">
-                                                <Link className="ank-menu" to={'/topup'}><FiPlus className='mx-4 fs-24px' />Top Up</Link>
+                                                <Link className="ank-menu" to={'/top-up'}><FiPlus className='mx-4 fs-24px' />Top Up</Link>
                                             </li>
                                             <li className="nav-item">
                                                 <Link className="ank-menu" to={'/profile'}><FiUser className='mx-4 fs-24px' />Profile</Link>
                                             </li>
                                             <li className="nav-item martop-554px">
-                                                <Link className="ank-menu" to={'/landing'}><FiLogOut className='mx-4 fs-24px' />Logout</Link>
+                                                <Link className="ank-menu" to={'/'}><FiLogOut className='mx-4 fs-24px' />Logout</Link>
                                             </li>
                                         </ul>
                                     </div>
@@ -124,22 +105,21 @@ const Home = () => {
                                                 <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-5 pb-2">
                                                     <div className="d-grid d-md-flex justify-content-md-end me-2">
                                                         <Button
-                                                            className="btn btn-primary mt-1 btn-lg fw-bold color-web-dark bg-color-gray fs-18px border-none"
+                                                            className="btn btn-primary mt-1 btn-lg fw-bold color-web-dark bg-color-gray fs-18px border-none button-share"
                                                             data-bs-toggle="modal" data-bs-target="#pin" type="button"><FiShare2
                                                                 className="me-2 mb-1" /></Button>
                                                     </div>
                                                     <div className="d-grid d-md-flex justify-content-md-end me-2">
                                                         <Button
-                                                            className="btn btn-primary mt-1 btn-lg fw-bold color-web bg-color-gray fs-18px border-none"
+                                                            className="btn btn-primary mt-1 btn-lg fw-bold color-web bg-color-gray fs-18px border-none download-pdf"
                                                             data-bs-toggle="modal" data-bs-target="#pin" type="button"><FiDownload
                                                                 className="me-2 mb-1" />Download
                                                             PDF</Button>
                                                     </div>
                                                     <div className="d-grid d-md-flex justify-content-md-end">
-                                                        <Button className="btn btn-primary mt-1 btn-lg text-white"
-                                                            data-bs-toggle="modal" data-bs-target="#pin" type="button"><Link
-                                                                className="u-none-back" to={'/home'}>Back to
-                                                                Home</Link></Button>
+                                                        <Link
+                                                            className="u-none-back btn btn-primary mt-1 btn-lg text-white border-none" to={'/home'}>Back to
+                                                            Home</Link>
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,17 +132,7 @@ const Home = () => {
                     </Container>
                 </section>
 
-                <Navbar className="p-3 foot-last">
-                    <Container className="px-5">
-                        <span>2020 Zwallet. All right reserved.</span>
-                        <aside className="d-flex">
-                            <div className="d-flex flex-column align-content-center me-4">
-                                <span>+62 5637 8882 9901</span>
-                            </div>
-                            <span>contact@zwallet.com</span>
-                        </aside>
-                    </Container>
-                </Navbar>
+                <Footer />
             </div>
         </>
     )

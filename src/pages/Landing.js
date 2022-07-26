@@ -22,7 +22,7 @@ const Home = () => {
                     <h1>Savings</h1>
                     <div class='buttonlanding'>
                         <button className='b-login'><Link to={'/login'} class="a-login">Login</Link></button >
-                        <button className='b-sign'><Link to={'/signup'} class="a-sign">Sign Up</Link></button >
+                        <button className='b-sign'><Link to={'/sign-up'} class="a-sign">Sign Up</Link></button >
                     </div>
                 </nav>
                 <main>
@@ -32,7 +32,7 @@ const Home = () => {
                                 For Saving Time.</h1>
                             <p>We bring you a mobile app for banking problems that<br />
                                 oftenly wasting much of your times.</p>
-                            <button className="b-sign"><Link to={'/signup'} className="a-sign">Try It Free</Link></button>
+                            <button className="b-sign"><Link to={'/sign-up'} className="a-sign">Try It Free</Link></button>
                         </div>
                     </div>
                     <div className='wallpaper'>

@@ -1,10 +1,11 @@
 import { React } from 'react'
-import { Container, Navbar, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Robert52 from '../assets/img/Robert52.png';
-import { FiBell, FiArrowUp, FiPlus, FiGrid, FiUser, FiLogOut } from 'react-icons/fi';
+import { FiArrowUp, FiPlus, FiGrid, FiUser, FiLogOut } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
+import Nav from '../components/navbar';
+import Footer from '../components/Footer';
 
 const Home = () => {
     return (
@@ -14,27 +15,7 @@ const Home = () => {
             </Helmet>
 
             <div className='background-home'>
-                <div className="header-home">
-                    <Navbar className="bg-white py-5 rounded-bottom shadow p-3 mb-5 bg-body">
-                        <Container className="px-5">
-                            <Link className="nav-link fw-bold fs-29px color-web logo-saving" aria-current="page"
-                                to={'/landing'}>Savings</Link>
-                            <aside className="d-flex">
-                                <Col md={3}>
-                                    <img src={Robert52} alt="Robert52.png" className="me-4" />
-                                </Col>
-                                <div className="d-flex flex-column align-content-center me-4">
-                                    <div className="name">
-                                        <h1 className="fs-18px fw-bold">Robert Chandler</h1>
-                                        <p className="fs-13px">+62 8139 3877 7946</p>
-                                    </div>
-                                </div>
-                                <Link className="a-menu d-flex justify-content-center align-items-center"
-                                    to={"/landing"}><FiBell /></Link>
-                            </aside>
-                        </Container>
-                    </Navbar>
-                </div>
+                <Nav />
 
                 <section>
                     <Container>
@@ -120,17 +101,7 @@ const Home = () => {
                     </Container>
                 </section>
 
-                <Navbar className="p-3 foot-last">
-                    <Container className="px-5">
-                        <span>2020 Zwallet. All right reserved.</span>
-                        <aside className="d-flex">
-                            <div className="d-flex flex-column align-content-center me-4">
-                                <span>+62 5637 8882 9901</span>
-                            </div>
-                            <span>contact@zwallet.com</span>
-                        </aside>
-                    </Container>
-                </Navbar>
+                <Footer />
             </div>
         </>
     )

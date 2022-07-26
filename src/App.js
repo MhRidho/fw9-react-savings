@@ -31,28 +31,28 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='login' element={<Login />} />
-        <Route path='loginfilled' element={<LoginFilled />} />
-        <Route path='signup' element={<SignUp />} />
-        <Route path='pinblank' element={<PinBlank />} />
-        <Route path='pinsuccess' element={<PinSuccess />} />
-        <Route path='resetpassword' element={<ResetPassword />} />
-        <Route path='newpassword' element={<CreateNewPassword />} />
+        <Route path='login-filled' element={<LoginFilled />} />
+        <Route path='sign-up' element={<SignUp />} />
+        <Route path='pin-blank' element={<PinBlank />} />
+        <Route path='pin-success' element={<PinSuccess />} />
+        <Route path='reset-password' element={<ResetPassword />} />
+        <Route path='new-password' element={<CreateNewPassword />} />
         <Route path='home' element={<Home />} />
         <Route path='history' element={<History />} />
-        <Route path='searchreceiver' element={<SearchReceiver />} />
-        <Route path='inputamountblank' element={<InputAmountBlank />} />
-        <Route path='inputamountfilled' element={<InputAmountFilled />} />
+        <Route path='search-receiver' element={<SearchReceiver />} />
+        <Route path='input-amount-blank' element={<InputAmountBlank />} />
+        <Route path='input-amount-filled' element={<InputAmountFilled />} />
         <Route path='confirmation' element={<Confirmation />} />
         <Route path='success' element={<Success />} />
         <Route path='failed' element={<Failed />} />
-        <Route path='topup' element={<TopUp />} />
+        <Route path='top-up' element={<TopUp />} />
         <Route path='profile' element={<Profile />} />
-        <Route path='personalinfo' element={<PersonalInfo />} />
-        <Route path='changepassword' element={<ChangePassword />} />
-        <Route path='changepin' element={<ChangePin />} />
-        <Route path='newpin' element={<NewPin />} />
-        <Route path='addphone' element={<AddPhoneNumber />} />
-        <Route path='managephone' element={<ManagePhoneNumber />} />
+        <Route path='personal-info' element={<PersonalInfo />} />
+        <Route path='change-password' element={<ChangePassword />} />
+        <Route path='change-pin' element={<ChangePin />} />
+        <Route path='new-pin' element={<NewPin />} />
+        <Route path='add-phone' element={<AddPhoneNumber />} />
+        <Route path='manage-phone' element={<ManagePhoneNumber />} />
       </Routes>
     </BrowserRouter>
   )
