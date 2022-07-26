@@ -1,8 +1,8 @@
 import React from 'react';
 import '../assets/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Formik } from 'formik';
-// import * as Yup from 'yup';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import { Container, Row, Col, InputGroup, Form, Stack } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import { FiMail, FiLock } from 'react-icons/fi';
@@ -10,42 +10,66 @@ import { Link } from 'react-router-dom';
 import WallAuth from '../components/WallAuth';
 
 
-// const loginSchema = Yup.object().shape({
-//     email: Yup.string().email('Invalid email address format').required(),
-//     password: Yup.string().min(4).required()
-// })
+const loginSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email address format').required(),
+    password: Yup.string().min(4).required()
+})
 
-// const AuthForm = ({ errors, handleSubmit, handleChange }) => {
-//     return (
-//         <Form noValidate>
-//             <Form.Group className='mb-3' controlId='formBasicEmail'>
-//                 <Form.Label>Email Address</Form.Label>
-//                 <Form.Control type='email' placeholder='Enter email' isInvalid={!!errors.email} />
-//                 <Form.Control.Feedback type='invalid'>{errors.email}</Form.Control.Feedback>
-//             </Form.Group>
-//             <Form.Group className='mb-3' controlId='formBasicEmail'>
-//                 <Form.Label>Password</Form.Label>
-//                 <Form.Control name='password' onChange={handleChange} type='password' placeholder='Password' isInvalid={!!errors.password} />
-//                 <Form.Control.Feedback type='invalid'>{errors.password}</Form.Control.Feedback>
-//             </Form.Group>
+const AuthForm = ({ errors, handleSubmit, handleChange }) => {
+    return (
+        <Form noValidate>
+            <InputGroup className="mb-5" controlId='formBasicEmail'>
+                <InputGroup.Text id="basic-addon1" className='form inp-logo'><FiMail className='color-A9A9A999 fs-22px' /></InputGroup.Text>
+                <Form.Control
+                    type="email"
+                    id="form"
+                    placeholder="Enter your e-mail"
+                    isInvalid={!!errors.email}
+                />
+                <Form.Control.Feedback
+                    type='invalid'
+                >
+                    {errors.email}
+                </Form.Control.Feedback>
+            </InputGroup>
+            <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1" className='inp-logo'><FiLock className='color-A9A9A999 fs-22px' /></InputGroup.Text>
+                <Form.Control
+                    name="password"
+                    id="form"
+                    onChange={handleChange}
+                    type="password"
+                    placeholder="Enter your password"
+                    isInvalid={!!errors.password}
+                />
+                <Form.Control.Feedback
+                    type='invalid'
+                >
+                    {errors.password}
+                </Form.Control.Feedback>
+            </InputGroup>
+            <Stack direction="horizontal" gap={3}>
+                <div className="ms-auto mt-3 pb-5"><Link className="a-menu fs-14px fw-600" to={'/reset-password'}>Forgot password?</Link></div>
+            </Stack>
+            <div className="d-grid gap-2 pt-5">
+                <Link className='btn btn-secondary btn-lg ent-email' to={"/home"}>
+                    Login
+                </Link>
+            </div>
 
-//             <Button variant='primary' type='submit'>Login</Button>
-
-//         </Form>
-//     )
-// }
-
+        </Form>
+    )
+}
 
 
 const Login = () => {
-    // const onLoginRequest = (val) => {
-    //     if (val.email === 'ridho@gmail.com' && val.password === 'ridho12345') {
-    //         window.alert('Login Success')
-    //     } else {
-    //         window.alert('Login Failed')
-    //     }
-    // }
-
+    const onLoginRequest = (val) => {
+        if (val.email === 'ridho@gmail.com' && val.password === 'ridho12345') {
+            window.alert('Login Success')
+        } else {
+            window.alert('Login Failed')
+        }
+    }
 
     return (
         <>
@@ -76,40 +100,10 @@ const Login = () => {
                                 </div>
 
                                 <div className="mt-5">
-                                    <InputGroup className="mb-5">
-                                        <InputGroup.Text id="basic-addon1" className='form inp-logo'><FiMail className='color-A9A9A999 fs-22px' /></InputGroup.Text>
-                                        <Form.Control
-                                            id="form"
-                                            placeholder="Enter your e-mail"
-                                            aria-label="Username"
-                                            aria-describedby="basic-addon1"
-                                        />
-                                    </InputGroup>
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="basic-addon1" className='inp-logo'><FiLock className='color-A9A9A999 fs-22px' /></InputGroup.Text>
-                                        <Form.Control
-                                            id="form"
-                                            type="password"
-                                            placeholder="Enter your password"
-                                            aria-label="Username"
-                                            aria-describedby="basic-addon1"
-                                        />
-                                    </InputGroup>
-                                    <Stack direction="horizontal" gap={3}>
-                                        <div className="ms-auto mt-3 pb-5"><Link className="a-menu fs-14px fw-600" to={'/reset-password'}>Forgot password?</Link></div>
-                                    </Stack>
-                                    <div className="d-grid gap-2 pt-5">
-                                        <Link className='btn btn-secondary btn-lg ent-email' to={"/home"}>
-                                            Login
-                                        </Link>
-                                    </div>
 
-                                    {/* <Formik onSubmit={onLoginRequest} initialValues={{ email: '', password: '' }} validationSchema={loginSchema}>
+                                    <Formik onSubmit={onLoginRequest} initialValues={{ email: '', password: '' }} validationSchema={loginSchema}>
                                         {(props) => <AuthForm {...props} />}
-                                    </Formik> */}
-
-
-
+                                    </Formik>
 
                                     <div className="form-check form-check-reverse position-relative text-center my-5">
                                         <label className="form-check-label" for="reverseCheck1">
