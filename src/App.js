@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Landing from './pages/Landing';
-import Login from './pages/Login';
-import LoginFilled from './pages/LoginFilled';
-import SignUp from './pages/SignUp';
-import PinBlank from './pages/PinBlank';
-import PinSuccess from './pages/PinSuccess';
-import ResetPassword from './pages/ResetPassword';
-import CreateNewPassword from './pages/CreateNewPassword';
+import Landing from './auth/Landing';
+// Routes auth public
+import Login from './auth/Login';
+import LoginFilled from './auth/LoginFilled';
+import SignUp from './auth/SignUp';
+import PinBlank from './auth/PinBlank';
+import PinSuccess from './auth/PinSuccess';
+import ResetPassword from './auth/ResetPassword';
+import CreateNewPassword from './auth/CreateNewPassword';
+// Routes pages private
 import Home from './pages/Home';
 import History from './pages/History';
 import SearchReceiver from './pages/SearchReceiver';
@@ -25,10 +27,14 @@ import NewPin from './pages/NewPin';
 import AddPhoneNumber from './pages/AddPhoneNumber';
 import ManagePhoneNumber from './pages/ManagePhoneNumber';
 
+import PrivateRoute from './components/PrivateRoute';
+
 const App = () => {
+  useEffect(() => { }, []);
   return (
     <BrowserRouter>
       <Routes>
+        {/* Routes Public */}
         <Route path='/' element={<Landing />} />
         <Route path='login' element={<Login />} />
         <Route path='login-filled' element={<LoginFilled />} />
@@ -37,7 +43,9 @@ const App = () => {
         <Route path='pin-success' element={<PinSuccess />} />
         <Route path='reset-password' element={<ResetPassword />} />
         <Route path='new-password' element={<CreateNewPassword />} />
-        <Route path='home' element={<Home />} />
+
+        {/* Routes Private */}
+        <Route path='home' element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path='history' element={<History />} />
         <Route path='search-receiver' element={<SearchReceiver />} />
         <Route path='input-amount-blank' element={<InputAmountBlank />} />
