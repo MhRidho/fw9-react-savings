@@ -3,9 +3,9 @@ import { Helmet } from 'react-helmet'
 
 import '../assets/css/styles.css';
 import Partners from '../assets/img/partners.png'
-import PngPhone from '../assets/img/PngPhone.png'
-import PngPhone2 from '../assets/img/PngPhone2.png'
-import PngPhone3 from '../assets/img/PngPhone3.png'
+import PngPhone from '../assets/img/PngPhonePurple-min.png'
+import PngPhone2 from '../assets/img/PngPhone2Purple.png'
+import PngPhone3 from '../assets/img/PngPhone3Purple-min.png'
 import Profile from '../assets/img/1.png'
 import { Link } from 'react-router-dom';
 import { FiArrowRight, FiArrowLeft, FiPhone, FiLock, FiDownload } from 'react-icons/fi';
@@ -105,7 +105,7 @@ const Home = () => {
           <div className="colart-2">
             <div>
               <h1>All The <span>Great</span><br />
-                Zwallet Features.</h1>
+                Savings Features.</h1>
             </div>
             <div className="ul-features">
               <div className="li-features">
@@ -162,7 +162,7 @@ const Home = () => {
 
       {/* <!-- START FOOTER --> */}
       <footer>
-        <div><span class="footer">Zwallet</span></div>
+        <div><span class="footer">Savings</span></div>
         <div>
           <p>Simplify financial needs and saving much time in banking needs with one single app.</p>
         </div>
@@ -170,10 +170,10 @@ const Home = () => {
           <hr />
         </div>
         <div class="contact">
-          <span>2020 Zwallet. All right reserved.</span>
+          <span>2022 Savings. All right reserved.</span>
           <div class="numb">
             <span>+62 5637 8882 9901</span>
-            <span>contact@zwallet.com</span>
+            <span>contact@savings.com</span>
           </div>
         </div>
       </footer>

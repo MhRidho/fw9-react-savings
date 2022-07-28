@@ -4,16 +4,20 @@
 }
 
 .cover {
-  background-image: url(../img/Mask-Group.png);
+  background-image: url(../img/Mask-Group-Purple-min.png);
   background-repeat: no-repeat;
 }
 
 .bg-web {
-  background-color: #4C3575;
+  background-color: #4C3575 !important;
 }
 
 .bg-web:hover {
   background-color: #371B58;
+}
+
+.color-7858A6 {
+  color: #7858A6 !important;
 }
 
 .cover h1 {
@@ -145,7 +149,7 @@
 }
 
 .color-soft-gray {
-  color: #B5BDCC;
+  color: #B5BDCC !important;
 }
 
 .color-soft-gray-2 {
@@ -214,6 +218,10 @@
 .s-receiver:focus {
   box-shadow: none;
   background-color: rgba(58, 61, 66, 0.1);
+}
+
+.bor-bot-none {
+  border-bottom: none !important;
 }
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam70.png';
 import { FiLogOut, FiEdit2 } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
@@ -8,6 +8,63 @@ import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import Footer from '../components/Footer';
 import AsideMenu from '../components/AsideMenu';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+
+
+const transferSchema = Yup.object().shape({
+  nominal: Yup.number()
+    .required()
+    .min(10000, 'Should tranfer at least 10000')
+    .max(5000000, 'Please transfer under 5000000')
+})
+
+
+const TransferForm = ({ errors, handleSubmit, handleChange }) => {
+  const navigate = useNavigate();
+
+  const onNext = () => {
+    navigate('/confirmation')
+  }
+  return (
+    <Form noValidate>
+      <Row className="mt-4 d-flex justify-content-center">
+        <Col md={4}>
+          <div class="input-group mb-sm-3 mt-sm-2 martop-40px">
+            <input
+              name="nominal"
+              onChange={handleChange}
+              type="number"
+              class="form-control form color-7858A6 fs-42px text-center fw-bold bor-bot-none"
+              placeholder='0.00'
+              isInvalid={!!errors.nominal}
+            />
+          </div>
+          <div type="invalid">
+            {errors.nominal}
+          </div>
+        </Col>
+      </Row>
+      <div class="row text-center mt-2">
+        <h2 class="fs-16px fw-bold">Rp120.000 Available</h2>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+          <div class="input-group mb-sm-5 mt-sm-5 martop-40px">
+            <span class="input-group-text form color-web-gray-3" id="basic-addon1"><FiEdit2 /></span>
+            <input type="text" class="form-control form"
+              placeholder="Add some notes" aria-label="Username"
+              aria-describedby="basic-addon1" />
+          </div>
+        </div>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+        <Button onClick={onNext} class="btn btn-primary btn-lg bg-web" type="submit">Continue</Button>
+      </div>
+    </Form>
+  )
+}
+
 
 const Home = () => {
   return (
@@ -53,25 +110,9 @@ const Home = () => {
                       <p class="mt-4 fs-16px color-soft-gray-2">Type the amount you want to transfer and
                         then<br />
                         press continue to the next steps.</p>
-                      <div class="row text-center mt-5">
-                        <h1 class="fs-42px fw-bold color-soft-gray">0.00</h1>
-                      </div>
-                      <div class="row text-center mt-4">
-                        <h2 class="fs-16px fw-bold">Rp120.000 Available</h2>
-                      </div>
-                      <div class="row d-flex justify-content-center">
-                        <div class="col-md-6">
-                          <div class="input-group mb-sm-5 mt-sm-5 martop-40px">
-                            <span class="input-group-text form color-web-gray-3" id="basic-addon1"><FiEdit2 /></span>
-                            <input type="password" class="form-control form color-soft-gray"
-                              placeholder="Add some notes" aria-label="Username"
-                              aria-describedby="basic-addon1" />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                        <Link to={'/input-amount-filled'} class="btn btn-primary btn-lg bg-web" type="button">Continue</Link>
-                      </div>
+                      <Formik validationSchema={transferSchema} initialValues={{ nominal: '' }}>
+                        {(props) => <TransferForm {...props} />}
+                      </Formik>
                     </div>
                   </div>
                 </div>

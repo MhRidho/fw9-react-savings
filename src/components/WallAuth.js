@@ -1,5 +1,5 @@
 import React from 'react'
-import Group57 from '../assets/img/Group-57.png';
+import Group57 from '../assets/img/Group-57-purple.png';
 import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 

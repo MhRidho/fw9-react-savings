@@ -14,7 +14,6 @@ import Home from './pages/Home';
 import History from './pages/History';
 import SearchReceiver from './pages/SearchReceiver';
 import InputAmountBlank from './pages/InputAmountBlank';
-import InputAmountFilled from './pages/InputAmountFilled';
 import Confirmation from './pages/Confirmation';
 import Success from './pages/Success';
 import Failed from './pages/Failed';
@@ -49,7 +48,6 @@ const App = () => {
         <Route path='history' element={<History />} />
         <Route path='search-receiver' element={<SearchReceiver />} />
         <Route path='input-amount-blank' element={<InputAmountBlank />} />
-        <Route path='input-amount-filled' element={<InputAmountFilled />} />
         <Route path='confirmation' element={<Confirmation />} />
         <Route path='success' element={<Success />} />
         <Route path='failed' element={<Failed />} />

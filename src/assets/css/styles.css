@@ -6,7 +6,7 @@
 
 /* CSS for Header nav */
 header {
-  background-image: url(../img/MaskGroup.png);
+  background-image: url(../img/MaskGroupPurple-min.png);
   background-size: cover;
   padding: 63px 150px 0;
 }
@@ -44,11 +44,11 @@ header nav .buttonlanding button .a-login {
 }
 
 header nav .buttonlanding button .a-sign {
-  color: #6379F4;
+  color: #4C3575;
 }
 
 header nav .buttonlanding button.b-login {
-  background-color: #6379F4;
+  background-color: #4C3575;
   border: 1px solid white;
 }
 
@@ -57,6 +57,9 @@ header nav .buttonlanding button.b-sign {
   border: 1px solid #6379f4;
 }
 
+header main div div.aside button a {
+  color: #4C3575 !important;
+}
 
 
 
@@ -72,7 +75,7 @@ header nav .buttonlanding button.b-sign {
 }
 
 .cover {
-  background-image: url(/src/assets/img/Mask-Group.png);
+  background-image: url(/src/assets/img/Mask-Group-Purple-min.png);
   background-repeat: no-repeat;
 }
 
@@ -110,10 +113,12 @@ header nav .buttonlanding button.b-sign {
 
 .ent-email {
   color: #88888F !important;
+  background-color: #371B58 !important;
 }
 
 .ent-email:hover {
   color: white !important;
+  background-color: #371B58 !important;
 }
 
 .color-88888F {
@@ -323,6 +328,11 @@ header nav .buttonlanding button.b-sign {
   color: #6379F4 !important;
 }
 
+.have-signup {
+  text-decoration: none;
+  color: #4C3575 !important;
+}
+
 
 
 
@@ -462,7 +472,7 @@ main.about div.h1 h1 {
 }
 
 main.about div.h1 h1 span {
-  color: #6379F4;
+  color: #7858A6;
 }
 
 main.about div.p {
@@ -487,7 +497,7 @@ main.about div.row-card div.card div.img {
 }
 
 main.about div.row-card div.card div.img .i {
-  color: #6379F4;
+  color: #4C3575;
   background-color: rgba(98, 86, 225, 0.1);
   padding: 18px;
   border-radius: 50%;
@@ -545,7 +555,7 @@ article div.rowart div.colart-2 div h1 {
 }
 
 article div.rowart div.colart-2 div h1 span {
-  color: #6379F4;
+  color: #7858A6;
 }
 
 article div.rowart div.colart-2 .ul-features {
@@ -572,7 +582,7 @@ article div.rowart div.colart-2 .ul-features .title {
 }
 
 article div.rowart div.colart-2 .ul-features .title span {
-  color: #6379F4;
+  color: #7858A6;
 }
 
 
@@ -591,7 +601,7 @@ summary div h1 {
 }
 
 summary div h1 span {
-  color: #6379F4;
+  color: #7858A6;
 }
 
 summary div p {
@@ -653,7 +663,7 @@ summary div.people div p {
 
 
 footer {
-  background-color: #6379F4;
+  background-color: #4C3575 !important;
   padding-top: 80px;
   padding-right: 150px;
   padding-bottom: 78px;
@@ -717,7 +727,7 @@ footer div.numb {
 
 @media screen and (max-width: 768px) {
   header {
-    background-image: url(../img/MaskGroup.png);
+    background-image: url(../img/MaskGroupPurple-min.png);
     background-size: cover;
     padding: 63px 30px 20px;
   }

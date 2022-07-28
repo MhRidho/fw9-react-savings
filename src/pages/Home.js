@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import Graphic from '../assets/img/graphic.png';
+import Graphic from '../assets/img/graphicPurple.png';
 import Satu from '../assets/img/sam1.png';
 import Dua from '../assets/img/chris56.png';
 import Netflix from '../assets/img/netflix.png';

@@ -10,13 +10,19 @@ import { Link } from 'react-router-dom';
 import WallAuth from '../components/WallAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address format').required(),
-  password: Yup.string().min(4).required()
+  password: Yup.string()
+    .required()
+    .min(6, 'Should more than 6 characters')
+    .matches(/[a-z]/g, 'Should content at least 1 lowercase')
+    .matches(/[A-Z]/g, 'Should contain at least 1 uppercase')
+    .matches(/[0-9]/g, 'Should contain at least 1 number')
+    .matches(/^\S*$/, 'Should not contain spaces')
 })
 
-const AuthForm = ({ errors, handleSubmit, handleChange }) => {
+const AuthForm = ({ errors, handleSubmit, handleChange, handleBlur }) => {
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -27,16 +33,16 @@ const AuthForm = ({ errors, handleSubmit, handleChange }) => {
   return (
     <Form noValidate>
       <InputGroup className="mb-5" controlId='formBasicEmail'>
-        <InputGroup.Text id="basic-addon1" className='form inp-logo'><FiMail className='color-A9A9A999 fs-22px' /></InputGroup.Text>
+        <InputGroup.Text id="basic-addon1" className='inp-logo'><FiMail className='color-A9A9A999 fs-22px' /></InputGroup.Text>
         <Form.Control
-          type="email"
+          name="email"
+          onChange={handleChange}
+          onBlur={handleBlur}
           id="form"
           placeholder="Enter your e-mail"
           isInvalid={!!errors.email}
         />
-        <Form.Control.Feedback
-          type='invalid'
-        >
+        <Form.Control.Feedback type='invalid'>
           {errors.email}
         </Form.Control.Feedback>
       </InputGroup>
@@ -44,15 +50,13 @@ const AuthForm = ({ errors, handleSubmit, handleChange }) => {
         <InputGroup.Text id="basic-addon1" className='inp-logo'><FiLock className='color-A9A9A999 fs-22px' /></InputGroup.Text>
         <Form.Control
           name="password"
-          id="form"
           onChange={handleChange}
+          id="form"
           type="password"
           placeholder="Enter your password"
           isInvalid={!!errors.password}
         />
-        <Form.Control.Feedback
-          type='invalid'
-        >
+        <Form.Control.Feedback type='invalid'>
           {errors.password}
         </Form.Control.Feedback>
       </InputGroup>
@@ -64,7 +68,7 @@ const AuthForm = ({ errors, handleSubmit, handleChange }) => {
         {location.state?.errorMsg && (
           <Alert variant='danger'>{location.state.errorMsg}</Alert>
         )}
-        <Button className='btn btn-secondary btn-lg ent-email' onClick={onLogin}>
+        <Button onClick={onLogin} className='btn btn-secondary btn-lg ent-email' type='submit'>
           Login
         </Button>
       </div>
@@ -75,10 +79,11 @@ const AuthForm = ({ errors, handleSubmit, handleChange }) => {
 
 
 const Login = () => {
-
+  const navigate = useNavigate();
   const onLoginRequest = (val) => {
-    if (val.email === 'ridho@gmail.com' && val.password === 'ridho12345') {
+    if (val.email === 'ridho@gmail.com' && val.password === 'Ridho12345') {
       window.alert('Login Success')
+      navigate('/home');
     } else {
       window.alert('Login Failed')
     }
@@ -114,13 +119,13 @@ const Login = () => {
 
                 <div className="mt-5">
 
-                  <Formik onSubmit={onLoginRequest} initialValues={{ email: '', password: '' }} validationSchema={loginSchema}>
+                  <Formik validationSchema={loginSchema} onSubmit={onLoginRequest} initialValues={{ email: '', password: '' }} >
                     {(props) => <AuthForm {...props} />}
                   </Formik>
 
                   <div className="form-check form-check-reverse position-relative text-center my-5">
                     <label className="form-check-label" for="reverseCheck1">
-                      Don't have an account? Let's <Link className='u-none' to={"/sign-up"}>Sign Up</Link>
+                      Don't have an account? Let's <Link className='have-signup' to={"/sign-up"}>Sign Up</Link>
                     </label>
                   </div>
                 </div>
