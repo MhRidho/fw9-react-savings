@@ -1,13 +1,14 @@
+import React from "react";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
-    const auth = localStorage.getItem("auth");
+    const token = useSelector((state) => state.auth.token);
 
-    return auth ? (
-        children
-    ) : (
-        <Navigate to="/login" replace={true} state={{ errorMsg: "You must login to access this page" }} />
-    );
+    if (token) {
+        return children;
+    }
+    return <Navigate to={'/login'} />
 };
 
 export default PrivateRoute;

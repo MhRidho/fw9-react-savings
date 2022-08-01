@@ -25,8 +25,12 @@ import ChangePin from './pages/ChangePin';
 import NewPin from './pages/NewPin';
 import AddPhoneNumber from './pages/AddPhoneNumber';
 import ManagePhoneNumber from './pages/ManagePhoneNumber';
+import Counter from './pages/Counter';
+import ListCharacter from './pages/ListCharacter';
 
 import PrivateRoute from './components/PrivateRoute';
+
+// import ListCharacter from './pages/ListCharacter';
 
 const App = () => {
   useEffect(() => { }, []);
@@ -42,6 +46,8 @@ const App = () => {
         <Route path='pin-success' element={<PinSuccess />} />
         <Route path='reset-password' element={<ResetPassword />} />
         <Route path='new-password' element={<CreateNewPassword />} />
+        <Route path='counter' element={<Counter />} />
+        <Route path='list-character' element={<ListCharacter />} />
 
         {/* Routes Private */}
         <Route path='home' element={<PrivateRoute><Home /></PrivateRoute>} />
@@ -59,6 +65,7 @@ const App = () => {
         <Route path='new-pin' element={<NewPin />} />
         <Route path='add-phone' element={<AddPhoneNumber />} />
         <Route path='manage-phone' element={<ManagePhoneNumber />} />
+        {/* <Route path='list-character' element={<ListCharacter />} /> */}
       </Routes>
     </BrowserRouter>
   )

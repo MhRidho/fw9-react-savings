@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import '../assets/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Formik } from 'formik';
@@ -6,9 +6,10 @@ import * as Yup from 'yup';
 import { Container, Row, Col, InputGroup, Form, Stack, Button, Alert } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import { FiMail, FiLock } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import WallAuth from '../components/WallAuth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { login } from '../redux/asyncActions/auth';
+import { useDispatch, useSelector } from 'react-redux';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address format').required(),
@@ -21,73 +22,70 @@ const loginSchema = Yup.object().shape({
     .matches(/^\S*$/, 'Should not contain spaces')
 })
 
-const AuthForm = ({ errors, handleSubmit, handleChange, handleBlur }) => {
-
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const onLogin = () => {
-    localStorage.setItem('auth', 'password');
-    navigate('/home')
-  }
+const LoginForm = (props) => {
+  const successMsg = useSelector((state) => state.auth.successMsg);
+  const errorMsg = useSelector((state) => state.auth.errorMsg);
   return (
-    <Form noValidate>
+    <Form noValidate onSubmit={props.handleSubmit}>
+      {successMsg && <Alert variant='success'>{successMsg}</Alert>}
+      {errorMsg && <Alert variant='danger'>{errorMsg}</Alert>}
       <InputGroup className="mb-5" controlId='formBasicEmail'>
         <InputGroup.Text id="basic-addon1" className='inp-logo'><FiMail className='color-A9A9A999 fs-22px' /></InputGroup.Text>
         <Form.Control
+          type="email"
           name="email"
-          onChange={handleChange}
-          onBlur={handleBlur}
+          value={props.values.email}
+          onChange={props.handleChange}
           id="form"
           placeholder="Enter your e-mail"
-          isInvalid={!!errors.email}
+          isInvalid={!!props.errors.email}
         />
-        <Form.Control.Feedback type='invalid'>
-          {errors.email}
-        </Form.Control.Feedback>
+        <Form.Control.Feedback type='invalid'></Form.Control.Feedback>
       </InputGroup>
       <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon1" className='inp-logo'><FiLock className='color-A9A9A999 fs-22px' /></InputGroup.Text>
         <Form.Control
-          name="password"
-          onChange={handleChange}
-          id="form"
           type="password"
+          name="password"
+          value={props.values.password}
+          onChange={props.handleChange}
+          id="form"
           placeholder="Enter your password"
-          isInvalid={!!errors.password}
+          isInvalid={!!props.errors.password}
         />
-        <Form.Control.Feedback type='invalid'>
-          {errors.password}
-        </Form.Control.Feedback>
+        <Form.Control.Feedback type='invalid'></Form.Control.Feedback>
       </InputGroup>
       <Stack direction="horizontal" gap={3}>
         <div className="ms-auto mt-3 pb-5"><Link className="a-menu fs-14px fw-600" to={'/reset-password'}>Forgot password?</Link></div>
       </Stack>
       <div className="d-grid gap-2 pt-5">
-
-        {location.state?.errorMsg && (
-          <Alert variant='danger'>{location.state.errorMsg}</Alert>
-        )}
-        <Button onClick={onLogin} className='btn btn-secondary btn-lg ent-email' type='submit'>
+        <Button className='btn btn-secondary btn-lg ent-email' type='submit'>
           Login
         </Button>
       </div>
 
     </Form>
-  )
-}
+  );
+
+};
+
+
 
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
-  const onLoginRequest = (val) => {
-    if (val.email === 'ridho@gmail.com' && val.password === 'Ridho12345') {
-      window.alert('Login Success')
+
+  const onLogin = (value) => {
+    const data = { email: value.email, password: value.password };
+    dispatch(login(data));
+  };
+  useEffect(() => {
+    if (token) {
       navigate('/home');
-    } else {
-      window.alert('Login Failed')
     }
-  }
+  }, [navigate, token]);
 
   return (
     <>
@@ -119,8 +117,8 @@ const Login = () => {
 
                 <div className="mt-5">
 
-                  <Formik validationSchema={loginSchema} onSubmit={onLoginRequest} initialValues={{ email: '', password: '' }} >
-                    {(props) => <AuthForm {...props} />}
+                  <Formik validationSchema={loginSchema} onSubmit={onLogin} initialValues={{ email: '', password: '' }} >
+                    {(props) => <LoginForm {...props} />}
                   </Formik>
 
                   <div className="form-check form-check-reverse position-relative text-center my-5">
@@ -138,5 +136,6 @@ const Login = () => {
     </>
   )
 }
+
 
 export default Login;

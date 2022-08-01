@@ -1,71 +1,85 @@
-import { React, useState, useEffect } from 'react'
+import { React, useEffect } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import Graphic from '../assets/img/graphicPurple.png';
 import Satu from '../assets/img/sam1.png';
-import Dua from '../assets/img/chris56.png';
-import Netflix from '../assets/img/netflix.png';
-import Adobe from '../assets/img/adobe.png';
 import { FiArrowUp, FiPlus, FiLogOut, FiArrowDown } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfile } from '../redux/asyncActions/profiles'
+import { logout } from '../redux/reducers/auth';
 
 const Home = () => {
-  const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+  const profile = useSelector((state) => state.profile.data);
+
+  console.log(profile);
+
+  const onLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
 
   useEffect(() => {
-    getUsers();
-  }, [])
+    dispatch(getProfile(token));
+  }, []);
 
-  const getUsers = () => {
-    const response = {
-      success: true,
-      message: 'List Users',
-      "results": [
-        {
-          "id": 1,
-          "img": Satu,
-          "name": "Samuel Suhi",
-          "transtype": 'Transfer',
-          "amount": '50.000'
-        },
-        {
-          "id": 2,
-          "img": Netflix,
-          "name": "Netflix",
-          "transtype": 'Subscription',
-          "amount": '149.000'
-        },
-        {
-          "id": 3,
-          "img": Dua,
-          "name": "Christine Mar...",
-          "transtype": 'Transfer',
-          "amount": '150.000'
-        },
-        {
-          "id": 4,
-          "img": Adobe,
-          "name": "Adobe Inc.",
-          "transtype": 'Subscription',
-          "amount": '249.000'
-        }
-      ]
-    }
-    setUsers(response.results);
-  }
+  // const [users, setUsers] = useState([]);
+
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
+
+  // const getUsers = () => {
+  //   const response = {
+  //     success: true,
+  //     message: 'List Users',
+  //     "results": [
+  //       {
+  //         "id": 1,
+  //         "img": Satu,
+  //         "name": "Samuel Suhi",
+  //         "transtype": 'Transfer',
+  //         "amount": '50.000'
+  //       },
+  //       {
+  //         "id": 2,
+  //         "img": Netflix,
+  //         "name": "Netflix",
+  //         "transtype": 'Subscription',
+  //         "amount": '149.000'
+  //       },
+  //       {
+  //         "id": 3,
+  //         "img": Dua,
+  //         "name": "Christine Mar...",
+  //         "transtype": 'Transfer',
+  //         "amount": '150.000'
+  //       },
+  //       {
+  //         "id": 4,
+  //         "img": Adobe,
+  //         "name": "Adobe Inc.",
+  //         "transtype": 'Subscription',
+  //         "amount": '249.000'
+  //       }
+  //     ]
+  //   }
+  //   setUsers(response.results);
+  // }
 
 
-  const navigate = useNavigate();
-  const onLogout = () => {
-    localStorage.removeItem('auth');
-    navigate('/');
-  }
-
-
+  // const navigate = useNavigate();
+  // const onLogout = () => {
+  //   localStorage.removeItem('auth');
+  //   navigate('/');
+  // }
   return (
     <>
       <Helmet>
@@ -96,6 +110,7 @@ const Home = () => {
                     <span className="fs-18px">Balance</span>
                     <h1 className="fs-40px">Rp120.000</h1>
                     <p className="fs-14px">+62 813-9387-7946</p>
+                    <p>Profile {profile?.email}</p>
                   </div>
                   <div className="col-md-3 d-flex flex-column justify-content-evenly ps-md-4">
                     <Link className="btn btn-primary btn-lg btn-main-section" to={'/search-receiver'}><FiArrowUp className="mx-2" />Transfer</Link>
@@ -133,18 +148,18 @@ const Home = () => {
                     </Row>
 
                     <div>
-                      {users.map((user) => (
-                        <div class="nav justify-content-between d-flex align-items-center mt-4">
-                          <Row>
-                            <img src={user.img} alt="3.png" className="me-3" />
-                          </Row>
-                          <div class="col">
-                            <h1 class="mt-3 fs-16px fw-bold ms-4">{user.name}</h1>
-                            <p class="fs-14px ms-4">{user.transtype}</p>
-                          </div>
-                          <span class="fs-16px fw-bold color-green-web">+Rp{user.amount}</span>
+                      {/* {users.map((user) => ( */}
+                      <div class="nav justify-content-between d-flex align-items-center mt-4">
+                        <Row>
+                          <img src={Satu} alt="3.png" className="me-3" />
+                        </Row>
+                        <div class="col">
+                          <h1 class="mt-3 fs-16px fw-bold ms-4">Samuel</h1>
+                          <p class="fs-14px ms-4">Transfer</p>
                         </div>
-                      ))}
+                        <span class="fs-16px fw-bold color-green-web">+Rp{profile?.username}</span>
+                      </div>
+                      {/* // ))} */}
                     </div>
                   </Col>
                 </Row>

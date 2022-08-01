@@ -61,6 +61,15 @@ header main div div.aside button a {
   color: #4C3575 !important;
 }
 
+.logo {
+  width: 40px;
+  display: flex;
+}
+
+.logo img {
+  width: 30px;
+}
+
 
 
 

@@ -9,8 +9,11 @@ import PngPhone3 from '../assets/img/PngPhone3Purple-min.png'
 import Profile from '../assets/img/1.png'
 import { Link } from 'react-router-dom';
 import { FiArrowRight, FiArrowLeft, FiPhone, FiLock, FiDownload } from 'react-icons/fi';
+import { useSelector } from 'react-redux';
+import logo from '../assets/img/logo savings.png'
 
 const Home = () => {
+  const count = useSelector((state) => state.counter.value);
   return (
     <>
       <Helmet>
@@ -19,7 +22,10 @@ const Home = () => {
       {/* START HEADER */}
       <header>
         <nav>
-          <h1>Savings</h1>
+          <div className='logo'>
+            <img src={logo} alt='logo.png' />
+            <h1>Savings</h1>
+          </div>
           <div class='buttonlanding'>
             <button className='b-login'><Link to={'/login'} class="a-login">Login</Link></button >
             <button className='b-sign'><Link to={'/sign-up'} class="a-sign">Sign Up</Link></button >
@@ -32,7 +38,8 @@ const Home = () => {
                 For Saving Time.</h1>
               <p>We bring you a mobile app for banking problems that<br />
                 oftenly wasting much of your times.</p>
-              <button className="b-sign"><Link to={'/sign-up'} className="a-sign">Try It Free</Link></button>
+              <button className="b-sign"><Link to={'/home'} className="a-sign">Try It Home</Link></button>
+              {/* <h1>{count}</h1> */}
             </div>
           </div>
           <div className='wallpaper'>
