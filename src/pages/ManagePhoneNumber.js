@@ -8,7 +8,7 @@ import Nav from '../components/navbar';
 import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
 
-const Home = () => {
+const ManagePhoneNumber = () => {
   return (
     <>
       <Helmet>
@@ -21,31 +21,20 @@ const Home = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <Col md={3} className="mt-md-1">
-                <Row>
-                  <div className="offcanvas-body bg-white rounded-4">
-                    <ul className="d-md-flex gap-5 navbar-nav justify-content-end ms-4 mt-5 pb-5">
-                      <AsideMenu />
-                      <li className="nav-item martop-270px">
-                        <Link className="ank-menu" to={'/'}><FiLogOut className='mx-4 fs-24px' />Logout</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </Row>
-              </Col>
+              <AsideMenu />
 
               <Col className="ms-md-3">
                 <Row className="d-flex justify-content-between rounded-4 pt-5 px-4 bg-white mt-1 pad-bot-304px">
                   <Col className="pb-2 f-color-g">
                     <div>
                       <h1 className="fs-18px fw-700">Manage Phone Number</h1>
-                      <p class="mt-3">You can only delete the phone number and then<br /> you must add another phone
+                      <p className="mt-3">You can only delete the phone number and then<br /> you must add another phone
                         number.
                       </p>
                     </div>
-                    <div class="row d-flex justify-content-center mt-5 mb-5">
+                    <div className="row d-flex justify-content-center mt-5 mb-5">
                       <div
-                        class="col-lg-11 nav justify-content-between d-flex align-items-center shadow-sm p-2 mb-5 bg-body rounded">
+                        className="col-lg-11 nav justify-content-between d-flex align-items-center shadow-sm p-2 mb-5 bg-body rounded">
                         <div className="col mt-3 ms-3 mar-right-40px" >
                           <p className="fs-16px">Primary</p>
                           <h1 className="fs-22px fw-700">+62 813-9387-7946</h1>
@@ -69,4 +58,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default ManagePhoneNumber;

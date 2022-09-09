@@ -8,7 +8,7 @@ import Nav from '../components/navbar';
 import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
 
-const Home = () => {
+const AddPhoneNumber = () => {
   return (
     <>
       <Helmet>
@@ -36,19 +36,19 @@ const Home = () => {
               <Col className="ms-md-3">
                 <Row className="d-flex justify-content-between rounded-4 py-5 px-4 bg-white mt-1">
                   <Col className="pb-2 f-color-g">
-                    <div class="d-flex justify-content-between mb-2">
-                      <h1 class="fs-18px fw-bold">Add Phone Number</h1>
+                    <div className="d-flex justify-content-between mb-2">
+                      <h1 className="fs-18px fw-bold">Add Phone Number</h1>
                     </div>
                     <div>
-                      <div class="d-flex justify-content-between my-4 pb-4">
+                      <div className="d-flex justify-content-between my-4 pb-4">
                         <span>Add at least one phone number for the transfer<br /> ID so you can start transfering your money to<br /> another user.</span>
                       </div>
-                      <div class="col-md-7 mx-auto mt-5 pb-4">
-                        <div class="d-flex flex-column">
-                          <div class="row">
-                            <div class="input-group mb-3 martop-73px">
-                              <span class="input-group-text form" id="basic-addon1"><FiPhone />
-                                <h5 class="ms-2 mt-2">+62</h5>
+                      <div className="col-md-7 mx-auto mt-5 pb-4">
+                        <div className="d-flex flex-column">
+                          <div className="row">
+                            <div className="input-group mb-3 martop-73px">
+                              <span className="input-group-text form" id="basic-addon1"><FiPhone />
+                                <h5 className="ms-2 mt-2">+62</h5>
                               </span>
                               <input type="password" className="form-control form color-web-gray-3 fs-16px"
 
@@ -58,8 +58,8 @@ const Home = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-7 m-auto pb-5">
-                        <div class="d-grid gap-2">
+                      <div className="col-md-7 m-auto pb-5">
+                        <div className="d-grid gap-2">
                           <Link
                             className="a-login color-btn-bef btn btn-primary btn-lg bg-btn-bef mt-5" to={'/managephone'}>Add Phone Number</Link>
                         </div>
@@ -81,4 +81,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default AddPhoneNumber;

@@ -5,14 +5,18 @@ import Satu from '../assets/img/sam70.png';
 import Momo from '../assets/img/momo.png';
 import Jes70 from '../assets/img/jes70.png';
 import Mic70 from '../assets/img/mic70.png';
-import { FiLogOut, FiSearch } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
 
-const Home = () => {
+const SearchReceiver = () => {
+
+
+
+
   const [receivers, setReceivers] = useState([]);
 
   useEffect(() => {
@@ -65,24 +69,13 @@ const Home = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <Col md={3} className="mt-md-1">
-                <Row>
-                  <div className="offcanvas-body bg-white rounded-4">
-                    <ul className="d-md-flex gap-5 navbar-nav justify-content-end ms-4 mt-5 pb-5">
-                      <AsideMenu />
-                      <li className="nav-item martop-313px">
-                        <Link className="ank-menu" to={'/'}><FiLogOut className='mx-4 fs-24px' />Logout</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </Row>
-              </Col>
+              <AsideMenu />
 
-              <div class="col ms-md-3">
-                <div class="row d-flex justify-content-between rounded-4 pt-5 px-4 bg-white mt-1">
-                  <div class="col pb-2 f-color-g">
-                    <div class="d-flex justify-content-between mb-3">
-                      <h1 class="fs-18px fw-bold">Search Receiver</h1>
+              <div className="col ms-md-3">
+                <div className="row d-flex justify-content-between rounded-4 pt-5 px-4 bg-white mt-1">
+                  <div className="col pb-2 f-color-g">
+                    <div className="d-flex justify-content-between mb-3">
+                      <h1 className="fs-18px fw-bold">Search Receiver</h1>
                     </div>
                     <InputGroup size="lg" className="mb-3">
                       <InputGroup.Text id="basic-addon1" className='s-receiver'><FiSearch className='color-A9A9A9' /></InputGroup.Text>
@@ -93,11 +86,10 @@ const Home = () => {
                         aria-describedby="basic-addon1"
                       />
                     </InputGroup>
-
                     <div>
                       {receivers.map((receiver) => (
                         <div
-                          class="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded">
+                          className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded">
                           <Row><img src={receiver.img} alt="3.png" className='mar-right-20px' /></Row>
                           <Col className="ms-3">
                             <Link className="u-none color-4D4B57" to={'/input-amount-blank'}><h1 class="mt-3 fs-16px fw-bold">{receiver.name}</h1></Link>
@@ -105,38 +97,6 @@ const Home = () => {
                           </Col>
                         </div>
                       ))}
-                      {/* <div
-                                                class="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded">
-                                                <Row><img src={Satu} alt="3.png" className='mar-right-20px' /></Row>
-                                                <Col className="ms-3">
-                                                    <Link className="u-none color-4D4B57" to={'/inputamountblank'}><h1 class="mt-3 fs-16px fw-bold">Samuel Suhi</h1></Link>
-                                                    <p class="fs-14px">+62 813-8492-9994</p>
-                                                </Col>
-                                            </div>
-                                            <div
-                                                class="nav justify-content-between d-flex align-items-center shadow-sm p-3 mb-2 bg-body rounded">
-                                                <Row><img src={Momo} alt="3.png" className='mar-right-20px' /></Row>
-                                                <Col className="ms-3">
-                                                    <h1 className="mt-3 fs-16px fw-bold">Momo Taro</h1>
-                                                    <p className='fs-14px'>+62 812-4343-6731</p>
-                                                </Col>
-                                            </div>
-                                            <div
-                                                class="nav justify-content-between d-flex align-items-center shadow-sm p-3 mb-2 bg-body rounded">
-                                                <Row><img src={Jes70} alt="3.png" className='mar-right-20px' /></Row>
-                                                <Col className="ms-3">
-                                                    <h1 className="mt-3 fs-16px fw-bold">Jessica Keen</h1>
-                                                    <p className="fs-14px">+62 811-3452-5252</p>
-                                                </Col>
-                                            </div>
-                                            <div
-                                                class="nav justify-content-between d-flex align-items-center shadow-sm p-3 bg-body rounded">
-                                                <Row><img src={Mic70} alt="3.png" className='mar-right-20px' /></Row>
-                                                <Col className='ms-3'>
-                                                    <h1 class="mt-3 fs-16px fw-bold">Michael Le</h1>
-                                                    <p className="fs-14px">+62 810-4224-4613</p>
-                                                </Col>
-                                            </div> */}
                     </div>
                   </div>
                 </div>
@@ -152,4 +112,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default SearchReceiver;

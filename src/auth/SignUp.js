@@ -20,10 +20,10 @@ const signupSchema = Yup.object().shape({
   password: Yup.string()
     .required()
     .min(6, 'Should more than 6 characters')
-    .matches(/[a-z]/g, 'Should contain at least 1 lowercase')
-    .matches(/[A-Z]/g, 'Should contain at least 1 uppercase')
-    .matches(/[0-9]/g, 'Should contain at least 1 number')
-    .matches(/^\S*$/g, 'Should not contain spaces')
+  // .matches(/[a-z]/g, 'Should contain at least 1 lowercase')
+  // .matches(/[A-Z]/g, 'Should contain at least 1 uppercase')
+  // .matches(/[0-9]/g, 'Should contain at least 1 number')
+  // .matches(/^\S*$/g, 'Should not contain spaces')
 });
 
 const RegisterForm = (props) => {
@@ -57,7 +57,7 @@ const RegisterForm = (props) => {
           placeholder="Enter your username"
           isInvalid={!!props.errors.username}
         />
-        <Form.Control.Feedback type='invalid'></Form.Control.Feedback>
+        <Form.Control.Feedback type='invalid'>{props.errors.username}</Form.Control.Feedback>
       </InputGroup>
       <InputGroup className="mb-5">
         <InputGroup.Text id="basic-addon1" className='form inp-log'><FiMail className='color-A9A9A999 fs-22px' /></InputGroup.Text>
@@ -70,7 +70,7 @@ const RegisterForm = (props) => {
           placeholder="Enter your e-mail"
           isInvalid={!!props.errors.email}
         />
-        <Form.Control.Feedback type='invalid'></Form.Control.Feedback>
+        <Form.Control.Feedback type='invalid'>{props.errors.email}</Form.Control.Feedback>
       </InputGroup>
       <InputGroup className="mb-5">
         <InputGroup.Text id="basic-addon1" className='form inp-log'><FiLock className='color-A9A9A999 fs-22px' /></InputGroup.Text>
@@ -83,6 +83,7 @@ const RegisterForm = (props) => {
           placeholder="Enter your password"
           isInvalid={!!props.errors.password}
         />
+        <Form.Control.Feedback type='invalid'>{props.errors.password}</Form.Control.Feedback>
       </InputGroup>
       <div className="d-grid gap-2 pt-5">
         <Button className='btn btn-secondary btn-lg sign-hover' type='submit'>
@@ -131,14 +132,14 @@ const Signup = () => {
               <Col md={10}>
                 <div>
                   <h1 className="martop-120px fs-24px fw-700 line-height-32px color-3A3D42">Start Accessing Banking Needs<br />
-                    With All Devices and All Platforms<br />
+                    With All Devices and All Platforms
                     With 30.000+ Users</h1>
                 </div>
                 <div>
                   <p className="martop-30px fs-16px color-3A3D4299 line-height-30px">
-                    Transfering money is eassier than ever, you can access<br />
+                    Transfering money is eassier than ever, you can access
                     Zwallet wherever you are. Desktop,
-                    laptop, mobile phone?<br />
+                    laptop, mobile phone?
                     we cover all of that for you!
                   </p>
                 </div>

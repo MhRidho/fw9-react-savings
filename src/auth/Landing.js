@@ -9,11 +9,11 @@ import PngPhone3 from '../assets/img/PngPhone3Purple-min.png'
 import Profile from '../assets/img/1.png'
 import { Link } from 'react-router-dom';
 import { FiArrowRight, FiArrowLeft, FiPhone, FiLock, FiDownload } from 'react-icons/fi';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import logo from '../assets/img/logo savings.png'
 
 const Home = () => {
-  const count = useSelector((state) => state.counter.value);
+  // const count = useSelector((state) => state.counter.value);
   return (
     <>
       <Helmet>

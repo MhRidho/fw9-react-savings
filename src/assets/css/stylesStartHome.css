@@ -581,4 +581,16 @@ footer {
   .li-menu-logout {
     margin-top: 264px;
   }
+
+  .logout-sr {
+    margin-top: 313px;
+  }
+
+  .logout-tu {
+    margin-top: 405px;
+  }
+
+  .logout-profile {
+    margin-top: 227px;
+  }
 }

@@ -1,7 +1,7 @@
 import { React } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Failed from '../assets/img/failed.png';
+import Failed1 from '../assets/img/failed.png';
 import Sam70 from '../assets/img/sam70.png';
 import { FiLogOut } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
@@ -10,7 +10,7 @@ import Nav from '../components/navbar';
 import Footer from '../components/Footer';
 import AsideMenu from '../components/AsideMenu';
 
-const Home = () => {
+const Failed = () => {
   return (
     <>
       <Helmet>
@@ -23,18 +23,7 @@ const Home = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <Col md={3} className="mt-md-1">
-                <Row>
-                  <div className="offcanvas-body bg-white rounded-4">
-                    <ul className="d-md-flex gap-5 navbar-nav justify-content-end ms-4 mt-5 pb-5">
-                      <AsideMenu />
-                      <li className="nav-item martop-270px">
-                        <Link className="ank-menu" to={'/'}><FiLogOut className='mx-4' />Logout</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </Row>
-              </Col>
+              <AsideMenu />
 
               <Col className="ms-md-3">
                 <Row className="d-flex justify-content-between rounded-4 py-5 px-4 bg-white mt-1">
@@ -42,7 +31,7 @@ const Home = () => {
                     <Row>
                       <div className="text-center mt-2">
                         <Col md={1} className='mx-auto'>
-                          <img src={Failed} alt="failed.png" />
+                          <img src={Failed1} alt="failed.png" />
                         </Col>
                         <h1 className="fs-18px fw-bold my-4">Transfer Failed</h1>
                         <span>We can't transfer your money at the moment, we recommend you to check your<br /> internet connection and try again.</span>
@@ -115,4 +104,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default Failed;

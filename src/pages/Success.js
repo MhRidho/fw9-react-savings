@@ -1,16 +1,16 @@
 import { React } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Success from '../assets/img/success.png';
+import Success1 from '../assets/img/success.png';
 import Sam70 from '../assets/img/sam70.png';
-import { FiLogOut, FiDownload, FiShare2 } from 'react-icons/fi';
+import { FiDownload, FiShare2 } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
 
-const Home = () => {
+const Success = () => {
   return (
     <>
       <Helmet>
@@ -23,18 +23,7 @@ const Home = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <Col md={3} className="mt-md-1">
-                <Row>
-                  <div className="offcanvas-body bg-white rounded-4">
-                    <ul className="d-md-flex gap-5 navbar-nav justify-content-end ms-4 mt-5 pb-5">
-                      <AsideMenu />
-                      <li className="nav-item martop-554px">
-                        <Link className="ank-menu" to={'/'}><FiLogOut className='mx-4 fs-24px' />Logout</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </Row>
-              </Col>
+              <AsideMenu />
 
               <Col className="ms-md-3">
                 <Row className="d-flex justify-content-between rounded-4 pt-5 pb-4 px-4 bg-white mt-1">
@@ -42,7 +31,7 @@ const Home = () => {
                     <Row>
                       <div className="text-center mt-2">
                         <Col md={1} className='mx-auto'>
-                          <img src={Success} alt="success.png" />
+                          <img src={Success1} alt="success.png" />
                         </Col>
                         <h1 className="fs-18px fw-bold mt-4">Transfer Success</h1>
                       </div>
@@ -128,4 +117,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default Success;

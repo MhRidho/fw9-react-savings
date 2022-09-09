@@ -1,8 +1,8 @@
 import React from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam70.png';
-import { FiLogOut, FiEdit2 } from 'react-icons/fi';
+import { FiEdit2 } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
@@ -10,7 +10,6 @@ import Footer from '../components/Footer';
 import AsideMenu from '../components/AsideMenu';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-
 
 const transferSchema = Yup.object().shape({
   nominal: Yup.number()
@@ -30,12 +29,12 @@ const TransferForm = ({ errors, handleSubmit, handleChange }) => {
     <Form noValidate>
       <Row className="mt-4 d-flex justify-content-center">
         <Col md={4}>
-          <div class="input-group mb-sm-3 mt-sm-2 martop-40px">
+          <div className="input-group mb-sm-3 mt-sm-2 martop-40px">
             <input
               name="nominal"
               onChange={handleChange}
               type="number"
-              class="form-control form color-7858A6 fs-42px text-center fw-bold bor-bot-none"
+              className="form-control form color-7858A6 fs-42px text-center fw-bold bor-bot-none"
               placeholder='0.00'
               isInvalid={!!errors.nominal}
             />
@@ -45,28 +44,28 @@ const TransferForm = ({ errors, handleSubmit, handleChange }) => {
           </div>
         </Col>
       </Row>
-      <div class="row text-center mt-2">
-        <h2 class="fs-16px fw-bold">Rp120.000 Available</h2>
+      <div className="row text-center mt-2">
+        <h2 className="fs-16px fw-bold">Rp120.000 Available</h2>
       </div>
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-6">
-          <div class="input-group mb-sm-5 mt-sm-5 martop-40px">
-            <span class="input-group-text form color-web-gray-3" id="basic-addon1"><FiEdit2 /></span>
-            <input type="text" class="form-control form"
+      <div className="row d-flex justify-content-center">
+        <div className="col-md-6">
+          <div className="input-group mb-sm-5 mt-sm-5 martop-40px">
+            <span className="input-group-text form color-web-gray-3" id="basic-addon1"><FiEdit2 /></span>
+            <input type="text" className="form-control form"
               placeholder="Add some notes" aria-label="Username"
               aria-describedby="basic-addon1" />
           </div>
         </div>
       </div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-        <Button onClick={onNext} class="btn btn-primary btn-lg bg-web" type="submit">Continue</Button>
+      <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+        <Button onClick={onNext} className="btn btn-primary btn-lg bg-web" type="submit">Continue</Button>
       </div>
     </Form>
   )
 }
 
 
-const Home = () => {
+const InputAmountBlank = () => {
   return (
     <>
       <Helmet>
@@ -79,18 +78,7 @@ const Home = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <Col md={3} className="mt-md-1">
-                <Row>
-                  <div className="offcanvas-body bg-white rounded-4">
-                    <ul className="d-md-flex gap-5 navbar-nav justify-content-end ms-4 mt-5 pb-5">
-                      <AsideMenu />
-                      <li className="nav-item martop-270px">
-                        <Link className="ank-menu" to={'/'}><FiLogOut className='mx-4 fs-24px' />Logout</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </Row>
-              </Col>
+              <AsideMenu />
 
               <div className="col ms-md-3">
                 <div className="row d-flex justify-content-between rounded-4 py-5 px-4 bg-white mt-1">
@@ -128,4 +116,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default InputAmountBlank;

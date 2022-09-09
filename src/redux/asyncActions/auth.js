@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import qs from 'qs';
 import http from '../../helpers/http';
 
-export const login = createAsyncThunk('auth/login', async (request) => {
+export const login = createAsyncThunk('/auth/login', async (request) => {
   const result = {};
   try {
     const send = qs.stringify(request);
@@ -20,11 +20,28 @@ export const login = createAsyncThunk('auth/login', async (request) => {
   }
 });
 
-export const register = createAsyncThunk('auth/register', async (request) => {
+export const register = createAsyncThunk('/auth/register', async (request) => {
   const result = {};
   try {
     const send = qs.stringify(request);
     const { data } = await http().post('/auth/register', send, {
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded'
+      }
+    });
+    result.successMsg = data.message;
+    return result;
+  } catch (e) {
+    result.errorMsg = e.error.data.message;
+    return result;
+  }
+});
+
+export const topUp = createAsyncThunk('/auth/topup', async (request) => {
+  const result = {};
+  try {
+    const send = qs.stringify(request);
+    const { data } = await http().post('/auth/topup', send, {
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
       }

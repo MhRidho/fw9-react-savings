@@ -1,14 +1,27 @@
-import { React } from 'react'
+import { React, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FiLogOut } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfileLogin, getUserLogin } from '../redux/asyncActions/profiles';
 
-const Home = () => {
+const PersonalInfo = () => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const profile = useSelector((state) => state.profile.data);
+
+  useEffect(() => {
+    dispatch(getProfileLogin(token));
+    dispatch(getUserLogin(token));
+  }, []);
+  console.log(profile.fullname);
+  console.log(profile.phonenumber);
+  console.log(profile.email);
+
   return (
     <>
       <Helmet>
@@ -21,61 +34,50 @@ const Home = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <Col md={3} className="mt-md-1">
-                <Row>
-                  <div className="offcanvas-body bg-white rounded-4">
-                    <ul className="d-md-flex gap-5 navbar-nav justify-content-end ms-4 mt-5 pb-5">
-                      <AsideMenu />
-                      <li className="nav-item martop-219px">
-                        <Link className="ank-menu" to={'/'}><FiLogOut className='mx-4 fs-24px' />Logout</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </Row>
-              </Col>
+              <AsideMenu />
 
               <Col className="ms-md-3">
                 <Row className="d-flex justify-content-between rounded-4 pt-5 pb-4 px-4 bg-white mt-1">
                   <Col className="pb-2 f-color-g">
-                    <div class="d-flex justify-content-between mb-2">
-                      <h1 class="fs-18px fw-bold">Personal Information</h1>
+                    <div className="d-flex justify-content-between mb-2">
+                      <h1 className="fs-18px fw-bold">Personal Information</h1>
                     </div>
                     <div>
-                      <div class="d-flex justify-content-between my-4">
+                      <div className="d-flex justify-content-between my-4">
                         <span>We got your personal information from the sign<br /> up proccess. If you want
                           to
                           make changes on<br /> your information, contact our support.</span>
                       </div>
                       <div
-                        class="nav justify-content-between d-flex align-items-center mt-2 shadow-sm p-2 bg-body rounded">
-                        <div class="col mar-right-40px">
-                          <p class="fs-16px">First Name
+                        className="nav justify-content-between d-flex align-items-center mt-2 shadow-sm p-2 bg-body rounded">
+                        <div className="col mar-right-40px">
+                          <p className="fs-16px">First Name
                           </p>
-                          <h1 class="fs-18px fw-bold color-web-dark-2">Robert</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">Robert</h1>
                         </div>
                       </div>
                       <div
-                        class="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-2 bg-body rounded">
-                        <div class="col mar-right-40px">
-                          <p class="fs-16px">Last Name
+                        className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-2 bg-body rounded">
+                        <div className="col mar-right-40px">
+                          <p className="fs-16px">Last Name
                           </p>
-                          <h1 class="fs-18px fw-bold color-web-dark-2">Chandler</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">Chandler</h1>
                         </div>
                       </div>
                       <div
-                        class="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-2 bg-body rounded">
-                        <div class="col mar-right-40px">
-                          <p class="fs-16px">Verified E-mail
+                        className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-2 bg-body rounded">
+                        <div className="col mar-right-40px">
+                          <p className="fs-16px">Verified E-mail
                           </p>
-                          <h1 class="fs-18px fw-bold color-web-dark-2">pewdiepie1@gmail.com</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">{profile.email}</h1>
                         </div>
                       </div>
                       <div
-                        class="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-2 bg-body rounded">
-                        <div class="col mar-right-40px">
-                          <p class="fs-16px">Phone Number
+                        className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-2 bg-body rounded">
+                        <div className="col mar-right-40px">
+                          <p className="fs-16px">Phone Number
                           </p>
-                          <h1 class="fs-18px fw-bold color-web-dark-2">+62 813-9387-7946</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">+62 813-9387-7946</h1>
                         </div>
                         <Link className="u-none-back-manage me-2" to={'/manage-phone'}>Manage</Link>
                       </div>
@@ -83,15 +85,13 @@ const Home = () => {
                   </Col>
                 </Row>
               </Col>
-
             </Row>
           </Container>
         </section>
-
         <Footer />
       </div>
     </>
   )
 }
 
-export default Home;
+export default PersonalInfo;

@@ -37,11 +37,11 @@ const auth = createSlice({
     });
     build.addCase(register.fulfilled, (state, action) => {
       state.errorMsg = action.payload?.errorMsg;
-      state.errorMsg = action.payload?.successMsg;
+      state.successMsg = action.payload?.successMsg;
     })
   }
 });
 
-export { login };
+export { login, register };
 export const { logout } = auth.actions;
 export default auth.reducer;

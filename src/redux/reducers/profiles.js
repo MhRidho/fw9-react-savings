@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfile } from "../asyncActions/profiles";
+import { getProfileLogin, getUserLogin } from "../asyncActions/profiles";
 
 const initialState = {
+  data: [],
   result: {}
 };
 
@@ -10,14 +11,14 @@ const profile = createSlice({
   initialState,
   reducers: {},
   extraReducers: (build) => {
-    build.addCase(getProfile.fulfilled, (state, action) => {
+    build.addCase(getProfileLogin.fulfilled, (state, action) => {
+      state.data = action.payload.results;
+    });
+    build.addCase(getUserLogin.fulfilled, (state, action) => {
       state.data = action.payload.results;
     });
   }
 });
 
-console.log(getProfile);
-console.log(profile.reducer);
-
-export { getProfile };
+export { getProfileLogin, getUserLogin };
 export default profile.reducer;
