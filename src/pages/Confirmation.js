@@ -1,6 +1,6 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam70.png';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
@@ -9,15 +9,84 @@ import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from "react-redux";
 import { transfer } from '../redux/asyncActions/transfer';
+import { Formik } from 'formik';
+
+const EnterPin = ({ handleSubmit, handleChange }) => {
+  return (
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          <p>Enter your 6 digits PIN for confirmation to continue transferring
+            money. </p>
+          <div className="d-flex flex-column my-5">
+
+            <Row>
+              <Col>
+                <input type="text" name="pin1" maxLength={1} onChange={handleChange}
+                  className="form-control form-control-lg pin-centered text-center fw-bold" />
+              </Col>
+              <Col>
+                <input type="text" name="pin2" maxLength={1} onChange={handleChange}
+                  className="form-control form-control-lg pin-centered text-center fw-bold" />
+              </Col>
+              <Col>
+                <input type="text" name="pin3" maxLength={1} onChange={handleChange}
+                  className="form-control form-control-lg pin-centered text-center fw-bold" />
+              </Col>
+              <Col>
+                <input type="text" name="pin4" maxLength={1} onChange={handleChange}
+                  className="form-control form-control-lg pin-centered text-center fw-bold" />
+              </Col>
+              <Col>
+                <input type="text" name="pin5" maxLength={1} onChange={handleChange}
+                  className="form-control form-control-lg pin-centered text-center fw-bold" />
+              </Col>
+              <Col>
+                <input type="text" name="pin6" maxLength={1} onChange={handleChange}
+                  className="form-control form-control-lg pin-centered text-center fw-bold" />
+              </Col>
+            </Row>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type='submit'
+            className="btn btn-primary btn-lg bg-web text-white u-none">Continue</Button>
+        </Modal.Footer>
+      </Form>
+    </>
+  )
+}
+
 
 const ModalCenter = (props) => {
-  // const token = useSelector(state => state.auth.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onTransfer = (token, amount, notes, date, pin) => {
-    dispatch(transfer(token, amount, notes, date, pin))
-    navigate('/success')
+  const token = useSelector(state => state.auth.token);
+  const recipient_id = useSelector(state => state.transfer.user_id);
+  const amount = useSelector(state => state.transfer.value);
+  const notes = useSelector(state => state.transfer.notes);
+  const time = useSelector(state => state.transfer.time);
+  const type_id = useSelector(state => state.transfer.type_id);
+  const success = useSelector(state => state.transfer.successMsg);
+  const error = useSelector(state => state.transfer.errorMsg);
+
+
+  const onPin = (value) => {
+    const pin = value.pin1 + value.pin2 + value.pin3 + value.pin4 + value.pin5 + value.pin6;
+    if (pin.length !== 6) {
+      window.alert('Pin Not Available');
+    } else {
+      console.log('masuk dispatch')
+      dispatch(transfer({ token, amount, recipient_id, notes, time, type_id, pin }))
+    }
   }
+
+  useEffect(() => {
+    if (success) {
+      navigate('/success')
+    }
+  }, [navigate, success, error])
+
   return (
     <Modal
       {...props}
@@ -30,62 +99,27 @@ const ModalCenter = (props) => {
             PIN
             to Transfer</h5>
         </Modal.Header>
-        <Form>
-          <Modal.Body>
-            <p>Enter your 6 digits PIN for confirmation to continue transferring
-              money. </p>
-            <div className="d-flex flex-column my-5">
-              <Row>
-                <Col>
-                  <input type="text" name="pin1" maxLength={1}
-                    className="form-control form-control-lg pin-centered text-center fw-bold" />
-                </Col>
-                <Col>
-                  <input type="text" name="pin2" maxLength={1}
-                    className="form-control form-control-lg pin-centered text-center fw-bold" />
-                </Col>
-                <Col>
-                  <input type="text" name="pin3" maxLength={1}
-                    className="form-control form-control-lg pin-centered text-center fw-bold" />
-                </Col>
-                <Col>
-                  <input type="text" name="pin4" maxLength={1}
-                    className="form-control form-control-lg pin-centered text-center fw-bold" />
-                </Col>
-                <Col>
-                  <input type="text" name="pin5" maxLength={1}
-                    className="form-control form-control-lg pin-centered text-center fw-bold" />
-                </Col>
-                <Col>
-                  <input type="text" name="pin6" maxLength={1}
-                    className="form-control form-control-lg pin-centered text-center fw-bold" />
-                </Col>
-              </Row>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onSubmit={onTransfer}
-              className="btn btn-primary btn-lg bg-web text-white u-none">Continue</Button>
-          </Modal.Footer>
-        </Form>
+
+        <Formik initialValues={{ pin1: '', pin2: '', pin3: '', pin4: '', pin5: '', pin6: '' }} onSubmit={onPin}>
+          {(props) => <EnterPin {...props} />}
+        </Formik>
+
       </Modal.Body>
     </Modal>
   )
 }
 
-
 const Confirmation = () => {
-  const profile = useSelector(state => state.profile.data);
-  const amount = useSelector((state) => state.notes.value);
-  const date = new Date().toISOString;
-  const currentBalance = profile.balance
-  const notes = useSelector((state) => state.notes.notes);
-  const balanceLeft = currentBalance - amount;
-
   const [modalShow, setModalShow] = useState(false);
-
+  const fullname = useSelector(state => state.transfer.fullname);
+  const phonenumber = useSelector(state => state.transfer.phonenumber);
+  const profile = useSelector(state => state.profile.data);
+  const amount = useSelector((state) => state.transfer.value);
+  const date = useSelector((state) => state.transfer.date);
+  const currentBalance = profile.balance
+  const notes = useSelector((state) => state.transfer.notes);
+  const balanceLeft = currentBalance - amount;
   return (
-
     <>
       <Helmet>
         <title>Confirmation</title>
@@ -110,8 +144,8 @@ const Confirmation = () => {
                         className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded">
                         <Row><img src={Satu} alt="3.png" className='mar-right-20px' /></Row>
                         <Col classNameName="ms-3">
-                          <h1 className="mt-3 fs-16px fw-bold ms-3">Samuel Suhi</h1>
-                          <p className="fs-14px ms-3">+62 813-8492-9994</p>
+                          <h1 className="mt-3 fs-16px fw-bold ms-3">{fullname}</h1>
+                          <p className="fs-14px ms-3">{phonenumber}</p>
                         </Col>
                       </div>
                       <div className="d-flex justify-content-between my-4">

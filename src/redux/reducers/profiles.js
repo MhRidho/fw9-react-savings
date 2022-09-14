@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getProfileLogin, getUserLogin } from "../asyncActions/profiles";
 
 const initialState = {
+  value: '',
   data: [],
   result: {},
   balance: []

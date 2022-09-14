@@ -1,6 +1,6 @@
-import { React, useState, useEffect } from 'react';
+import { React, useEffect } from 'react';
 import { Container, Row, Col, InputGroup, Form } from 'react-bootstrap';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam70.png';
 import { FiSearch } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
@@ -10,22 +10,39 @@ import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProfiles } from '../redux/asyncActions/allprofiles';
+import { editNameTransfer, editPhoneTransfer, editUserIdTransfer } from '../redux/reducers/transfer';
+
+const DataProfile = ({ id, user_id, fullname, phonenumber }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const nextData = () => {
+    dispatch(editNameTransfer(fullname));
+    dispatch(editPhoneTransfer(phonenumber));
+    dispatch(editUserIdTransfer(user_id));
+    navigate('/input-amount-blank');
+  }
+  return (
+    <>
+      <div onClick={nextData}
+        className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded pointer" key={id}>
+        <Row><img src={Satu} alt="3.png" className='mar-right-20px' /></Row>
+        <Col className="ms-3">
+          <h1 className="mt-3 fs-16px fw-bold">{fullname}</h1>
+          <p className="fs-14px">{phonenumber}</p>
+        </Col>
+      </div>
+    </>
+  )
+}
 
 const SearchReceiver = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const allprofile = useSelector((state) => state.allprofile.value);
-  console.log(allprofile);
 
   useEffect(() => {
     dispatch(getAllProfiles(token));
   }, []);
-
-
-  const inputAmount = () => {
-    navigate('/input-amount-blank')
-  }
 
   return (
     <>
@@ -57,15 +74,8 @@ const SearchReceiver = () => {
                       />
                     </InputGroup>
                     <div>
-                      {allprofile?.results?.map((profile, i) => (
-                        <div
-                          className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded pointer" key={i} onClick={inputAmount}>
-                          <Row><img src={Satu} alt="3.png" className='mar-right-20px' /></Row>
-                          <Col className="ms-3">
-                            <h1 className="mt-3 fs-16px fw-bold">{profile.fullname}</h1>
-                            <p className="fs-14px">{profile.phonenumber}</p>
-                          </Col>
-                        </div>
+                      {allprofile?.results?.map((profile, id) => (
+                        <DataProfile id={profile.id} user_id={profile.user_id} fullname={profile.fullname} phonenumber={profile.phonenumber} />
                       ))}
                     </div>
                   </div>

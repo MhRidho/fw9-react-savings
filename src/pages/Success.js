@@ -9,8 +9,17 @@ import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
+import { useSelector } from 'react-redux';
 
 const Success = () => {
+  const amount = useSelector(state => state.transfer.value);
+  const fullname = useSelector(state => state.transfer.fullname);
+  const phonenumber = useSelector(state => state.transfer.phonenumber);
+  const profile = useSelector(state => state.profile.data);
+  const date = useSelector((state) => state.transfer.date);
+  const currentBalance = profile.balance
+  const notes = useSelector((state) => state.transfer.notes);
+  const balanceLeft = currentBalance - amount;
   return (
     <>
       <Helmet>
@@ -40,7 +49,7 @@ const Success = () => {
                         <div className="col mar-right-40px">
                           <p className="fs-16px">Amount
                           </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">Rp100.000</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">Rp {amount}</h1>
                         </div>
                       </div>
                       <div
@@ -48,7 +57,7 @@ const Success = () => {
                         <div className="col mar-right-40px">
                           <p className="fs-16px">Balance Left
                           </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">Rp20.000</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">Rp {balanceLeft}</h1>
                         </div>
                       </div>
                       <div
@@ -56,7 +65,7 @@ const Success = () => {
                         <div className="col mar-right-40px">
                           <p className="fs-16px">Date & Time
                           </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">May 11, 2020 - 12.20</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">{date}May 11, 2020 - 12.20</h1>
                         </div>
                       </div>
                       <div
@@ -64,7 +73,7 @@ const Success = () => {
                         <div className="col mar-right-40px">
                           <p className="fs-16px">Notes
                           </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">For buying some socks</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">{notes}</h1>
                         </div>
                       </div>
                       <div className="d-flex justify-content-between mt-5">
@@ -75,8 +84,8 @@ const Success = () => {
                           className="nav justify-content-between d-flex align-items-center mt-1 shadow-sm p-3 mb-1 bg-body rounded">
                           <Row><img src={Sam70} alt="3.png" className="mar-right-40px" /></Row>
                           <div className="col ms-3">
-                            <h1 className="mt-3 fs-18px fw-bold">Samuel Suhi</h1>
-                            <p className="fs-16px">+62 813-8492-9994
+                            <h1 className="mt-3 fs-18px fw-bold">{fullname}</h1>
+                            <p className="fs-16px">{phonenumber}
                             </p>
                           </div>
                         </div>
