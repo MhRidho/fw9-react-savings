@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam70.png';
@@ -10,6 +10,9 @@ import Footer from '../components/Footer';
 import AsideMenu from '../components/AsideMenu';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { customValue, customNotes } from "../redux/reducers/notes";
+import { getProfileLogin } from '../redux/asyncActions/profiles';
 
 const transferSchema = Yup.object().shape({
   nominal: Yup.number()
@@ -20,7 +23,14 @@ const transferSchema = Yup.object().shape({
 
 
 const TransferForm = ({ errors, handleSubmit, handleChange }) => {
+  const profile = useSelector(state => state.profile.data);
+  const token = useSelector(state => state.auth.token);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getProfileLogin(token))
+  }, [])
 
   const onNext = () => {
     navigate('/confirmation')
@@ -32,7 +42,7 @@ const TransferForm = ({ errors, handleSubmit, handleChange }) => {
           <div className="input-group mb-sm-3 mt-sm-2 martop-40px">
             <input
               name="nominal"
-              onChange={handleChange}
+              onChange={(e) => dispatch(customValue(e.target.value))}
               type="number"
               className="form-control form color-7858A6 fs-42px text-center fw-bold bor-bot-none"
               placeholder='0.00'
@@ -45,7 +55,7 @@ const TransferForm = ({ errors, handleSubmit, handleChange }) => {
         </Col>
       </Row>
       <div className="row text-center mt-2">
-        <h2 className="fs-16px fw-bold">Rp120.000 Available</h2>
+        <h2 className="fs-16px fw-bold">Rp {profile.balance} Available</h2>
       </div>
       <div className="row d-flex justify-content-center">
         <div className="col-md-6">
@@ -53,7 +63,7 @@ const TransferForm = ({ errors, handleSubmit, handleChange }) => {
             <span className="input-group-text form color-web-gray-3" id="basic-addon1"><FiEdit2 /></span>
             <input type="text" className="form-control form"
               placeholder="Add some notes" aria-label="Username"
-              aria-describedby="basic-addon1" />
+              aria-describedby="basic-addon1" onChange={(e) => dispatch(customNotes(e.target.value))} />
           </div>
         </div>
       </div>
@@ -89,8 +99,8 @@ const InputAmountBlank = () => {
                     <div>
                       <div
                         className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded">
-                        <Row><img src={Satu} alt="3.png" classNameName='mar-right-20px' /></Row>
-                        <Col classNameName="ms-3">
+                        <Row><img src={Satu} alt="3.png" className='mar-right-20px' /></Row>
+                        <Col className="ms-3">
                           <h1 className="mt-3 fs-16px fw-bold ms-3">Samuel Suhi</h1>
                           <p className="fs-14px ms-3">+62 813-8492-9994</p>
                         </Col>

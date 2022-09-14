@@ -3,13 +3,18 @@ import { getProfileLogin, getUserLogin } from "../asyncActions/profiles";
 
 const initialState = {
   data: [],
-  result: {}
+  result: {},
+  balance: []
 };
 
 const profile = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
+  reducers: {
+    balance: (state, action) => {
+      state.balance = action.payload
+    },
+  },
   extraReducers: (build) => {
     build.addCase(getProfileLogin.fulfilled, (state, action) => {
       state.data = action.payload.results;

@@ -11,31 +11,18 @@ import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileLogin } from '../redux/asyncActions/profiles';
-import axios from 'axios';
+import { getHistory } from '../redux/asyncActions/transactions';
 
 const Home = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const profile = useSelector((state) => state.profile.data);
-
-  const [transactions, setTransactions] = useState([]);
-
-  useEffect(() => {
-    getTransactions();
-  }, []);
-
-  const getTransactions = async () => {
-    const response = await axios.get('http://localhost:3332/auth/historyTransactions');
-    setTransactions(response.data);
-  }
-
-  console.log(transactions);
+  const transaction = useSelector((state) => state.transaction.value);
 
   useEffect(() => {
     dispatch(getProfileLogin(token));
+    dispatch(getHistory(token));
   }, []);
-
-  console.log(transactions);
 
   return (
     <>
@@ -93,18 +80,18 @@ const Home = () => {
                     </Row>
 
                     <div>
-                      {/* {transaction && transaction.map((trans, i) => ( */}
-                      <div className="nav justify-content-between d-flex align-items-center mt-4">
-                        <Row>
-                          <img src={Satu} alt="3.png" className="me-3" />
-                        </Row>
-                        <Col>
-                          <h1 className="mt-3 fs-16px fw-bold ms-4" >Samuel</h1>
-                          <p className="fs-14px ms-4">Transfer</p>
-                        </Col>
-                        <span className="fs-16px fw-bold color-green-web">+Rp50.000</span>
-                      </div>
-                      {/* ))} */}
+                      {transaction?.results?.map((trans, i) => (
+                        <div className="nav justify-content-between d-flex align-items-center mt-4" key={i}>
+                          <Row>
+                            <img src={Satu} alt="3.png" className="me-3" />
+                          </Row>
+                          <Col>
+                            <h1 className="mt-3 fs-16px fw-bold ms-4" >Samuel</h1>
+                            <p className="fs-14px ms-4">Transfer</p>
+                          </Col>
+                          <span className="fs-16px fw-bold color-green-web">+Rp{trans.amount}</span>
+                        </div>
+                      ))}
                     </div>
                   </Col>
                 </Row>

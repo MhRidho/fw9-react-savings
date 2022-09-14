@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import http from '../../helpers/http';
 
-export const getHistory = createAsyncThunk('/auth/historyTransactions', async (token) => {
+export const getAllProfiles = createAsyncThunk('/admin/profiles', async (token) => {
   const result = {};
   try {
-    const { data } = await http(token).get('/auth/historyTransactions');
+    const { data } = await http(token).get('/admin/profiles');
     return data;
   }
   catch (e) {

@@ -1,60 +1,30 @@
 import { React, useState, useEffect } from 'react';
 import { Container, Row, Col, InputGroup, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam70.png';
-import Momo from '../assets/img/momo.png';
-import Jes70 from '../assets/img/jes70.png';
-import Mic70 from '../assets/img/mic70.png';
 import { FiSearch } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProfiles } from '../redux/asyncActions/allprofiles';
 
 const SearchReceiver = () => {
-
-
-
-
-  const [receivers, setReceivers] = useState([]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const allprofile = useSelector((state) => state.allprofile.value);
+  console.log(allprofile);
 
   useEffect(() => {
-    getReceivers();
-  }, [])
+    dispatch(getAllProfiles(token));
+  }, []);
 
-  const getReceivers = () => {
-    const response = {
-      success: true,
-      message: 'List Users',
-      "results": [
-        {
-          "id": 1,
-          "img": Satu,
-          "name": "Samuel Suhi",
-          "phone": '+62 813-8492-9994'
-        },
-        {
-          "id": 2,
-          "img": Momo,
-          "name": "Momo Taro",
-          "phone": '+62 812-4343-6731'
-        },
-        {
-          "id": 3,
-          "img": Jes70,
-          "name": "Jessica Keen",
-          "phone": '+62 811-3452-5252'
-        },
-        {
-          "id": 4,
-          "img": Mic70,
-          "name": "Michael Le",
-          "phone": '+62 810-4224-4613'
-        }
-      ]
-    }
-    setReceivers(response.results);
+
+  const inputAmount = () => {
+    navigate('/input-amount-blank')
   }
 
   return (
@@ -87,13 +57,13 @@ const SearchReceiver = () => {
                       />
                     </InputGroup>
                     <div>
-                      {receivers.map((receiver) => (
+                      {allprofile?.results?.map((profile, i) => (
                         <div
-                          className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded">
-                          <Row><img src={receiver.img} alt="3.png" className='mar-right-20px' /></Row>
+                          className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded pointer" key={i} onClick={inputAmount}>
+                          <Row><img src={Satu} alt="3.png" className='mar-right-20px' /></Row>
                           <Col className="ms-3">
-                            <Link className="u-none color-4D4B57" to={'/input-amount-blank'}><h1 class="mt-3 fs-16px fw-bold">{receiver.name}</h1></Link>
-                            <p class="fs-14px">{receiver.phone}</p>
+                            <h1 className="mt-3 fs-16px fw-bold">{profile.fullname}</h1>
+                            <p className="fs-14px">{profile.phonenumber}</p>
                           </Col>
                         </div>
                       ))}

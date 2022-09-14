@@ -30,7 +30,6 @@ const RegisterForm = (props) => {
   const navigate = useNavigate();
   const successMsg = useSelector((state) => state.auth.successMsg);
   const errorMsg = useSelector((state) => state.auth.errorMsg);
-  console.log(successMsg);
 
   useEffect(() => {
     if (successMsg) {

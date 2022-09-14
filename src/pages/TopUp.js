@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import { Container, Row, Col, Button, Modal, InputGroup } from 'react-bootstrap';
+import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';

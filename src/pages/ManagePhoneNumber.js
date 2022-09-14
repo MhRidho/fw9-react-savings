@@ -1,7 +1,7 @@
 import { React } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FiLogOut, FiTrash } from 'react-icons/fi';
+import { FiTrash } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';

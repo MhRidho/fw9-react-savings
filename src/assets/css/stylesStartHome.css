@@ -494,6 +494,10 @@ footer {
   background-color: unset;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .cari {
   background-color: transparent;
 }

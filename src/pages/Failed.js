@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Failed1 from '../assets/img/failed.png';
 import Sam70 from '../assets/img/sam70.png';
-import { FiLogOut } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';

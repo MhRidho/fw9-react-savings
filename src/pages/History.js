@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam1.png';
-import { FiLogOut } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
@@ -15,9 +14,9 @@ const History = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
-  const transactions = useSelector((state) => state.transaction.data);
+  const transactions = useSelector((state) => state.transaction.value);
 
-  // console.log(profile);
+  console.log(transactions);
 
   useEffect(() => {
     dispatch(getHistory(token));
@@ -45,14 +44,14 @@ const History = () => {
                     <span>This Week</span>
                     <div>
                       {/* integration */}
-                      {transactions && transactions.map((transaction, i) => (
-                        <div className="nav justify-content-between d-flex align-items-center mt-4">
+                      {transactions?.results?.map((transaction, i) => (
+                        <div className="nav justify-content-between d-flex align-items-center mt-4" key={i}>
                           <Row><img src={Satu} alt="3.png" className="me-3" /></Row>
                           <div className="col ms-3">
                             <h1 className="mt-3 fs-16px fw-bold">{transaction?.notes}</h1>
                             <p className="fs-14px">Transfer</p>
                           </div>
-                          <span className="fs-16px fw-bold color-green-web">+Rp50.000</span>
+                          <span className="fs-16px fw-bold color-green-web">+Rp{transaction.amount}</span>
                         </div>
                       ))}
                       {/* end integration */}
