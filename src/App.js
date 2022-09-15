@@ -27,6 +27,7 @@ import AddPhoneNumber from './pages/AddPhoneNumber';
 import ManagePhoneNumber from './pages/ManagePhoneNumber';
 import Counter from './pages/Counter';
 import ListCharacter from './pages/ListCharacter';
+import SuccessTopup from './pages/SuccessTopup';
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -56,6 +57,7 @@ const App = () => {
         <Route path='input-amount-blank' element={<InputAmountBlank />} />
         <Route path='confirmation' element={<Confirmation />} />
         <Route path='success' element={<Success />} />
+        <Route path='success-topup' element={<SuccessTopup />} />
         <Route path='failed' element={<Failed />} />
         <Route path='top-up' element={<TopUp />} />
         <Route path='profile' element={<Profile />} />

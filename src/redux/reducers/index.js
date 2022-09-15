@@ -7,6 +7,7 @@ import transaction from "./transactions";
 import allprofile from "./allprofiles";
 import transfer from "./transfer";
 import notes from "./notes";
+import topup from "./topup";
 
 const reducer = combineReducers({
   counter,
@@ -16,7 +17,8 @@ const reducer = combineReducers({
   transaction,
   allprofile,
   transfer,
-  notes
+  notes,
+  topup
 });
 
 export default reducer;

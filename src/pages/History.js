@@ -12,7 +12,6 @@ import { getHistory } from '../redux/asyncActions/transactions';
 
 const History = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
   const transactions = useSelector((state) => state.transaction.value);
 

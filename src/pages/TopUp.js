@@ -1,20 +1,27 @@
-import { React, useState } from 'react'
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
+import { React, useEffect, useState } from 'react'
+import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
 import { FiPlus } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { topup } from '../redux/asyncActions/topup';
+import { notes, editAmount, editTimeTopup } from '../redux/reducers/topup';
 
-const ModalCenter = (props) => {
+const topupSchema = Yup.object().shape({
+  amount: Yup.number()
+    .required()
+})
+
+const EnterTopup = (props) => {
   return (
-    <Modal
-      {...props}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-      <Modal.Body>
+    <>
+      <Form noValidate onSubmit={props.handleSubmit}>
         <Modal.Header closeButton>
           <h5 className="modal-title fs-16px fw-700 text-dark" id="contained-modal-title-vcenter"
           >Input Amount</h5>
@@ -25,30 +32,37 @@ const ModalCenter = (props) => {
               <div className="input-group mb-sm-3 mt-sm-2 martop-40px">
                 <input
                   name="amount"
-                  // onChange={handleChange}
+                  value={props.values.amount}
+                  onChange={props.handleChange}
                   type="number"
                   className="form-control form color-7858A6 fs-42px text-center fw-bold bor-bot-none"
                   placeholder='0.00'
-                // isInvalid={!!errors.nominal}
+                  isInvalid={!!props.errors.amount}
                 />
               </div>
-              <div type="invalid">
-                {/* {errors.nominal} */}
+              <div type="invalid" className='text-center text-danger fs-14px mb-3'>
+                {props.errors.amount}
               </div>
               <input
                 name="notes"
+                value={props.values.notes}
+                onChange={props.handleChange}
                 type="text"
                 className="form-control form color-7858A6 fs-16px text-center"
                 placeholder='notes'
               />
               <input
                 name="time"
+                value={props.values.time}
+                onChange={props.handleChange}
                 type="date"
                 className="form-control form color-7858A6 fs-16px text-center my-3"
                 placeholder='time'
               />
               <input
                 name="type_id"
+                value={props.values.type_id}
+                onChange={props.handleChange}
                 type="text"
                 className="form-control form color-7858A6 fs-16px text-center"
                 placeholder='type_id'
@@ -57,9 +71,46 @@ const ModalCenter = (props) => {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Link to={'/success'}
-            className="btn btn-primary btn-lg bg-web text-white u-none">Continue</Link>
+          <Button type='submit'
+            className="btn btn-primary btn-lg bg-web text-white u-none">Continue</Button>
         </Modal.Footer>
+      </Form>
+    </>
+  )
+}
+
+const ModalCenter = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useSelector(state => state.auth.token);
+  const success = useSelector(state => state.topup.successMsg);
+  const error = useSelector(state => state.topup.errorMsg);
+
+  const onTopup = (value) => {
+    if (value.amount === '') {
+      window.alert('Please Input amount');
+    } else {
+      console.log('masuk dispatch')
+      dispatch(topup({ token, request: value }))
+    }
+  }
+
+  useEffect(() => {
+    if (success) {
+      navigate('/success-topup')
+    }
+  }, [navigate, success, error])
+  return (
+    <Modal
+      {...props}
+      aria-labelledby="contained-modal-title-vcenter"
+      centered>
+      <Modal.Body>
+
+        <Formik validationSchema={topupSchema} initialValues={{ amount: '', notes: '', time: '', type_id: '' }} onSubmit={onTopup}>
+          {(props) => <EnterTopup {...props} />}
+        </Formik>
+
       </Modal.Body>
     </Modal>
   )
@@ -86,7 +137,7 @@ const TopUp = () => {
                   <div className="col pb-2 f-color-g">
                     <div
                       className="nav justify-content-between d-flex align-items-center shadow-sm p-2 bg-body rounded">
-                      <div className="col mar-right-40px py-3">
+                      <div className="col mar-right-40px py-3 ps-3">
                         <h4 className="fs-16px color-web-dark">
                           <Button className='btn btn-light' onClick={() => setModalShow(true)}><span className="color-web fw-18px fw-bold ms-3"><FiPlus className='fs-24px' /></span>
                             <span className="color-web fw-18px fw-bold mx-3">Top Up</span></Button>
@@ -97,7 +148,7 @@ const TopUp = () => {
                         </h4>
                       </div>
                     </div>
-                    <div className="d-flex justify-content-between my-2">
+                    <div className="d-flex justify-content-between my-3">
                       <h1 className="fs-18px fw-bold">How To Top Up</h1>
                     </div>
                     <div>
