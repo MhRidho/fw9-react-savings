@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FiBell } from 'react-icons/fi';
 import Robert52 from '../assets/img/Robert52.png';
 
-const navbar = () => {
+const navbar = ({ name, phone }) => {
   return (
     <div className="header-home">
       <Navbar className="bg-white py-5 rounded-bottom shadow p-3 mb-5 bg-body">
@@ -16,9 +16,9 @@ const navbar = () => {
               <img src={Robert52} alt="Robert52.png" className="me-4" />
             </Col>
             <div className="d-flex flex-column align-content-center me-4">
-              <div className="name">
-                <h1 className="fs-18px fw-bold mt-1">Robert Chandler</h1>
-                <p className="fs-13px">+62 8139 3877 7946</p>
+              <div className="name ps-2">
+                <h1 className="fs-18px fw-bold mt-1">{name}</h1>
+                <p className="fs-13px">{phone}</p>
               </div>
             </div>
             <Link className="a-menu d-flex justify-content-center align-items-center"

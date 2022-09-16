@@ -1,14 +1,83 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../assets/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Formik } from 'formik';
 // import * as Yup from 'yup';
 import { Container, Row, Col, InputGroup, Form, Button } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Wallauth from '../components/WallAuth';
+import { pinregis } from '../redux/asyncActions/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { Formik } from 'formik';
 
-const Login = () => {
+const EnterPin = ({ handleSubmit, handleChange }) => {
+  return (
+    <>
+      <Form>
+        <InputGroup className="mb-5 d-flex gap-3">
+          <Form.Control className='form-pin'
+            name='pin1'
+            maxLength={1}
+            onChange={handleChange} />
+          <Form.Control className='form-pin'
+            name='pin2'
+            maxLength={1}
+            onChange={handleChange} />
+          <Form.Control className='form-pin'
+            name='pin3'
+            maxLength={1}
+            onChange={handleChange} />
+          <Form.Control className='form-pin'
+            name='pin4'
+            maxLength={1}
+            onChange={handleChange} />
+          <Form.Control className='form-pin'
+            name='pin5'
+            maxLength={1}
+            onChange={handleChange} />
+          <Form.Control className='form-pin'
+            name='pin6'
+            maxLength={1}
+            onChange={handleChange} />
+        </InputGroup>
+        <div className="d-grid gap-2 py-5">
+          <Button className='d-grid' variant="secondary" size="lg">
+            <Button className='btn btn-secondary btn-lg sign-hover' type='submit'>
+              Confirm
+            </Button>
+          </Button>
+        </div>
+      </Form>
+    </>
+  )
+}
+
+const PinBlank = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const email = useSelector(state => state.auth.email);
+  const successMsg = useSelector((state) => state.auth.successMsg);
+  const errorMsg = useSelector((state) => state.auth.errorMsg);
+
+  const onPinRegister = (value) => {
+    const pin = value.pin1 + value.pin2 + value.pin3 + value.pin4 + value.pin5 + value.pin6;
+    const request = { email, pin }
+    if (pin.length !== 6) {
+      window.alert('Pin Not Available');
+    } else {
+      console.log('masuk dispatch');
+      dispatch(pinregis(request));
+      navigate('/pin-success');
+    }
+  }
+
+  useEffect(() => {
+    if (successMsg) {
+      navigate('/login', { state: { successMsg } });
+    }
+  }, [navigate, successMsg]);
+
   return (
     <>
       <Helmet>
@@ -35,21 +104,9 @@ const Login = () => {
                 </div>
 
                 <div className="mt-5">
-                  <InputGroup className="mb-5 d-flex gap-3">
-                    <Form.Control aria-label="First name" className='form-pin' />
-                    <Form.Control aria-label="Last name" className='form-pin' />
-                    <Form.Control aria-label="First name" className='form-pin' />
-                    <Form.Control aria-label="Last name" className='form-pin' />
-                    <Form.Control aria-label="First name" className='form-pin' />
-                    <Form.Control aria-label="Last name" className='form-pin' />
-                  </InputGroup>
-                  <div className="d-grid gap-2 py-5">
-                    <Button className='d-grid' variant="secondary" size="lg">
-                      <Link className='btn btn-secondary btn-lg sign-hover' to={"/LoginFilled"}>
-                        Confirm
-                      </Link>
-                    </Button>
-                  </div>
+                  <Formik initialValues={{ pin1: '', pin2: '', pin3: '', pin4: '', pin5: '', pin6: '' }} onSubmit={onPinRegister}>
+                    {(props) => <EnterPin {...props} />}
+                  </Formik>
                 </div>
               </Col>
             </Row>
@@ -61,4 +118,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default PinBlank;

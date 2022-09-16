@@ -31,7 +31,7 @@ const Home = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav />
+        <Nav name={profile.fullname} phone={profile.phonenumber} />
 
         <section>
           <Container>

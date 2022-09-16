@@ -9,7 +9,7 @@ import { FiLock } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import WallAuth from '../components/WallAuth';
 
-const Login = () => {
+const CreateNewPassword = () => {
   return (
     <>
       <Helmet>
@@ -71,4 +71,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default CreateNewPassword;

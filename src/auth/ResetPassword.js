@@ -9,7 +9,7 @@ import { FiMail } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import WallAuth from '../components/WallAuth';
 
-const Login = () => {
+const ResetPassword = () => {
   return (
     <>
       <Helmet>
@@ -61,4 +61,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default ResetPassword;

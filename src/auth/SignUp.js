@@ -10,6 +10,7 @@ import { FiUser, FiMail, FiLock } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import WallAuth from '../components/WallAuth';
 import { register } from '../redux/asyncActions/auth';
+import { editEmail } from '../redux/reducers/auth';
 
 const signupSchema = Yup.object().shape({
   username: Yup.string()
@@ -34,14 +35,10 @@ const RegisterForm = (props) => {
   useEffect(() => {
     if (successMsg) {
       console.log(successMsg);
-      navigate('/login', { state: { successMsg } });
+      navigate('/pin-blank', { state: { successMsg } });
     }
   }, [navigate, successMsg]);
 
-  // const onSignup = () => {
-  //   localStorage.setItem('username', 'email');
-  //   navigate('/login')
-  // }
   return (
     <Form noValidate onSubmit={props.handleSubmit}>
       {errorMsg && <Alert variant='danger'>{errorMsg}</Alert>}
@@ -104,16 +101,24 @@ const Signup = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
+  const successMsg = useSelector((state) => state.auth.successMsg);
+  const errorMsg = useSelector((state) => state.auth.errorMsg);
 
   const onSignupRequest = (value) => {
-    dispatch(register(value));
+    const request = { username: value.username, email: value.email, password: value.password }
+    if (value.email === '' && value.password === '') {
+      window.alert('Input Email and Password!');
+    } else {
+      dispatch(editEmail(value.email));
+      dispatch(register(request));
+    }
   };
 
   useEffect(() => {
-    if (token) {
-      navigate('/home')
+    if (successMsg) {
+      navigate('/pin-blank')
     }
-  }, [navigate, token]);
+  }, [navigate, successMsg]);
 
   return (
     <>

@@ -9,7 +9,7 @@ import Success from '../assets/img/success.png';
 import { Link } from 'react-router-dom';
 import Wallauth from '../components/WallAuth';
 
-const Login = () => {
+const PinSuccess = () => {
   return (
     <>
       <Helmet>
@@ -52,4 +52,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default PinSuccess;

@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { login, register } from '../asyncActions/auth';
+import { login, register, pinregis } from '../asyncActions/auth';
 
 const initialState = {
   token: localStorage.getItem('token') || null,
   errorMsg: null,
-  successMsg: null
+  successMsg: null,
+  email: ''
 };
 
 const auth = createSlice({
@@ -14,6 +15,9 @@ const auth = createSlice({
     logout: (state) => {
       localStorage.removeItem('token');
       return initialState;
+    },
+    editEmail: (state, action) => {
+      state.email = action.payload
     }
   },
   extraReducers: (build) => {
@@ -38,10 +42,18 @@ const auth = createSlice({
     build.addCase(register.fulfilled, (state, action) => {
       state.errorMsg = action.payload?.errorMsg;
       state.successMsg = action.payload?.successMsg;
-    })
+    });
+    build.addCase(pinregis.pending, (state) => {
+      state.errorMsg = null;
+      state.successMsg = null;
+    });
+    build.addCase(pinregis.fulfilled, (state, action) => {
+      state.errorMsg = action.payload?.errorMsg;
+      state.successMsg = action.payload?.successMsg;
+    });
   }
 });
 
-export { login, register };
-export const { logout } = auth.actions;
+export { login, register, pinregis };
+export const { logout, editEmail } = auth.actions;
 export default auth.reducer;

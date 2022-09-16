@@ -9,12 +9,11 @@ import PngPhone3 from '../assets/img/PngPhone3Purple-min.png'
 import Profile from '../assets/img/1.png'
 import { Link } from 'react-router-dom';
 import { FiArrowRight, FiArrowLeft, FiPhone, FiLock, FiDownload } from 'react-icons/fi';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import logo from '../assets/img/logo savings.png'
 
 const Home = () => {
-  const count = useSelector((state) => state.counter.value);
-  console.log(count)
+  // const count = useSelector((state) => state.counter.value);
   return (
     <>
       <Helmet>
@@ -40,7 +39,7 @@ const Home = () => {
               <p>We bring you a mobile app for banking problems that<br />
                 oftenly wasting much of your times.</p>
               <button className="b-sign"><Link to={'/home'} className="a-sign">Try It Home</Link></button>
-              <h1>{count}</h1>
+              {/* <h1>{count}</h1> */}
             </div>
           </div>
           <div className='wallpaper'>

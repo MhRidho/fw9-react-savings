@@ -37,11 +37,11 @@ export const register = createAsyncThunk('/auth/register', async (request) => {
   }
 });
 
-export const topUp = createAsyncThunk('/auth/topup', async (request) => {
+export const pinregis = createAsyncThunk('/auth/createPin', async (request) => {
   const result = {};
   try {
     const send = qs.stringify(request);
-    const { data } = await http().post('/auth/topup', send, {
+    const { data } = await http().post('/auth/createPin', send, {
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
       }
