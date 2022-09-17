@@ -117,6 +117,7 @@ const ModalCenter = (props) => {
 }
 
 const TopUp = () => {
+  const profile = useSelector(state => state.profile.data);
   const [modalShow, setModalShow] = useState(false);
   return (
     <>
@@ -125,7 +126,7 @@ const TopUp = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav />
+        <Nav name={profile.fullname} phone={profile.phonenumber} />
 
         <section>
           <Container>

@@ -76,6 +76,7 @@ const InputAmountBlank = () => {
   const date = new Date().toISOString();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const profile = useSelector(state => state.profile.data);
 
   const transferReq = (value) => {
     console.log('masuk')
@@ -95,7 +96,7 @@ const InputAmountBlank = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav />
+        <Nav name={profile.fullname} phone={profile.phonenumber} />
 
         <section>
           <Container>

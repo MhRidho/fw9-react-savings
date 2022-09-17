@@ -3,7 +3,7 @@ import '../assets/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Formik } from 'formik';
 // import * as Yup from 'yup';
-import { Container, Row, Col, InputGroup, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, InputGroup, Form, Button, Alert } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import Wallauth from '../components/WallAuth';
@@ -12,9 +12,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
 const EnterPin = ({ handleSubmit, handleChange }) => {
+  const successMsg = useSelector((state) => state.auth.successMsg);
+  const errorMsg = useSelector((state) => state.auth.errorMsg);
+
   return (
     <>
-      <Form>
+      <Form onSubmit={handleSubmit}>
+        {successMsg && <Alert variant='success'>{successMsg}</Alert>}
+        {errorMsg && <Alert variant='danger'>{errorMsg}</Alert>}
         <InputGroup className="mb-5 d-flex gap-3">
           <Form.Control className='form-pin'
             name='pin1'
@@ -62,19 +67,18 @@ const PinBlank = () => {
 
   const onPinRegister = (value) => {
     const pin = value.pin1 + value.pin2 + value.pin3 + value.pin4 + value.pin5 + value.pin6;
-    const request = { email, pin }
+    const data = { email, pin }
     if (pin.length !== 6) {
       window.alert('Pin Not Available');
     } else {
-      console.log('masuk dispatch');
-      dispatch(pinregis(request));
+      dispatch(pinregis(data));
       navigate('/pin-success');
     }
   }
 
   useEffect(() => {
     if (successMsg) {
-      navigate('/login', { state: { successMsg } });
+      console.log('succes regis')
     }
   }, [navigate, successMsg]);
 

@@ -39,6 +39,7 @@ const SearchReceiver = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const allprofile = useSelector((state) => state.allprofile.value);
+  const profile = useSelector(state => state.profile.data);
 
   useEffect(() => {
     dispatch(getAllProfiles(token));
@@ -51,7 +52,7 @@ const SearchReceiver = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav />
+        <Nav name={profile.fullname} phone={profile.phonenumber} />
 
         <section>
           <Container>

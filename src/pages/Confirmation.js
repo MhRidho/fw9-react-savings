@@ -70,7 +70,6 @@ const ModalCenter = (props) => {
   const success = useSelector(state => state.transfer.successMsg);
   const error = useSelector(state => state.transfer.errorMsg);
 
-
   const onPin = (value) => {
     const pin = value.pin1 + value.pin2 + value.pin3 + value.pin4 + value.pin5 + value.pin6;
     if (pin.length !== 6) {
@@ -126,7 +125,7 @@ const Confirmation = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav />
+        <Nav name={profile.fullname} phone={profile.phonenumber} />
 
         <section>
           <Container>

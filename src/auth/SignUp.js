@@ -28,16 +28,16 @@ const signupSchema = Yup.object().shape({
 });
 
 const RegisterForm = (props) => {
-  const navigate = useNavigate();
-  const successMsg = useSelector((state) => state.auth.successMsg);
+  // const navigate = useNavigate();
+  // const successMsg = useSelector((state) => state.auth.successMsg);
   const errorMsg = useSelector((state) => state.auth.errorMsg);
 
-  useEffect(() => {
-    if (successMsg) {
-      console.log(successMsg);
-      navigate('/pin-blank', { state: { successMsg } });
-    }
-  }, [navigate, successMsg]);
+  // useEffect(() => {
+  //   if (successMsg) {
+  //     console.log(successMsg);
+  //     navigate('/pin-blank', { state: { successMsg } });
+  //   }
+  // }, [navigate, successMsg]);
 
   return (
     <Form noValidate onSubmit={props.handleSubmit}>
@@ -99,18 +99,18 @@ const RegisterForm = (props) => {
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token);
+  // const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
   const successMsg = useSelector((state) => state.auth.successMsg);
   const errorMsg = useSelector((state) => state.auth.errorMsg);
 
   const onSignupRequest = (value) => {
-    const request = { username: value.username, email: value.email, password: value.password }
+    const data = { username: value.username, email: value.email, password: value.password }
     if (value.email === '' && value.password === '') {
       window.alert('Input Email and Password!');
     } else {
       dispatch(editEmail(value.email));
-      dispatch(register(request));
+      dispatch(register(data));
     }
   };
 
@@ -118,7 +118,7 @@ const Signup = () => {
     if (successMsg) {
       navigate('/pin-blank')
     }
-  }, [navigate, successMsg]);
+  }, [navigate, successMsg])
 
   return (
     <>

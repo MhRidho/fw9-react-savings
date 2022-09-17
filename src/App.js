@@ -21,6 +21,7 @@ import TopUp from './pages/TopUp';
 import Profile from './pages/Profile';
 import PersonalInfo from './pages/PersonalInfo';
 import ChangePassword from './pages/ChangePassword';
+import AddPin from './pages/AddPin';
 import ChangePin from './pages/ChangePin';
 import NewPin from './pages/NewPin';
 import AddPhoneNumber from './pages/AddPhoneNumber';
@@ -63,6 +64,7 @@ const App = () => {
         <Route path='profile' element={<Profile />} />
         <Route path='personal-info' element={<PersonalInfo />} />
         <Route path='change-password' element={<ChangePassword />} />
+        <Route path='add-pin' element={<AddPin />} />
         <Route path='change-pin' element={<ChangePin />} />
         <Route path='new-pin' element={<NewPin />} />
         <Route path='add-phone' element={<AddPhoneNumber />} />

@@ -79,7 +79,7 @@ const Profile = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav />
+        <Nav name={profile.fullname} phone={profile.phonenumber} />
 
         <section>
           <Container>
@@ -115,6 +115,11 @@ const Profile = () => {
                       <div
                         className="col-md-6 nav justify-content-between d-flex align-items-center mt-2 shadow-sm p-4 bg-body rounded m-auto bg-profile">
                         <Link className="u-none color-4D4B57" to={'/change-password'}><h1 className="fs-16px fw-bold color-web-dark-2">Change Password</h1></Link>
+                        <FiArrowRight />
+                      </div>
+                      <div
+                        className="col-md-6 nav justify-content-between d-flex align-items-center mt-2 shadow-sm p-4 bg-body rounded m-auto bg-profile">
+                        <Link className="u-none color-4D4B57" to={'/add-pin'}><h1 className="fs-16px fw-bold color-web-dark-2">Add PIN</h1></Link>
                         <FiArrowRight />
                       </div>
                       <div
