@@ -41,3 +41,17 @@ export const editProfile = createAsyncThunk('/auth/profile', async ({ token, ful
     return result;
   }
 });
+
+export const editProfilePhone = createAsyncThunk('/auth/phone', async ({ token, phonenumber }) => {
+  const result = {};
+  try {
+    const send = qs.stringify({ phonenumber }, { headers: { 'Content-Type': 'multipart/form-data' } })
+    const { data } = await http(token).patch('/auth/phone', send);
+    result.successMsg = data.message;
+    return result;
+  }
+  catch (e) {
+    result.message = e.response.data?.message;
+    return result;
+  }
+});

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Container, Navbar, Col } from 'react-bootstrap';
+import { Container, Navbar, Col, DropdownButton, Dropdown, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FiBell } from 'react-icons/fi';
 import Robert52 from '../assets/img/Robert52.png';
+import Satu from '../assets/img/sam1.png';
 
 const navbar = ({ name, phone }) => {
   return (
@@ -21,8 +22,29 @@ const navbar = ({ name, phone }) => {
                 <p className="fs-13px">{phone}</p>
               </div>
             </div>
-            <Link className="a-menu d-flex justify-content-center align-items-center"
-              to={"/"}><FiBell /></Link>
+            <DropdownButton
+              className='d-flex justify-content-center align-items-center'
+              as='ButtonGroup'
+              key='start'
+              id='dropdown-button-drop-start'
+              drop='start'
+              variant="light"
+              title={<FiBell />}
+            >
+              <Dropdown.Item eventKey="1">Action</Dropdown.Item>
+              <Container>
+                <div className="nav justify-content-between d-flex align-items-center mt-4 px-5">
+                  <Row>
+                    <img src={Satu} alt="3.png" className="me-3" />
+                  </Row>
+                  <Col>
+                    <h1 className="mt-3 fs-16px fw-bold ms-4" >Samuel</h1>
+                    <p className="fs-14px ms-4">Transfer</p>
+                  </Col>
+                  <span className="fs-16px fw-bold color-green-web">+Rp 100.000</span>
+                </div>
+              </Container>
+            </DropdownButton>
           </aside>
         </Container>
       </Navbar>

@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react'
 import { Container, Row, Col, Button, Modal, Form, FormControl } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Mic80 from '../assets/img/mic80.png';
 import { FiEdit2, FiArrowRight } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
@@ -10,34 +10,83 @@ import AsideMenu from '../components/AsideMenu';
 import Footer from '../components/Footer';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileLogin, editProfile } from '../redux/asyncActions/profiles';
+import { getProfileLogin, editProfile, editProfilePhone } from '../redux/asyncActions/profiles';
 
-const FormEdit = ({ error, handleSubmit, handleChange, handleFileSelect }) => {
-  const profile = useSelector(state => state.profile.data);
+const FormEditName = ({ handleSubmit, handleChange }) => {
   return (
     <>
-      <div className="d-flex flex-column my-5">
-        <Row>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Control className='shadow-none' type="text" placeholder="Fullname" />
-          </Form.Group>
-          <Form.Group>
-            <FormControl className='shadow-none' type='file' />
-          </Form.Group>
-        </Row>
-      </div>
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          <div className="d-flex flex-column my-5">
+            <Row>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Control className='shadow-none' type="text" placeholder="Fullname" name='fullname' onChange={handleChange} />
+              </Form.Group>
+              <Form.Group>
+                <FormControl className='shadow-none' type='file' name='picture' onChange={handleChange} />
+              </Form.Group>
+            </Row>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type='submit'
+            className="btn btn-primary btn-lg bg-web text-white u-none">Continue</Button>
+        </Modal.Footer>
+      </Form>
     </>
   )
 }
 
-const ModalCenter = (props) => {
+const FormEditPhone = ({ handleSubmit, handleChange }) => {
+  return (
+    <>
+
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          <div className="d-flex flex-column my-5">
+            <Row>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Control className='shadow-none' type="text" placeholder="Phone Number" name='phonenumber' onChange={handleChange} />
+              </Form.Group>
+            </Row>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type='submit'
+            className="btn btn-primary btn-lg bg-web text-white u-none">Continue</Button>
+        </Modal.Footer>
+      </Form>
+    </>
+  )
+}
+
+const ModalCenterName = (props) => {
+  const navigate = useNavigate();
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
-  const setProfile = (results) => {
-    const fullname = results.fullname;
-    const picture = results.picture;
-    dispatch(editProfile({ token, fullname, picture }));
+  const profile = useSelector(state => state.profile.data);
+  const success = useSelector(state => state.profile.successMsg);
+
+  const onEditProfile = (value) => {
+    console.log(value);
+    const fullname = value.fullname;
+    const picture = value.picture
+
+    if (fullname === '') {
+      window.alert('Input Fullname');
+    } else {
+      console.log('masuk dispatch')
+      dispatch(editProfile({ token, fullname, picture }))
+      navigate('/profile');
+    }
   }
+
+  useEffect(() => {
+    if (success) {
+      navigate('/profile')
+    }
+  }, [navigate, success])
+
   return (
     <Modal
       {...props}
@@ -48,15 +97,46 @@ const ModalCenter = (props) => {
           <h5 className="modal-title fs-16px fw-700 text-dark" id="contained-modal-title-vcenter"
           >Edit Your Data</h5>
         </Modal.Header>
-        <Modal.Body>
-          <Formik onSubmit={setProfile} initialValues={{ fullname: '', picture: '' }} >
-            {(props) => <FormEdit {...props} />}
-          </Formik>
-        </Modal.Body>
-        <Modal.Footer>
-          <Link to={'/success'}
-            className="btn btn-primary btn-lg bg-web text-white u-none">Continue</Link>
-        </Modal.Footer>
+        <Formik onSubmit={onEditProfile} initialValues={{ fullname: '', phonenumber: '', picture: '' }} >
+          {(props) => <FormEditName {...props} />}
+        </Formik>
+      </Modal.Body>
+    </Modal>
+  )
+}
+
+const ModalCenterPhone = (props) => {
+  const navigate = useNavigate();
+  const token = useSelector(state => state.auth.token);
+  const dispatch = useDispatch();
+  const profile = useSelector(state => state.profile.data);
+  const success = useSelector(state => state.profile.successMsg);
+
+  const onEditProfilePhone = (value) => {
+    const phonenumber = value.phonenumber;
+
+    if (phonenumber === '') {
+      window.alert('Input Phonenumber');
+    } else {
+      console.log('masuk dispatch')
+      dispatch(editProfilePhone({ token, phonenumber }))
+      navigate('/profile');
+    }
+  }
+
+  return (
+    <Modal
+      {...props}
+      aria-labelledby="contained-modal-title-vcenter"
+      centered>
+      <Modal.Body>
+        <Modal.Header closeButton>
+          <h5 className="modal-title fs-16px fw-700 text-dark" id="contained-modal-title-vcenter"
+          >Edit Your Data</h5>
+        </Modal.Header>
+        <Formik onSubmit={onEditProfilePhone} initialValues={{ phonenumber: '' }} >
+          {(props) => <FormEditPhone {...props} />}
+        </Formik>
       </Modal.Body>
     </Modal>
   )
@@ -66,8 +146,10 @@ const Profile = () => {
   const profile = useSelector(state => state.profile.data);
   const token = useSelector(state => state.auth.token);
   const successMsg = useSelector(state => state.profile.successMsg);
+  const defaultPhone = '+62822 8734 7634';
   const dispatch = useDispatch();
-  const [show, setShow] = useState(false);
+  const [showname, setShowName] = useState(false);
+  const [showphone, setShowPhone] = useState(false);
 
   useEffect(() => {
     dispatch(getProfileLogin(token))
@@ -95,16 +177,23 @@ const Profile = () => {
                         </Col>
                         <Row className='d-flex justify-content-center'>
                           <Col md={4}>
-                            <Button onClick={() => setShow(true)} className='btn btn-light mt-3'><span className="mt-3"><FiEdit2 className="me-2" />Edit</span></Button>
+                            <div className='align-items-center d-flex justify-content-center'>
+                              <h1 className="fs-18px fw-bold mt-4">{profile.fullname}</h1><Button onClick={() => setShowName(true)} className='btn btn-light mt-3'><span className="mt-3"><FiEdit2 className="me-2" /></span></Button></div>
                           </Col>
-                          <ModalCenter
-                            show={show}
-                            onHide={() => setShow(false)}
+                          <ModalCenterName
+                            show={showname}
+                            onHide={() => setShowName(false)}
                           />
                         </Row>
-                        <h1 className="fs-18px fw-bold mt-4">{profile.fullname}</h1>
+
                         <Row className="mt-3">
-                          <span>{profile.phonenumber}</span>
+                          <div className='align-items-center d-flex justify-content-center'>
+                            <span>{profile.phonenumber || defaultPhone}</span><Button onClick={() => setShowPhone(true)} className='btn btn-light'><FiEdit2 className="me-2" /></Button>
+                          </div>
+                          <ModalCenterPhone
+                            show={showphone}
+                            onHide={() => setShowPhone(false)}
+                          />
                         </Row>
                       </div>
                       <div
@@ -115,11 +204,6 @@ const Profile = () => {
                       <div
                         className="col-md-6 nav justify-content-between d-flex align-items-center mt-2 shadow-sm p-4 bg-body rounded m-auto bg-profile">
                         <Link className="u-none color-4D4B57" to={'/change-password'}><h1 className="fs-16px fw-bold color-web-dark-2">Change Password</h1></Link>
-                        <FiArrowRight />
-                      </div>
-                      <div
-                        className="col-md-6 nav justify-content-between d-flex align-items-center mt-2 shadow-sm p-4 bg-body rounded m-auto bg-profile">
-                        <Link className="u-none color-4D4B57" to={'/add-pin'}><h1 className="fs-16px fw-bold color-web-dark-2">Add PIN</h1></Link>
                         <FiArrowRight />
                       </div>
                       <div

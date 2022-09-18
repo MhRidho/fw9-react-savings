@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfileLogin, getUserLogin } from "../asyncActions/profiles";
+import { editProfile, editProfilePhone, getProfileLogin, getUserLogin } from "../asyncActions/profiles";
 
 const initialState = {
   value: '',
   data: [],
   result: {},
-  balance: []
+  balance: [],
+  successMsg: ''
 };
 
 const profile = createSlice({
@@ -23,8 +24,24 @@ const profile = createSlice({
     build.addCase(getUserLogin.fulfilled, (state, action) => {
       state.data = action.payload.results;
     });
+    build.addCase(editProfile.pending, (state) => {
+      state.data = null;
+      state.successMsg = null;
+    });
+    build.addCase(editProfile.fulfilled, (state, action) => {
+      state.data = action.payload.results;
+      state.successMsg = action.payload?.successMsg;
+    });
+    build.addCase(editProfilePhone.pending, (state) => {
+      state.data = null;
+      state.successMsg = null;
+    });
+    build.addCase(editProfilePhone.fulfilled, (state, action) => {
+      state.data = action.payload.results;
+      state.successMsg = action.payload?.successMsg;
+    });
   }
 });
 
-export { getProfileLogin, getUserLogin };
+export { getProfileLogin, getUserLogin, editProfile, editProfilePhone };
 export default profile.reducer;
