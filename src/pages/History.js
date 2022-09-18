@@ -25,15 +25,12 @@ const History = () => {
       <Helmet>
         <title>History</title>
       </Helmet>
-
       <div className='background-home'>
         <Nav />
-
         <section>
           <Container>
             <Row className="mx-5">
               <AsideMenu />
-
               <div className="col ms-md-3">
                 <div className="row d-flex justify-content-between rounded-4 py-5 px-4 bg-white mt-1">
                   <div className="col pb-5 f-color-g">
@@ -56,14 +53,16 @@ const History = () => {
                       {/* end integration */}
                       <span className="mt-5">This Month</span>
                     </div>
+                    <div className='mt-4 d-flex gap-3'>
+                      <Button className='bg-web' disabled={transactions?.pageInfo?.prevPage === null} onClick={() => transactions.pageInfo.prevPage && dispatch(getHistory(transactions.pageInfo.prevPage))}>Prev Page</Button>
+                      <Button className='bg-web' disabled={transactions?.pageInfo?.nextPage === null} onClick={() => transactions.pageInfo.nextPage && dispatch(getHistory(transactions.pageInfo.nextPage))}>Next Page</Button>
+                    </div>
                   </div>
                 </div>
               </div>
-
             </Row>
           </Container>
         </section>
-
         <Footer />
       </div>
     </>

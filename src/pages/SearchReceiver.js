@@ -1,5 +1,5 @@
 import { React, useEffect } from 'react';
-import { Container, Row, Col, InputGroup, Form } from 'react-bootstrap';
+import { Container, Row, Col, InputGroup, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam70.png';
 import { FiSearch } from 'react-icons/fi';
@@ -76,8 +76,12 @@ const SearchReceiver = () => {
                     </InputGroup>
                     <div>
                       {allprofile?.results?.map((profile, id) => (
-                        <DataProfile id={profile.id} user_id={profile.user_id} fullname={profile.fullname} phonenumber={profile.phonenumber} />
+                        <DataProfile key={id} id={profile.id} user_id={profile.user_id} fullname={profile.fullname} phonenumber={profile.phonenumber} />
                       ))}
+                    </div>
+                    <div className='mt-4 d-flex gap-3'>
+                      <Button className='bg-web' disabled={allprofile?.pageInfo?.prevPage === null} onClick={() => allprofile.pageInfo.prevPage && dispatch(getAllProfiles(allprofile.pageInfo.prevPage))}>Prev Page</Button>
+                      <Button className='bg-web' disabled={allprofile?.pageInfo?.nextPage === null} onClick={() => allprofile.pageInfo.nextPage && dispatch(getAllProfiles(allprofile.pageInfo.nextPage))}>Next Page</Button>
                     </div>
                   </div>
                 </div>
