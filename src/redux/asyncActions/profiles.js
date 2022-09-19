@@ -26,13 +26,15 @@ export const getUserLogin = createAsyncThunk('/auth/users', async (token) => {
   }
 });
 
-export const editProfile = createAsyncThunk('/auth/profile', async ({ token, fullname, picture }) => {
+export const editProfile = createAsyncThunk('/auth/profile', async ({ token, fullname, phonenumber, picture }) => {
   const result = {};
   try {
-    const profilePicture = new FormData();
-    profilePicture.append('file', picture);
-    const send = qs.stringify({ fullname, picture }, { headers: { 'Content-Type': 'multipart/form-data' } })
-    const { data } = await http(token).patch('/auth/profile', send);
+    const formData = new FormData();
+    formData.append('picture', picture);
+    formData.append('fullname', fullname);
+    formData.append('phonenumber', phonenumber);
+    // const send = qs.stringify({ fullname, phonenumber, picture }, { headers: { 'Content-Type': 'multipart/form-data' } })
+    const { data } = await http(token).patch('/auth/profile', formData);
     result.successMsg = data.message;
     return result;
   }

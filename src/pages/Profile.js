@@ -12,7 +12,8 @@ import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileLogin, editProfile, editProfilePhone } from '../redux/asyncActions/profiles';
 
-const FormEditName = ({ handleSubmit, handleChange }) => {
+const FormEditName = ({ handleSubmit, handleChange, handleFile, setPicture }) => {
+  const profile = useSelector(state => state.profile.data);
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -20,10 +21,13 @@ const FormEditName = ({ handleSubmit, handleChange }) => {
           <div className="d-flex flex-column my-5">
             <Row>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control className='shadow-none' type="text" placeholder="Fullname" name='fullname' onChange={handleChange} />
+                <Form.Control className='shadow-none' type="text" placeholder={profile.fullname} name='fullname' onChange={handleChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Control className='shadow-none' type="text" placeholder={profile.phonenumber} name='phonenumber' onChange={handleChange} />
               </Form.Group>
               <Form.Group>
-                <FormControl className='shadow-none' type='file' name='picture' onChange={handleChange} />
+                <FormControl className='shadow-none' type='file' name='picture' onChange={(event) => { setPicture(event.currentTarget.files[0]) }} />
               </Form.Group>
             </Row>
           </div>
@@ -61,22 +65,25 @@ const FormEditPhone = ({ handleSubmit, handleChange }) => {
 }
 
 const ModalCenterName = (props) => {
+  const [picture, setPicture] = useState('');
   const navigate = useNavigate();
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile.data);
   const success = useSelector(state => state.profile.successMsg);
+  const firstName = profile.fullname;
+  const phoneNumber = profile.phonenumber;
 
   const onEditProfile = (value) => {
     console.log(value);
     const fullname = value.fullname;
-    const picture = value.picture
+    const phonenumber = value.phonenumber;
 
     if (fullname === '') {
       window.alert('Input Fullname');
     } else {
       console.log('masuk dispatch')
-      dispatch(editProfile({ token, fullname, picture }))
+      dispatch(editProfile({ token, fullname, phonenumber, picture }))
       navigate('/profile');
     }
   }
@@ -97,8 +104,8 @@ const ModalCenterName = (props) => {
           <h5 className="modal-title fs-16px fw-700 text-dark" id="contained-modal-title-vcenter"
           >Edit Your Data</h5>
         </Modal.Header>
-        <Formik onSubmit={onEditProfile} initialValues={{ fullname: '', phonenumber: '', picture: '' }} >
-          {(props) => <FormEditName {...props} />}
+        <Formik onSubmit={onEditProfile} initialValues={{ fullname: { firstName }, phonenumber: { phoneNumber }, picture: '' }} >
+          {(props) => <FormEditName {...props} setPicture={setPicture} />}
         </Formik>
       </Modal.Body>
     </Modal>
@@ -146,7 +153,7 @@ const Profile = () => {
   const profile = useSelector(state => state.profile.data);
   const token = useSelector(state => state.auth.token);
   const successMsg = useSelector(state => state.profile.successMsg);
-  const defaultPhone = '+62822 8734 7634';
+  const defaultPhone = 'No Number';
   const dispatch = useDispatch();
   const [showname, setShowName] = useState(false);
   const [showphone, setShowPhone] = useState(false);
@@ -173,7 +180,7 @@ const Profile = () => {
                     <div>
                       <div className="text-center mt-2">
                         <Col md={1} className='mx-auto'>
-                          <img src={Mic80} alt="mic80.png" /><br />
+                          <img src={Mic80} alt="mic80.png" />
                         </Col>
                         <Row className='d-flex justify-content-center'>
                           <Col md={4}>
