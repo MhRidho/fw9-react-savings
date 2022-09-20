@@ -49,7 +49,7 @@ const RegisterForm = (props) => {
           name="username"
           value={props.values.username}
           onChange={props.handleChange}
-          id="form"
+          className='form-wallet shadow-none'
           placeholder="Enter your username"
           isInvalid={!!props.errors.username}
         />
@@ -62,7 +62,7 @@ const RegisterForm = (props) => {
           name="email"
           value={props.values.email}
           onChange={props.handleChange}
-          id="form"
+          className='form-wallet shadow-none'
           placeholder="Enter your e-mail"
           isInvalid={!!props.errors.email}
         />
@@ -75,7 +75,7 @@ const RegisterForm = (props) => {
           name="password"
           value={props.values.password}
           onChange={props.handleChange}
-          id="form"
+          className='form-wallet shadow-none'
           placeholder="Enter your password"
           isInvalid={!!props.errors.password}
         />

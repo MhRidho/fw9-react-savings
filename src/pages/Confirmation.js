@@ -171,7 +171,7 @@ const Confirmation = () => {
                         <div className="col mar-right-40px">
                           <p className="fs-16px">Date & Time
                           </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">{date}May 11, 2020 - 12.20</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">{date}September 20, 2022 - 12.20</h1>
                         </div>
                       </div>
                       <div

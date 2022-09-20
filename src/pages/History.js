@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam1.png';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
@@ -11,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getHistory } from '../redux/asyncActions/transactions';
 
 const History = () => {
+  const profile = useSelector(state => state.profile.data);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const transactions = useSelector((state) => state.transaction.value);
@@ -26,7 +26,7 @@ const History = () => {
         <title>History</title>
       </Helmet>
       <div className='background-home'>
-        <Nav />
+        <Nav name={profile.fullname} phone={profile.phonenumber} />
         <section>
           <Container>
             <Row className="mx-5">

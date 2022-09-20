@@ -357,11 +357,11 @@ header main div div.aside button a {
 
 
 /* FORM */
-#form {
-  border: unset;
-  border-bottom: 1px solid gray;
-  border-radius: unset;
-  background-color: transparent;
+.form-wallet {
+  border: unset !important;
+  border-bottom: 1px solid gray !important;
+  border-radius: unset !important;
+  background-color: transparent !important;
 }
 
 .form {
@@ -369,11 +369,6 @@ header main div div.aside button a {
   border-bottom: 1px solid gray;
   border-radius: unset;
   background-color: transparent;
-}
-
-#form:focus {
-  box-shadow: unset;
-  border-bottom: 1px solid gray;
 }
 
 .a-menu {

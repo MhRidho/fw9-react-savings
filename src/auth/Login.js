@@ -29,7 +29,7 @@ const LoginForm = (props) => {
     <Form noValidate onSubmit={props.handleSubmit}>
       {successMsg && <Alert variant='success'>{successMsg}</Alert>}
       {errorMsg && <Alert variant='danger'>{errorMsg}</Alert>}
-      <InputGroup className="mb-5" controlId='formBasicEmail'>
+      <InputGroup className="mb-5">
         <InputGroup.Text id="basic-addon1" className='inp-logo'><FiMail className='color-A9A9A999 fs-22px' /></InputGroup.Text>
         <Form.Control
           type="email"
@@ -37,7 +37,7 @@ const LoginForm = (props) => {
           value={props.values.email}
           onChange={props.handleChange}
           onBlur={props.handleChange}
-          id="form"
+          className='form-wallet shadow-none'
           placeholder="Enter your e-mail"
           isInvalid={!!props.errors.email}
         />
@@ -50,7 +50,7 @@ const LoginForm = (props) => {
           name="password"
           value={props.values.password}
           onChange={props.handleChange}
-          id="form"
+          className='form-wallet shadow-none'
           placeholder="Enter your password"
           isInvalid={!!props.errors.password}
         />
@@ -120,7 +120,7 @@ const Login = () => {
                   </Formik>
 
                   <div className="form-check form-check-reverse position-relative text-center my-5">
-                    <label className="form-check-label" for="reverseCheck1">
+                    <label className="form-check-label" >
                       Don't have an account? Let's <Link className='have-signup' to={"/sign-up"}>Sign Up</Link>
                     </label>
                   </div>
