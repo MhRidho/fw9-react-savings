@@ -37,4 +37,4 @@ REACT_APP_BACKEND_URL = http://localhost:3332
 
 ## License
 
-`Muhammad Ridho`
+**Muhammad Ridho**
