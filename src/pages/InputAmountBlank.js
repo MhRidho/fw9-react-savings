@@ -72,7 +72,7 @@ const TransferForm = (props) => {
 const InputAmountBlank = () => {
   const fullname = useSelector(state => state.transfer.fullname);
   const phonenumber = useSelector(state => state.transfer.phonenumber);
-  const picture = useSelector(state => state.transfer.picture);
+  // const picture = useSelector(state => state.transfer.picture);
   const date = new Date().toISOString();
   const navigate = useNavigate();
   const dispatch = useDispatch();

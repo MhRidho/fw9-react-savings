@@ -1,9 +1,8 @@
 import { React } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Success1 from '../assets/img/success.png';
 import Sam70 from '../assets/img/sam70.png';
-import { FiDownload, FiShare2 } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';

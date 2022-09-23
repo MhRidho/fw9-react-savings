@@ -3,13 +3,11 @@ import { Col, Row, Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom';
 import { FiGrid, FiArrowUp, FiPlus, FiUser, FiLogOut } from 'react-icons/fi';
 import { logout } from '../redux/reducers/auth';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 
 const AsideMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useSelector((state) => state.auth.token);
 
   const onLogout = () => {
     dispatch(logout());

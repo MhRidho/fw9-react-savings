@@ -22,7 +22,6 @@ const ChangePassword = () => {
           <Container>
             <Row className="mx-5">
               <AsideMenu />
-
               <Col className="ms-md-3">
                 <Row className="d-flex justify-content-between rounded-4 pt-5 px-4 bg-white mt-1 pad-bot-115px">
                   <Col className="pb-2 f-color-g">
@@ -72,11 +71,9 @@ const ChangePassword = () => {
                   </Col>
                 </Row>
               </Col>
-
             </Row>
           </Container>
         </section>
-
         <Footer />
       </div>
     </>

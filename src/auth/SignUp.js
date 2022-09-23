@@ -99,10 +99,8 @@ const RegisterForm = (props) => {
 
 const Signup = () => {
   const dispatch = useDispatch();
-  // const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
   const successMsg = useSelector((state) => state.auth.successMsg);
-  const errorMsg = useSelector((state) => state.auth.errorMsg);
 
   const onSignupRequest = (value) => {
     const data = { username: value.username, email: value.email, password: value.password }

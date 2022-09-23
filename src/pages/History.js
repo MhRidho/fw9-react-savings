@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Button } from 'react-bootstrap';
 import Satu from '../assets/img/sam1.png';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
@@ -14,8 +14,6 @@ const History = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const transactions = useSelector((state) => state.transaction.value);
-
-  console.log(transactions);
 
   useEffect(() => {
     dispatch(getHistory(token));

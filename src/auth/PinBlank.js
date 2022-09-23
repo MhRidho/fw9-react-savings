@@ -63,7 +63,6 @@ const PinBlank = () => {
   const navigate = useNavigate();
   const email = useSelector(state => state.auth.email);
   const successMsg = useSelector((state) => state.auth.successMsg);
-  const errorMsg = useSelector((state) => state.auth.errorMsg);
 
   const onPinRegister = (value) => {
     const pin = value.pin1 + value.pin2 + value.pin3 + value.pin4 + value.pin5 + value.pin6;

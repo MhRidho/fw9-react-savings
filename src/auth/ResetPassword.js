@@ -1,8 +1,6 @@
 import React from 'react';
 import '../assets/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Formik } from 'formik';
-// import * as Yup from 'yup';
 import { Container, Row, Col, InputGroup, Form } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import { FiMail } from 'react-icons/fi';

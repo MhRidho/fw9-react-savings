@@ -64,8 +64,6 @@ const AddPhoneNumber = () => {
                             className="a-login color-btn-bef btn btn-primary btn-lg bg-btn-bef mt-5" to={'/managephone'}>Add Phone Number</Link>
                         </div>
                       </div>
-
-
                     </div>
                   </Col>
                 </Row>
@@ -74,7 +72,6 @@ const AddPhoneNumber = () => {
             </Row>
           </Container>
         </section>
-
         <Footer />
       </div>
     </>

@@ -116,8 +116,8 @@ const ModalCenterPhone = (props) => {
   const navigate = useNavigate();
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
-  const profile = useSelector(state => state.profile.data);
-  const success = useSelector(state => state.profile.successMsg);
+  // const profile = useSelector(state => state.profile.data);
+  // const success = useSelector(state => state.profile.successMsg);
 
   const onEditProfilePhone = (value) => {
     const phonenumber = value.phonenumber;
@@ -152,7 +152,7 @@ const ModalCenterPhone = (props) => {
 const Profile = () => {
   const profile = useSelector(state => state.profile.data);
   const token = useSelector(state => state.auth.token);
-  const successMsg = useSelector(state => state.profile.successMsg);
+  const success = useSelector(state => state.profile.successMsg);
   const defaultPhone = 'No Number';
   const dispatch = useDispatch();
   const [showname, setShowName] = useState(false);
@@ -160,7 +160,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getProfileLogin(token))
-  }, [successMsg])
+  }, [success])
   return (
     <>
       <Helmet>

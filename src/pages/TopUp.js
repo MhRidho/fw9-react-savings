@@ -11,7 +11,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { topup } from '../redux/asyncActions/topup';
-import { notes, editAmount, editTimeTopup } from '../redux/reducers/topup';
 
 const topupSchema = Yup.object().shape({
   amount: Yup.number()
