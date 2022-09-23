@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import Footer from '../components/Footer';
-import AsideMenu from '../components/AsideMenu';
+import AsideMenus from '../components/AsideMenus';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -101,7 +101,7 @@ const InputAmountBlank = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <AsideMenu />
+              <AsideMenus />
 
               <div className="col ms-md-3">
                 <div className="row d-flex justify-content-between rounded-4 py-5 px-4 bg-white mt-1">

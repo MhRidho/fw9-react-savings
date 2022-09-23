@@ -7,7 +7,7 @@ import { FiArrowUp, FiPlus, FiArrowDown } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
-import AsideMenu from '../components/AsideMenu';
+import AsideMenus from '../components/AsideMenus';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileLogin } from '../redux/asyncActions/profiles';
@@ -36,7 +36,7 @@ const Home = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <AsideMenu />
+              <AsideMenus />
               <Col className="ms-md-2 mt-1">
                 <Row className="d-flex justify-content-between rounded-4 py-4 ps-4 main-section">
                   <Col>

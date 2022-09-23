@@ -5,7 +5,7 @@ import { FiPhone, FiLogOut } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
-import AsideMenu from '../components/AsideMenu';
+import AsideMenus from '../components/AsideMenus';
 import Footer from '../components/Footer';
 
 const AddPhoneNumber = () => {
@@ -24,7 +24,7 @@ const AddPhoneNumber = () => {
                 <Row>
                   <div className="offcanvas-body bg-white rounded-4">
                     <ul className="d-md-flex gap-5 navbar-nav justify-content-end ms-4 mt-5 pb-5">
-                      <AsideMenu />
+                      <AsideMenus />
                       <li className="nav-item martop-270px">
                         <Link className="ank-menu" to={'/'}><FiLogOut className='mx-4' />Logout</Link>
                       </li>

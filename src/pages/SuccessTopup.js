@@ -6,7 +6,7 @@ import Sam70 from '../assets/img/sam70.png';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
-import AsideMenu from '../components/AsideMenu';
+import AsideMenus from '../components/AsideMenus';
 import Footer from '../components/Footer';
 import { useSelector } from 'react-redux';
 
@@ -31,7 +31,7 @@ const Success = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <AsideMenu />
+              <AsideMenus />
 
               <Col className="ms-md-3">
                 <Row className="d-flex justify-content-between rounded-4 pt-5 pb-4 px-4 bg-white mt-1">

@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
 import Footer from '../components/Footer';
-import AsideMenu from '../components/AsideMenu';
+import AsideMenus from '../components/AsideMenus';
 
 const Failed = () => {
   return (
@@ -22,7 +22,7 @@ const Failed = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <AsideMenu />
+              <AsideMenus />
 
               <Col className="ms-md-3">
                 <Row className="d-flex justify-content-between rounded-4 py-5 px-4 bg-white mt-1">

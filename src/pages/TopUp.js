@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
-import AsideMenu from '../components/AsideMenu';
+import AsideMenus from '../components/AsideMenus';
 import Footer from '../components/Footer';
 import { FiPlus } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
@@ -130,7 +130,7 @@ const TopUp = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <AsideMenu />
+              <AsideMenus />
 
               <Col className="ms-md-3">
                 <div className="row d-flex justify-content-between rounded-4 pt-5 pb-4 px-4 bg-white mt-1 ">

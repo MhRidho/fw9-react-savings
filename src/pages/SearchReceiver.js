@@ -6,7 +6,7 @@ import { FiSearch } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
-import AsideMenu from '../components/AsideMenu';
+import AsideMenus from '../components/AsideMenus';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProfiles } from '../redux/asyncActions/allprofiles';
@@ -57,7 +57,7 @@ const SearchReceiver = () => {
         <section>
           <Container>
             <Row className="mx-5">
-              <AsideMenu />
+              <AsideMenus />
 
               <div className="col ms-md-3">
                 <div className="row d-flex justify-content-between rounded-4 pt-5 px-4 bg-white mt-1">
