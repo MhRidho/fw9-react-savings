@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Navbar, Col, DropdownButton, Dropdown, Row } from 'react-bootstrap';
+import { Container, Navbar, Col, DropdownButton, Dropdown, ButtonGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FiBell } from 'react-icons/fi';
 import Robert52 from '../assets/img/Robert52.png';
@@ -24,7 +24,7 @@ const navbar = ({ name, phone }) => {
             </div>
             <DropdownButton
               className='d-flex justify-content-center align-items-center'
-              as='ButtonGroup'
+              as={ButtonGroup}
               key='start'
               id='dropdown-button-drop-start'
               drop='start'

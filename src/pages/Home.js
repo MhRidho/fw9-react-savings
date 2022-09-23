@@ -65,7 +65,7 @@ const Home = () => {
                     </Row>
                     <Row className="d-flex justify-content-center mt-5">
                       <Col md={10}>
-                        <img fluid src={Graphic} alt="graphic.png" />
+                        <img fluid="true" src={Graphic} alt="graphic.png" />
                       </Col>
                     </Row>
                   </Col>
