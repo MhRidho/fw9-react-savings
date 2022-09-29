@@ -80,9 +80,24 @@ const SearchReceiver = () => {
                       ))}
                     </div>
                     <div className='mt-4 d-flex gap-3'>
-                      <Button className='bg-web' disabled={allprofile?.pageInfo?.prevPage === null} onClick={() => allprofile.pageInfo.prevPage && dispatch(getAllProfiles(allprofile.pageInfo.prevPage))}>Prev Page</Button>
-                      <Button className='bg-web' disabled={allprofile?.pageInfo?.nextPage === null} onClick={() => allprofile.pageInfo.nextPage && dispatch(getAllProfiles(allprofile.pageInfo.nextPage))}>Next Page</Button>
+                      <Button className='bg-web' disabled={allprofile?.pageInfo?.prevPage === null} onClick={() => allprofile.pageInfo.prevPage && dispatch(getAllProfiles({ limit: allprofile.pageInfo.limit, page: allprofile.pageInfo.prevPage }))}>Prev</Button>
+                      <div className='d-flex align-items-center'><b>{allprofile?.pageInfo?.currentPage}</b></div>
+                      <Button className='bg-web' disabled={allprofile?.pageInfo?.nextPage === null} onClick={() => allprofile.pageInfo.nextPage && dispatch(getAllProfiles({ limit: allprofile.pageInfo.limit, page: allprofile.pageInfo.nextPage }))}>Next</Button>
                     </div>
+                    <Row>
+                      <div className='d-flex justify-content-end'>
+                        <Col md={1}>
+                          <Form.Select onChange={(e) => dispatch(getAllProfiles({ limit: e.target.value }))} className='mt-3 shadow-none rounded-0'>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                            <option value={6}>All Data</option>
+                          </Form.Select>
+                        </Col>
+                      </div>
+                    </Row>
                   </div>
                 </div>
               </div>
