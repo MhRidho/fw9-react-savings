@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProfiles } from '../redux/asyncActions/allprofiles';
 import { editNameTransfer, editPhoneTransfer, editUserIdTransfer } from '../redux/reducers/transfer';
+import { BeatLoader } from 'react-spinners';
 
 const DataProfile = ({ id, user_id, fullname, phonenumber }) => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const SearchReceiver = () => {
   const token = useSelector((state) => state.auth.token);
   const allprofile = useSelector((state) => state.allprofile.value);
   const profile = useSelector(state => state.profile.data);
+  const isLoading = useSelector(state => state.transaction.isLoading);
 
   useEffect(() => {
     dispatch(getAllProfiles(token));
@@ -74,11 +76,13 @@ const SearchReceiver = () => {
                         aria-describedby="basic-addon1"
                       />
                     </InputGroup>
-                    <div>
-                      {allprofile?.results?.map((profile, id) => (
-                        <DataProfile key={id} id={profile.id} user_id={profile.user_id} fullname={profile.fullname} phonenumber={profile.phonenumber} />
-                      ))}
-                    </div>
+                    {isLoading ? (<BeatLoader loading />) : (
+                      <div>
+                        {allprofile?.results?.map((profile, id) => (
+                          <DataProfile key={id} id={profile.id} user_id={profile.user_id} fullname={profile.fullname} phonenumber={profile.phonenumber} />
+                        ))}
+                      </div>
+                    )}
                     <div className='mt-4 d-flex gap-3'>
                       <Button className='bg-web' disabled={allprofile?.pageInfo?.prevPage === null} onClick={() => allprofile.pageInfo.prevPage && dispatch(getAllProfiles({ limit: allprofile.pageInfo.limit, page: allprofile.pageInfo.prevPage }))}>Prev</Button>
                       <div className='d-flex align-items-center'><b>{allprofile?.pageInfo?.currentPage}</b></div>
@@ -87,7 +91,7 @@ const SearchReceiver = () => {
                     <Row>
                       <div className='d-flex justify-content-end'>
                         <Col md={1}>
-                          <Form.Select onChange={(e) => dispatch(getAllProfiles({ limit: e.target.value }))} className='mt-3 shadow-none rounded-0'>
+                          <Form.Select onChange={(e) => dispatch(getAllProfiles({ limit: e.target.value }))} className='my-3 shadow-none'>
                             <option value={1}>1</option>
                             <option value={2}>2</option>
                             <option value={3}>3</option>

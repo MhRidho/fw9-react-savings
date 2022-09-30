@@ -84,7 +84,6 @@ const ModalCenterName = (props) => {
     } else {
       console.log('masuk dispatch')
       dispatch(editProfile({ token, fullname, phonenumber, picture }))
-      navigate('/profile');
     }
   }
 

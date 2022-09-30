@@ -12,12 +12,14 @@ import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileLogin } from '../redux/asyncActions/profiles';
 import { getHistory } from '../redux/asyncActions/transactions';
+import { BeatLoader } from 'react-spinners';
 
 const Home = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const profile = useSelector((state) => state.profile.data);
   const transaction = useSelector((state) => state.transaction.value);
+  const isLoading = useSelector(state => state.transaction.isLoading);
 
   useEffect(() => {
     dispatch(getProfileLogin(token));
@@ -78,21 +80,23 @@ const Home = () => {
                           all</span></Link>
                       </Col>
                     </Row>
+                    {isLoading ? (<div className='d-flex justify-content-center'><BeatLoader loading /></div>) : (
+                      <div>
+                        {transaction?.results?.map((trans, i) => (
+                          <div className="nav justify-content-between d-flex align-items-center mt-4" key={i}>
+                            <Row>
+                              <img src={Satu} alt="3.png" className="me-3" />
+                            </Row>
+                            <Col>
+                              <h1 className="mt-3 fs-16px fw-bold ms-4" >Samuel</h1>
+                              <p className="fs-14px ms-4">Transfer</p>
+                            </Col>
+                            <span className="fs-16px fw-bold color-green-web">+Rp{trans.amount}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
-                    <div>
-                      {transaction?.results?.map((trans, i) => (
-                        <div className="nav justify-content-between d-flex align-items-center mt-4" key={i}>
-                          <Row>
-                            <img src={Satu} alt="3.png" className="me-3" />
-                          </Row>
-                          <Col>
-                            <h1 className="mt-3 fs-16px fw-bold ms-4" >Samuel</h1>
-                            <p className="fs-14px ms-4">Transfer</p>
-                          </Col>
-                          <span className="fs-16px fw-bold color-green-web">+Rp{trans.amount}</span>
-                        </div>
-                      ))}
-                    </div>
                   </Col>
                 </Row>
               </Col>
