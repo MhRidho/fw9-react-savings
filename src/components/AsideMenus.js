@@ -44,23 +44,23 @@ const AsideMenus = () => {
         <Row className='d-flex flex-sm-column gap-sm-5 pt-sm-3'>
           <ul className='nav flex-sm-column gap-sm-5 ps-sm-3'>
             <li className="nav-item">
-              <Link className='ank-menu' to={'/home'}><FiGrid className='mx-4 fs-24px' />Dashboard</Link>
+              <Link className='ank-menu' to={'/home'}><FiGrid className='mx-4 fs-24px' /><span>Dashboard</span></Link>
             </li>
             <li className="nav-item">
-              <Link className='ank-menu' to={'/search-receiver'}><FiArrowUp className='mx-4 fs-24px' />Transfer</Link>
+              <Link className='ank-menu' to={'/search-receiver'}><FiArrowUp className='mx-4 fs-24px' /><span>Transfer</span></Link>
             </li>
             <li className="nav-item">
-              <Link className='ank-menu' to={'/top-up'}><FiPlus className='mx-4 fs-24px' />Top Up</Link>
+              <Link className='ank-menu' to={'/top-up'}><FiPlus className='mx-4 fs-24px' /><span>Top Up</span></Link>
             </li>
             <li className="nav-item">
-              <Link className='ank-menu' to={'/profile'}><FiUser className='mx-4 fs-24px' />Profile</Link>
+              <Link className='ank-menu' to={'/profile'}><FiUser className='mx-4 fs-24px' /><span>Profile</span></Link>
             </li>
           </ul>
         </Row>
         <Row className='pb-sm-3'>
           <ul className='nav flex-sm-column gap-sm-5 ps-sm-3'>
             <li className="nav-item">
-              <Button className='btn-logout ps-0' onClick={onLogout}><FiLogOut className='mx-4 fs-24px' />Logout</Button>
+              <Button className='btn-logout ps-0' onClick={onLogout}><FiLogOut className='mx-4 fs-24px' /><span>Logout</span></Button>
             </li>
           </ul>
         </Row>

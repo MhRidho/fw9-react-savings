@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Container, Row, Button } from 'react-bootstrap';
+import { Container, Row, Button, Col, Form } from 'react-bootstrap';
 import Satu from '../assets/img/sam1.png';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
@@ -52,9 +52,24 @@ const History = () => {
                       <span className="mt-5">This Month</span>
                     </div>
                     <div className='mt-4 d-flex gap-3'>
-                      <Button className='bg-web' disabled={transactions?.pageInfo?.prevPage === null} onClick={() => transactions.pageInfo.prevPage && dispatch(getHistory(transactions.pageInfo.prevPage))}>Prev Page</Button>
-                      <Button className='bg-web' disabled={transactions?.pageInfo?.nextPage === null} onClick={() => transactions.pageInfo.nextPage && dispatch(getHistory(transactions.pageInfo.nextPage))}>Next Page</Button>
+                      <Button className='bg-web' disabled={transactions?.pageInfo?.prevPage === null} onClick={() => transactions.pageInfo.prevPage && dispatch(getHistory({ limit: transactions.pageInfo.limit, page: transactions.pageInfo.prevPage }))}>Prev</Button>
+                      <div className='d-flex align-items-center'><b>{transactions?.pageInfo?.currentPage}</b></div>
+                      <Button className='bg-web' disabled={transactions?.pageInfo?.nextPage === null} onClick={() => transactions.pageInfo.nextPage && dispatch(getHistory({ limit: transactions.pageInfo.limit, page: transactions.pageInfo.nextPage }))}>Next</Button>
                     </div>
+                    <Row>
+                      <div className='d-flex justify-content-end'>
+                        <Col md={1}>
+                          <Form.Select onChange={(e) => dispatch(getHistory({ limit: e.target.value }))} className='my-3 shadow-none'>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                            <option value={6}>All Data</option>
+                          </Form.Select>
+                        </Col>
+                      </div>
+                    </Row>
                   </div>
                 </div>
               </div>

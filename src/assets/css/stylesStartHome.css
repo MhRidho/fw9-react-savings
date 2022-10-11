@@ -598,3 +598,13 @@ footer {
     margin-top: 227px;
   }
 }
+
+@media screen and (max-width: 576px) {
+  .nav-item:hover {
+    border-left: unset;
+  }
+
+  .nav-item span {
+    display: none;
+  }
+}
