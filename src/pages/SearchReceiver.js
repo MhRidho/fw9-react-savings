@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Container, Row, Col, InputGroup, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Satu from '../assets/img/sam70.png';
@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllProfiles } from '../redux/asyncActions/allprofiles';
 import { editNameTransfer, editPhoneTransfer, editUserIdTransfer } from '../redux/reducers/transfer';
 import { BeatLoader } from 'react-spinners';
+import { getHistory } from '../redux/asyncActions/transactions';
 
 const DataProfile = ({ id, user_id, fullname, phonenumber }) => {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ const DataProfile = ({ id, user_id, fullname, phonenumber }) => {
 }
 
 const SearchReceiver = () => {
+  const [term, setTerm] = useState('');
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const allprofile = useSelector((state) => state.allprofile.value);
@@ -67,18 +69,31 @@ const SearchReceiver = () => {
                     <div className="d-flex justify-content-between mb-3">
                       <h1 className="fs-18px fw-bold">Search Receiver</h1>
                     </div>
-                    <InputGroup size="lg" className="mb-3">
-                      <InputGroup.Text id="basic-addon1" className='s-receiver'><FiSearch className='color-A9A9A9' /></InputGroup.Text>
-                      <Form.Control
-                        className='s-receiver'
-                        placeholder="Search receiver here"
-                        aria-label="Username"
-                        aria-describedby="basic-addon1"
-                      />
-                    </InputGroup>
-                    {isLoading ? (<BeatLoader loading />) : (
+                    <form>
+                      <InputGroup size="lg" className="mb-3">
+                        <InputGroup.Text id="basic-addon1" className='s-receiver'>
+                          <Button variant='light' type='submit'><FiSearch className='color-A9A9A9' /></Button>
+                        </InputGroup.Text>
+                        <Form.Control
+                          type='text'
+                          value={term}
+                          onChange={e => setTerm(e.target.value)}
+                          className='s-receiver'
+                          placeholder="Search receiver here"
+                        />
+                      </InputGroup>
+                    </form>
+                    {isLoading ? (<div className='d-flex justify-content-center'><BeatLoader loading /></div>) : (
                       <div>
-                        {allprofile?.results?.map((profile, id) => (
+                        {allprofile?.results?.filter(val => {
+                          if (term === '') {
+                            return val;
+                          } else if (
+                            val.fullname.toLowerCase().includes(term.toLowerCase())
+                          ) {
+                            return val;
+                          }
+                        }).map((profile, id) => (
                           <DataProfile key={id} id={profile.id} user_id={profile.user_id} fullname={profile.fullname} phonenumber={profile.phonenumber} />
                         ))}
                       </div>
@@ -105,11 +120,9 @@ const SearchReceiver = () => {
                   </div>
                 </div>
               </div>
-
             </Row>
           </Container>
         </section>
-
         <Footer />
       </div>
     </>

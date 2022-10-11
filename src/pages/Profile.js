@@ -82,8 +82,8 @@ const ModalCenterName = (props) => {
     if (fullname === '') {
       window.alert('Input Fullname');
     } else {
-      console.log('masuk dispatch')
       dispatch(editProfile({ token, fullname, phonenumber, picture }))
+      navigate('/profile');
     }
   }
 
@@ -160,6 +160,8 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getProfileLogin(token))
   }, [success])
+
+  console.log(profile.picture);
   return (
     <>
       <Helmet>
@@ -184,7 +186,7 @@ const Profile = () => {
                         <Row className='d-flex justify-content-center'>
                           <Col md={4}>
                             <div className='align-items-center d-flex justify-content-center'>
-                              <h1 className="fs-18px fw-bold mt-4">{profile.fullname}</h1><Button onClick={() => setShowName(true)} className='btn btn-light mt-3'><span className="mt-3"><FiEdit2 className="me-2" /></span></Button></div>
+                              <h1 className="fs-18px fw-bold mt-4">{profile.fullname || 'Fullname'}</h1><Button onClick={() => setShowName(true)} className='btn btn-light mt-3'><span className="mt-3"><FiEdit2 className="me-2" /></span></Button></div>
                           </Col>
                           <ModalCenterName
                             show={showname}

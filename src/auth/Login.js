@@ -32,12 +32,12 @@ const LoginForm = (props) => {
       <InputGroup className="mb-5">
         <InputGroup.Text id="basic-addon1" className='inp-logo'><FiMail className='color-A9A9A999 fs-22px' /></InputGroup.Text>
         <Form.Control
-          type="email"
+          type="text"
           name="email"
           value={props.values.email}
           onChange={props.handleChange}
           onBlur={props.handleChange}
-          className='form-wallet shadow-none'
+          className="form-wallet shadow-none"
           placeholder="Enter your e-mail"
           isInvalid={!!props.errors.email}
         />
@@ -50,7 +50,7 @@ const LoginForm = (props) => {
           name="password"
           value={props.values.password}
           onChange={props.handleChange}
-          className='form-wallet shadow-none'
+          className="form-wallet shadow-none"
           placeholder="Enter your password"
           isInvalid={!!props.errors.password}
         />

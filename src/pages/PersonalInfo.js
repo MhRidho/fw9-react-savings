@@ -18,9 +18,6 @@ const PersonalInfo = () => {
     dispatch(getProfileLogin(token));
     dispatch(getUserLogin(token));
   }, []);
-  console.log(profile.fullname);
-  console.log(profile.phonenumber);
-  console.log(profile.email);
 
   return (
     <>
@@ -29,7 +26,7 @@ const PersonalInfo = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav />
+        <Nav name={profile.fullname} phone={profile.phonenumber} />
 
         <section>
           <Container>
