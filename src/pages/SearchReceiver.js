@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllProfiles } from '../redux/asyncActions/allprofiles';
 import { editNameTransfer, editPhoneTransfer, editUserIdTransfer } from '../redux/reducers/transfer';
 import { BeatLoader } from 'react-spinners';
-import { getHistory } from '../redux/asyncActions/transactions';
 
 const DataProfile = ({ id, user_id, fullname, phonenumber }) => {
   const navigate = useNavigate();

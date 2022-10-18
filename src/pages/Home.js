@@ -55,12 +55,12 @@ const Home = () => {
                   <Col md={7} className="bg-white rounded-4 p-4 mt-1">
                     <Row className="d-flex justify-content-between">
                       <Col md={8} className='m-2'>
-                        <span className="input-group color-green-web pb-2"><FiArrowDown /></span>
+                        <span className="input-group color-green-web pb-2"><FiArrowDown className='fs-24px' /></span>
                         <span className="fs-14px">Income</span>
                         <h1 className="mt-2 fw-bold fs-18px">Rp2.120.000</h1>
                       </Col>
                       <Col className='m-2'>
-                        <span className="input-group color-red pb-2"><FiArrowUp /></span>
+                        <span className="input-group color-red pb-2"><FiArrowUp className='fs-24px' /></span>
                         <span className="fs-14px">Expense</span>
                         <h1 className="mt-2 fw-bold fs-18px">Rp1.560.000</h1>
                       </Col>

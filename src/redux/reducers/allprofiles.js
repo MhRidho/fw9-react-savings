@@ -21,3 +21,4 @@ const allprofile = createSlice({
 
 export { getAllProfiles };
 export default allprofile.reducer;
+export const { setValue } = allprofile.actions;

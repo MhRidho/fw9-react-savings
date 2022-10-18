@@ -31,19 +31,22 @@ const navbar = ({ name, phone }) => {
               variant="light"
               title={<FiBell />}
             >
-              <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-              <Container>
-                <div className="nav justify-content-between d-flex align-items-center mt-4 px-5">
-                  <Row>
-                    <img src={Satu} alt="3.png" className="me-3" />
-                  </Row>
-                  <Col>
-                    <h1 className="mt-3 fs-16px fw-bold ms-4" >Samuel</h1>
-                    <p className="fs-14px ms-4">Transfer</p>
-                  </Col>
-                  <span className="fs-16px fw-bold color-green-web">+Rp 100.000</span>
+              <div className='border px-5'>
+                <div>
+                  <Container className='border'>
+                    <Row>
+                      <div className="nav justify-content-between d-flex align-items-center mt-4 px-5">
+                        <Row>
+                          <img src={Satu} alt="3.png" className="me-3" />
+                          <h1 className="mt-3 fs-16px fw-bold ms-4" >Samuel</h1>
+                          <p className="fs-14px ms-4">Transfer</p>
+                          <span className="fs-16px fw-bold color-green-web">+Rp 100.000</span>
+                        </Row>
+                      </div>
+                    </Row>
+                  </Container>
                 </div>
-              </Container>
+              </div>
             </DropdownButton>
           </aside>
         </Container>

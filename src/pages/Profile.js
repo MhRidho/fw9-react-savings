@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react'
-import { Container, Row, Col, Button, Modal, Form, FormControl } from 'react-bootstrap';
+import { Container, Row, Col, Button, Modal, Form, FormControl, Image } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import Mic80 from '../assets/img/mic80.png';
 import { FiEdit2, FiArrowRight } from 'react-icons/fi';
@@ -38,6 +38,63 @@ const FormEditName = ({ handleSubmit, handleChange, handleFile, setPicture }) =>
         </Modal.Footer>
       </Form>
     </>
+  )
+}
+
+const FormEditPicture = (handleSubmit, handleChange, handleFile, setPicture) => {
+  const [previewSource, setPreviewSource] = useState();
+  const handleInputFile = (e) => {
+    const file = e.target.files[0];
+    previewFile(file)
+  }
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    }
+  }
+  return (
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          <div>
+            <Row>
+              <Form.Group>
+                <FormControl type='file' name='picture' onChange={handleInputFile} />
+              </Form.Group>
+            </Row>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type='submit'>Edit</Button>
+        </Modal.Footer>
+      </Form>
+    </>
+  )
+}
+
+const ModalPicture = (props) => {
+  const [picture, setPicture] = useState('');
+  const [previewSource, setPreviewSource] = useState();
+  const onEditPicture = (e) => {
+    if (!previewSource) return;
+  }
+  return (
+    <Modal {...props} centered>
+      <Modal.Header>
+        <h5>Edit Your Picture</h5>
+      </Modal.Header>
+      <Modal.Body>
+        <Formik onSubmit={onEditPicture} initialValues={{ picture: '' }}>
+          {(props) => <FormEditPicture {...props} setPicture={setPicture} />}
+        </Formik>
+        {previewSource && (
+          <Image className='mt-2' src={previewSource} alt='chosen' style={{ height: '200px' }} />
+        )}
+      </Modal.Body>
+    </Modal>
   )
 }
 
@@ -115,8 +172,6 @@ const ModalCenterPhone = (props) => {
   const navigate = useNavigate();
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
-  // const profile = useSelector(state => state.profile.data);
-  // const success = useSelector(state => state.profile.successMsg);
 
   const onEditProfilePhone = (value) => {
     const phonenumber = value.phonenumber;
@@ -156,6 +211,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [showname, setShowName] = useState(false);
   const [showphone, setShowPhone] = useState(false);
+  const [showPicture, setShowPicture] = useState(false);
 
   useEffect(() => {
     dispatch(getProfileLogin(token))
@@ -180,9 +236,10 @@ const Profile = () => {
                   <Col className="pb-2 f-color-g">
                     <div>
                       <div className="text-center mt-2">
-                        <Col md={1} className='mx-auto'>
-                          <img src={Mic80} alt="mic80.png" />
+                        <Col md={1} className='mx-auto' type='file' >
+                          <img src={Mic80} alt="mic80.png" title='edit picture' className='pointer' onClick={() => setShowPicture(true)} />
                         </Col>
+                        <ModalPicture show={showPicture} onHide={() => setShowPicture(false)} />
                         <Row className='d-flex justify-content-center'>
                           <Col md={4}>
                             <div className='align-items-center d-flex justify-content-center'>
