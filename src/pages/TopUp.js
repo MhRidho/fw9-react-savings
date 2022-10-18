@@ -89,7 +89,6 @@ const ModalCenter = (props) => {
     if (value.amount === '') {
       window.alert('Please Input amount');
     } else {
-      console.log('masuk dispatch')
       dispatch(topup({ token, request: value }))
     }
   }

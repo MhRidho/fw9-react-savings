@@ -24,15 +24,12 @@ const Success = () => {
       <Helmet>
         <title>Success</title>
       </Helmet>
-
       <div className='background-home'>
         <Nav />
-
         <section>
           <Container>
             <Row className="mx-5">
               <AsideMenus />
-
               <Col className="ms-md-3">
                 <Row className="d-flex justify-content-between rounded-4 pt-5 pb-4 px-4 bg-white mt-1">
                   <Col className="pb-2 f-color-g">

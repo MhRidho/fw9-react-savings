@@ -237,7 +237,7 @@ const Profile = () => {
                     <div>
                       <div className="text-center mt-2">
                         <Col md={1} className='mx-auto' type='file' >
-                          <img src={Mic80} alt="mic80.png" title='edit picture' className='pointer' onClick={() => setShowPicture(true)} />
+                          <img src={profile.picture || Mic80} alt="mic80.png" title='edit picture' className='pointer' onClick={() => setShowPicture(true)} />
                         </Col>
                         <ModalPicture show={showPicture} onHide={() => setShowPicture(false)} />
                         <Row className='d-flex justify-content-center'>
