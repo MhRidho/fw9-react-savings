@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Navbar, Col, DropdownButton, Dropdown, ButtonGroup, Row } from 'react-bootstrap';
+import { Container, Navbar, Col, DropdownButton, ButtonGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FiBell } from 'react-icons/fi';
 import Robert52 from '../assets/img/Robert52.png';
 import Satu from '../assets/img/sam1.png';
 
-const navbar = ({ name, phone }) => {
+const navbar = ({ name, phone, picture }) => {
   return (
     <div className="header-home">
       <Navbar className="bg-white py-5 rounded-bottom shadow p-3 mb-5 bg-body">
@@ -14,7 +14,7 @@ const navbar = ({ name, phone }) => {
             to={'/'}>Savings</Link>
           <aside className="d-flex">
             <Col md={3}>
-              <img src={Robert52} alt="Robert52.png" className="me-4" />
+              <img src={picture || Robert52} style={{ height: '50px' }} alt="Robert52.png" className="me-4" />
             </Col>
             <div className="d-flex flex-column align-content-center me-4">
               <div className="name ps-2">

@@ -124,7 +124,7 @@ const TopUp = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav name={profile.fullname} phone={profile.phonenumber} />
+        <Nav name={profile.fullname} phone={profile.phonenumber} picture={profile.picture} />
 
         <section>
           <Container>
