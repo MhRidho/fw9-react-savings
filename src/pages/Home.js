@@ -43,7 +43,7 @@ const Home = () => {
                 <Row className="d-flex justify-content-between rounded-4 py-4 ps-4 main-section">
                   <Col>
                     <span className="fs-18px">Balance</span>
-                    <h1 className="fs-40px">Rp. {profile.balance}</h1>
+                    <h1 className="fs-40px">{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(parseInt(profile?.balance || 0))}</h1>
                     <p className="fs-14px">{profile.phonenumber}</p>
                   </Col>
                   <Col md={3} className="d-flex flex-column justify-content-evenly ps-md-4">

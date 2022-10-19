@@ -14,7 +14,7 @@ const navbar = ({ name, phone, picture }) => {
             to={'/'}>Savings</Link>
           <aside className="d-flex">
             <Col md={3}>
-              <img src={picture || Robert52} style={{ height: '50px' }} alt="Robert52.png" className="me-4" />
+              <img src={picture || Robert52} style={{ height: '50px' }} alt="Robert52.png" className="img-nav me-4 img-fluid" />
             </Col>
             <div className="d-flex flex-column align-content-center me-4">
               <div className="name ps-2">
@@ -31,9 +31,9 @@ const navbar = ({ name, phone, picture }) => {
               variant="light"
               title={<FiBell />}
             >
-              <div className='border px-5'>
+              <div className='px-5'>
                 <div>
-                  <Container className='border'>
+                  <Container>
                     <Row>
                       <div className="nav justify-content-between d-flex align-items-center mt-4 px-5">
                         <Row>

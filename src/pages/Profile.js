@@ -21,10 +21,10 @@ const FormEditName = ({ handleSubmit, handleChange, handleFile, setPicture }) =>
           <div className="d-flex flex-column my-5">
             <Row>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control className='shadow-none' type="text" placeholder={profile.fullname} name='fullname' onChange={handleChange} />
+                <Form.Control className='shadow-none' type="text" placeholder={profile?.fullname ? profile.fullname : 'Your Name'} name='fullname' onChange={handleChange} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control className='shadow-none' type="text" placeholder={profile.phonenumber} name='phonenumber' onChange={handleChange} />
+                <Form.Control className='shadow-none' type="text" placeholder={profile?.phonenumber ? profile.phonenumber : 'Your Number'} name='phonenumber' onChange={handleChange} />
               </Form.Group>
               <Form.Group>
                 <FormControl className='shadow-none' type='file' name='picture' onChange={(event) => { setPicture(event.currentTarget.files[0]) }} />
@@ -122,17 +122,16 @@ const FormEditPhone = ({ handleSubmit, handleChange }) => {
 }
 
 const ModalCenterName = (props) => {
+  const [showname, setShowName] = useState(false);
   const [picture, setPicture] = useState('');
-  const navigate = useNavigate();
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile.data);
   const success = useSelector(state => state.profile.successMsg);
-  const firstName = profile.fullname;
-  const phoneNumber = profile.phonenumber;
+  const firstName = profile?.fullname ? profile.fullname : 'Your Name';
+  const phoneNumber = profile?.phonenumber ? profile.phonenumber : 'Your Number';
 
   const onEditProfile = (value) => {
-    console.log(value);
     const fullname = value.fullname;
     const phonenumber = value.phonenumber;
 
@@ -140,15 +139,9 @@ const ModalCenterName = (props) => {
       window.alert('Input Fullname');
     } else {
       dispatch(editProfile({ token, fullname, phonenumber, picture }))
-      navigate('/profile');
+      setShowName(false);
     }
   }
-
-  useEffect(() => {
-    if (success) {
-      navigate('/profile')
-    }
-  }, [navigate, success])
 
   return (
     <Modal
@@ -217,7 +210,6 @@ const Profile = () => {
     dispatch(getProfileLogin(token))
   }, [success])
 
-  console.log(profile.picture);
   return (
     <>
       <Helmet>
@@ -225,7 +217,7 @@ const Profile = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav name={profile.fullname} phone={profile.phonenumber} picture={profile.picture} />
+        <Nav name={profile?.fullname ? profile.fullname : 'Your Name'} phone={profile?.phonenumber ? profile.phonenumber : 'Your Number'} picture={profile?.picture ? profile.picture : Mic80} />
 
         <section>
           <Container>
@@ -237,13 +229,13 @@ const Profile = () => {
                     <div>
                       <div className="text-center mt-2">
                         <Col md={1} className='mx-auto' type='file' >
-                          <img src={profile.picture || Mic80} alt="mic80.png" title='edit picture' className='pointer' onClick={() => setShowPicture(true)} />
+                          <img src={profile?.picture ? profile.picture : Mic80} alt="mic80.png" title='edit picture' className='pointer' onClick={() => setShowPicture(true)} />
                         </Col>
                         <ModalPicture show={showPicture} onHide={() => setShowPicture(false)} />
                         <Row className='d-flex justify-content-center'>
                           <Col md={4}>
                             <div className='align-items-center d-flex justify-content-center'>
-                              <h1 className="fs-18px fw-bold mt-4">{profile.fullname || 'Fullname'}</h1><Button onClick={() => setShowName(true)} className='btn btn-light mt-3'><span className="mt-3"><FiEdit2 className="me-2" /></span></Button></div>
+                              <h1 className="fs-18px fw-bold mt-4">{profile?.fullname ? profile.fullname : 'Fullname'}</h1><Button onClick={() => setShowName(true)} className='btn btn-light mt-3'><span className="mt-3"><FiEdit2 className="me-2" /></span></Button></div>
                           </Col>
                           <ModalCenterName
                             show={showname}
@@ -253,7 +245,7 @@ const Profile = () => {
 
                         <Row className="mt-3">
                           <div className='align-items-center d-flex justify-content-center'>
-                            <span>{profile.phonenumber || defaultPhone}</span><Button onClick={() => setShowPhone(true)} className='btn btn-light'><FiEdit2 className="me-2" /></Button>
+                            <span>{profile?.phonenumber ? profile.phonenumber : defaultPhone}</span><Button onClick={() => setShowPhone(true)} className='btn btn-light'><FiEdit2 className="me-2" /></Button>
                           </div>
                           <ModalCenterPhone
                             show={showphone}
