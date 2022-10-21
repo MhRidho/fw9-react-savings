@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getAllProfiles } from "../asyncActions/allprofiles";
 
 const initialState = {
-  value: {}
+  value: {},
+  isLoading: false,
 };
 
 const allprofile = createSlice({
@@ -11,9 +12,11 @@ const allprofile = createSlice({
   reducers: {},
   extraReducers: (build) => {
     build.addCase(getAllProfiles.pending, (state) => {
+      state.isLoading = true
       state.value = {};
     });
     build.addCase(getAllProfiles.fulfilled, (state, action) => {
+      state.isLoading = false
       state.value = { ...action.payload };
     });
   }

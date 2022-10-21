@@ -17,8 +17,8 @@ import { editTimeTransfer, notes, editAmount } from '../redux/reducers/transfer'
 const transferSchema = Yup.object().shape({
   amount: Yup.number()
     .required()
-  // .min(10000, 'Should tranfer at least 10000')
-  // .max(5000000, 'Please transfer under 5000000')
+    .min(10000, 'Should tranfer at least 10000')
+    .max(5000000, 'Please transfer under 5000000')
 })
 
 const TransferForm = (props) => {
@@ -72,7 +72,7 @@ const TransferForm = (props) => {
 const InputAmountBlank = () => {
   const fullname = useSelector(state => state.transfer.fullname);
   const phonenumber = useSelector(state => state.transfer.phonenumber);
-  // const picture = useSelector(state => state.transfer.picture);
+  const picture = useSelector(state => state.transfer.picture);
   const date = new Date().toISOString();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -112,7 +112,7 @@ const InputAmountBlank = () => {
                     <div>
                       <div
                         className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded">
-                        <Row><img src={profile.picture || Satu} alt="3.png" className='mar-right-20px' style={{ height: '40px' }} /></Row>
+                        <Row><img src={picture || Satu} alt="3.png" className='mar-right-20px' /></Row>
                         <Col className="ms-3">
                           <h1 className="mt-3 fs-16px fw-bold ms-3">{fullname}</h1>
                           <p className="fs-14px ms-3">{phonenumber}</p>

@@ -42,7 +42,7 @@ const SearchReceiver = () => {
   const token = useSelector((state) => state.auth.token);
   const allprofile = useSelector((state) => state.allprofile.value);
   const profile = useSelector(state => state.profile.data);
-  const isLoading = useSelector(state => state.transaction.isLoading);
+  const isLoading = useSelector(state => state.allprofile.isLoading);
 
   useEffect(() => {
     dispatch(getAllProfiles(token));

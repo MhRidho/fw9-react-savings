@@ -112,6 +112,7 @@ const Confirmation = () => {
   const [modalShow, setModalShow] = useState(false);
   const fullname = useSelector(state => state.transfer.fullname);
   const phonenumber = useSelector(state => state.transfer.phonenumber);
+  const picture = useSelector(state => state.transfer.picture);
   const profile = useSelector(state => state.profile.data);
   const amount = useSelector((state) => state.transfer.value);
   const date = useSelector((state) => state.transfer.date);
@@ -141,7 +142,7 @@ const Confirmation = () => {
                     <div>
                       <div
                         className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded">
-                        <Row><img src={profile.picture || Satu} alt="3.png" className='mar-right-20px' style={{ height: '40px' }} /></Row>
+                        <Row><img src={picture || Satu} alt="3.png" className='mar-right-20px' /></Row>
                         <Col classNameName="ms-3">
                           <h1 className="mt-3 fs-16px fw-bold ms-3">{fullname}</h1>
                           <p className="fs-14px ms-3">{phonenumber}</p>

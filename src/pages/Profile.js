@@ -10,7 +10,7 @@ import AsideMenus from '../components/AsideMenus';
 import Footer from '../components/Footer';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileLogin, editProfile, editProfilePhone } from '../redux/asyncActions/profiles';
+import { getProfileLogin, editProfile } from '../redux/asyncActions/profiles';
 
 const FormEditName = ({ handleSubmit, handleChange, handleFile, setPicture }) => {
   const profile = useSelector(state => state.profile.data);
@@ -98,36 +98,12 @@ const ModalPicture = (props) => {
   )
 }
 
-const FormEditPhone = ({ handleSubmit, handleChange }) => {
-  return (
-    <>
-
-      <Form onSubmit={handleSubmit}>
-        <Modal.Body>
-          <div className="d-flex flex-column my-5">
-            <Row>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control className='shadow-none' type="text" placeholder="Phone Number" name='phonenumber' onChange={handleChange} />
-              </Form.Group>
-            </Row>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button type='submit'
-            className="btn btn-primary btn-lg bg-web text-white u-none">Continue</Button>
-        </Modal.Footer>
-      </Form>
-    </>
-  )
-}
-
 const ModalCenterName = (props) => {
   const [showname, setShowName] = useState(false);
   const [picture, setPicture] = useState('');
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile.data);
-  const success = useSelector(state => state.profile.successMsg);
   const firstName = profile?.fullname ? profile.fullname : 'Your Name';
   const phoneNumber = profile?.phonenumber ? profile.phonenumber : 'Your Number';
 
@@ -155,41 +131,6 @@ const ModalCenterName = (props) => {
         </Modal.Header>
         <Formik onSubmit={onEditProfile} initialValues={{ fullname: { firstName }, phonenumber: { phoneNumber }, picture: '' }} >
           {(props) => <FormEditName {...props} setPicture={setPicture} />}
-        </Formik>
-      </Modal.Body>
-    </Modal>
-  )
-}
-
-const ModalCenterPhone = (props) => {
-  const navigate = useNavigate();
-  const token = useSelector(state => state.auth.token);
-  const dispatch = useDispatch();
-
-  const onEditProfilePhone = (value) => {
-    const phonenumber = value.phonenumber;
-
-    if (phonenumber === '') {
-      window.alert('Input Phonenumber');
-    } else {
-      console.log('masuk dispatch')
-      dispatch(editProfilePhone({ token, phonenumber }))
-      navigate('/profile');
-    }
-  }
-
-  return (
-    <Modal
-      {...props}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-      <Modal.Body>
-        <Modal.Header closeButton>
-          <h5 className="modal-title fs-16px fw-700 text-dark" id="contained-modal-title-vcenter"
-          >Edit Your Data</h5>
-        </Modal.Header>
-        <Formik onSubmit={onEditProfilePhone} initialValues={{ phonenumber: '' }} >
-          {(props) => <FormEditPhone {...props} />}
         </Formik>
       </Modal.Body>
     </Modal>
@@ -232,25 +173,21 @@ const Profile = () => {
                           <img src={profile?.picture ? profile.picture : Mic80} alt="mic80.png" title='edit picture' className='pointer' onClick={() => setShowPicture(true)} />
                         </Col>
                         <ModalPicture show={showPicture} onHide={() => setShowPicture(false)} />
+                        <Button title='edit' onClick={() => setShowName(true)} className='btn btn-light mt-1'><span className="mt-3"><FiEdit2 className="me-2" /></span></Button>
                         <Row className='d-flex justify-content-center'>
                           <Col md={4}>
                             <div className='align-items-center d-flex justify-content-center'>
-                              <h1 className="fs-18px fw-bold mt-4">{profile?.fullname ? profile.fullname : 'Fullname'}</h1><Button onClick={() => setShowName(true)} className='btn btn-light mt-3'><span className="mt-3"><FiEdit2 className="me-2" /></span></Button></div>
+                              <h1 className="fs-18px fw-bold my-1">{profile?.fullname ? profile.fullname : 'Fullname'}</h1></div>
                           </Col>
                           <ModalCenterName
                             show={showname}
                             onHide={() => setShowName(false)}
                           />
                         </Row>
-
-                        <Row className="mt-3">
+                        <Row className='mt-2'>
                           <div className='align-items-center d-flex justify-content-center'>
-                            <span>{profile?.phonenumber ? profile.phonenumber : defaultPhone}</span><Button onClick={() => setShowPhone(true)} className='btn btn-light'><FiEdit2 className="me-2" /></Button>
+                            <span>{profile?.phonenumber ? profile.phonenumber : defaultPhone}</span>
                           </div>
-                          <ModalCenterPhone
-                            show={showphone}
-                            onHide={() => setShowPhone(false)}
-                          />
                         </Row>
                       </div>
                       <div
