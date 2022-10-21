@@ -8,12 +8,14 @@ import AsideMenus from '../components/AsideMenus';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getHistory } from '../redux/asyncActions/transactions';
+import { BeatLoader } from 'react-spinners';
 
 const History = () => {
   const profile = useSelector(state => state.profile.data);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const transactions = useSelector((state) => state.transaction.value);
+  const isLoading = useSelector(state => state.transaction.isLoading);
 
   useEffect(() => {
     dispatch(getHistory(token));
@@ -37,21 +39,23 @@ const History = () => {
                     </div>
                     <span>This Week</span>
                     <div>
-                      {/* integration */}
-                      {transactions?.results?.map((transaction, i) => (
-                        <div className="nav justify-content-between d-flex align-items-center mt-4" key={i}>
-                          <Row><img src={Satu} alt="3.png" className="me-3" /></Row>
-                          <div className="col ms-3">
-                            <h1 className="mt-3 fs-16px fw-bold">{transaction?.notes}</h1>
-                            <p className="fs-14px">Transfer</p>
-                          </div>
-                          <span className="fs-16px fw-bold color-green-web">+Rp{transaction.amount}</span>
-                        </div>
-                      ))}
-                      {/* end integration */}
-                      <span className="mt-5">This Month</span>
+                      {isLoading ? (<div className='d-flex justify-content-center'><BeatLoader loading /></div>) :
+                        (
+                          <>
+                            {transactions?.results?.map((transaction, i) => (
+                              <div className="nav justify-content-between d-flex align-items-center mt-4" key={i}>
+                                <Row><img src={Satu} alt="3.png" className="me-3" /></Row>
+                                <div className="col ms-3">
+                                  <h1 className="mt-3 fs-16px fw-bold">{transaction?.notes}</h1>
+                                  <p className="fs-14px">Transfer</p>
+                                </div>
+                                <span className="fs-16px fw-bold color-green-web">+Rp{transaction.amount}</span>
+                              </div>
+                            ))}
+                          </>
+                        )}
                     </div>
-                    <div className='mt-4 d-flex gap-3'>
+                    <div className='mt-5 d-flex gap-3'>
                       <Button className='bg-web' disabled={transactions?.pageInfo?.prevPage === null} onClick={() => transactions.pageInfo.prevPage && dispatch(getHistory({ limit: transactions.pageInfo.limit, page: transactions.pageInfo.prevPage }))}>Prev</Button>
                       <div className='d-flex align-items-center'><b>{transactions?.pageInfo?.currentPage}</b></div>
                       <Button className='bg-web' disabled={transactions?.pageInfo?.nextPage === null} onClick={() => transactions.pageInfo.nextPage && dispatch(getHistory({ limit: transactions.pageInfo.limit, page: transactions.pageInfo.nextPage }))}>Next</Button>
