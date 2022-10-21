@@ -11,10 +11,12 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { topup } from '../redux/asyncActions/topup';
+import { getAllProfiles } from '../redux/asyncActions/allprofiles';
 
 const topupSchema = Yup.object().shape({
   amount: Yup.number()
     .required()
+    .min(5000, 'Min Topup 5000')
 })
 
 const EnterTopup = (props) => {
@@ -42,30 +44,6 @@ const EnterTopup = (props) => {
               <div type="invalid" className='text-center text-danger fs-14px mb-3'>
                 {props.errors.amount}
               </div>
-              <input
-                name="notes"
-                value={props.values.notes}
-                onChange={props.handleChange}
-                type="text"
-                className="form-control form color-7858A6 fs-16px text-center"
-                placeholder='notes'
-              />
-              <input
-                name="time"
-                value={props.values.time}
-                onChange={props.handleChange}
-                type="date"
-                className="form-control form color-7858A6 fs-16px text-center my-3"
-                placeholder='time'
-              />
-              <input
-                name="type_id"
-                value={props.values.type_id}
-                onChange={props.handleChange}
-                type="text"
-                className="form-control form color-7858A6 fs-16px text-center"
-                placeholder='type_id'
-              />
             </Col>
           </Row>
         </Modal.Body>
@@ -75,6 +53,20 @@ const EnterTopup = (props) => {
         </Modal.Footer>
       </Form>
     </>
+  )
+}
+
+const CardTopup = ({ no, way }) => {
+  return (
+    <div
+      className="nav justify-content-between d-flex align-items-center mt-2 shadow-sm p-2 bg-body rounded">
+      <div className="col mar-right-40px py-3">
+        <h4 className="fs-16px color-web-dark"><span
+          className="color-web fw-18px fw-bold mx-3">{no}
+        </span>{way}
+        </h4>
+      </div>
+    </div>
   )
 }
 
@@ -105,7 +97,7 @@ const ModalCenter = (props) => {
       centered>
       <Modal.Body>
 
-        <Formik validationSchema={topupSchema} initialValues={{ amount: '', notes: '', time: '', type_id: '' }} onSubmit={onTopup}>
+        <Formik validationSchema={topupSchema} initialValues={{ amount: '' }} onSubmit={onTopup}>
           {(props) => <EnterTopup {...props} />}
         </Formik>
 
@@ -124,7 +116,7 @@ const TopUp = () => {
       </Helmet>
 
       <div className='background-home'>
-        <Nav name={profile.fullname} phone={profile.phonenumber} picture={profile.picture} />
+        <Nav name={profile.fullname || 'Fullname'} phone={profile.phonenumber || 'Phone Number'} picture={profile.picture} />
 
         <section>
           <Container>
@@ -151,80 +143,14 @@ const TopUp = () => {
                       <h1 className="fs-18px fw-bold">How To Top Up</h1>
                     </div>
                     <div>
-                      <div
-                        className="nav justify-content-between d-flex align-items-center mt-2 shadow-sm p-2 bg-body rounded">
-                        <div className="col mar-right-40px py-3">
-                          <h4 className="fs-16px color-web-dark"><span
-                            className="color-web fw-18px fw-bold mx-3">1
-                          </span>Go the nearest
-                            ATM or you
-                            can use E-Banking.
-                          </h4>
-                        </div>
-                      </div>
-                      <div
-                        className="nav justify-content-between d-flex align-items-center mt-3 shadow-sm p-2 bg-body rounded">
-                        <div className="col mar-right-40px py-3">
-                          <h4 className="fs-16px color-web-dark"><span
-                            className="color-web fw-18px fw-bold mx-3">2
-                          </span>Type your security number on the ATM or E-Banking.
-                          </h4>
-                        </div>
-                      </div>
-                      <div
-                        className="nav justify-content-between d-flex align-items-center mt-3 shadow-sm p-2 bg-body rounded">
-                        <div className="col mar-right-40px py-3">
-                          <h4 className="fs-16px color-web-dark"><span
-                            className="color-web fw-18px fw-bold mx-3">3
-                          </span>Select “Transfer” in the menu
-                          </h4>
-                        </div>
-                      </div>
-                      <div
-                        className="nav justify-content-between d-flex align-items-center mt-3 shadow-sm p-2 bg-body rounded">
-                        <div className="col mar-right-40px py-3">
-                          <h4 className="fs-16px color-web-dark"><span
-                            className="color-web fw-18px fw-bold mx-3">4
-                          </span>Type the virtual account number that we provide you at the top.
-                          </h4>
-                        </div>
-                      </div>
-                      <div
-                        className="nav justify-content-between d-flex align-items-center mt-3 shadow-sm p-2 bg-body rounded">
-                        <div className="col mar-right-40px py-3">
-                          <h4 className="fs-16px color-web-dark"><span
-                            className="color-web fw-18px fw-bold mx-3">5
-                          </span>Type the amount of the money you want to top up.
-                          </h4>
-                        </div>
-                      </div>
-                      <div
-                        className="nav justify-content-between d-flex align-items-center mt-3 shadow-sm p-2 bg-body rounded">
-                        <div className="col mar-right-40px py-3">
-                          <h4 className="fs-16px color-web-dark"><span
-                            className="color-web fw-18px fw-bold mx-3">6
-                          </span>Read the summary details
-                          </h4>
-                        </div>
-                      </div>
-                      <div
-                        className="nav justify-content-between d-flex align-items-center mt-3 shadow-sm p-2 bg-body rounded">
-                        <div className="col mar-right-40px py-3">
-                          <h4 className="fs-16px color-web-dark"><span
-                            className="color-web fw-18px fw-bold mx-3">7
-                          </span>Press transfer / top up
-                          </h4>
-                        </div>
-                      </div>
-                      <div
-                        className="nav justify-content-between d-flex align-items-center mt-3 shadow-sm p-2 bg-body rounded">
-                        <div className="col mar-right-40px py-3">
-                          <h4 className="fs-16px color-web-dark"><span
-                            className="color-web fw-18px fw-bold mx-3">8
-                          </span>You can see your money in Zwallet within 3 hours.
-                          </h4>
-                        </div>
-                      </div>
+                      <CardTopup no='1' way='Go the nearest ATM or you can use E-Banking.' />
+                      <CardTopup no='2' way='Type your security number on the ATM or E-Banking.' />
+                      <CardTopup no='3' way='Select “Transfer” in the menu.' />
+                      <CardTopup no='4' way='Type the virtual account number that we provide you at the top.' />
+                      <CardTopup no='5' way='Type the amount of the money you want to top up.' />
+                      <CardTopup no='6' way='Read the summary details.' />
+                      <CardTopup no='7' way='Press transfer / top up.' />
+                      <CardTopup no='8' way='You can see your money in Zwallet within 3 hours.' />
                     </div>
                   </div>
                 </div>

@@ -65,7 +65,7 @@ const Success = () => {
                         <div className="col mar-right-40px">
                           <p className="fs-16px">Date & Time
                           </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">{date}September 20, 2022 - 12.20</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">{date}November 20, 2022 - 12.20</h1>
                         </div>
                       </div>
                       <div
@@ -82,7 +82,7 @@ const Success = () => {
                       <div>
                         <div
                           className="nav justify-content-between d-flex align-items-center mt-1 shadow-sm p-3 mb-1 bg-body rounded">
-                          <Row><img src={Sam70} alt="3.png" className="mar-right-40px" /></Row>
+                          <Row><img src={profile.picture || Sam70} alt="3.png" className="mar-right-40px" style={{ height: '40px' }} /></Row>
                           <div className="col ms-3">
                             <h1 className="mt-3 fs-18px fw-bold">{fullname}</h1>
                             <p className="fs-16px">{phonenumber}

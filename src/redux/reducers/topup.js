@@ -8,7 +8,7 @@ const initialState = {
   phonenumber: '',
   picture: '',
   time: '',
-  notes: '',
+  notes: 'Topup',
   errorMsg: '',
   successMsg: '',
   type_id: 1

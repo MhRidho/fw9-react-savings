@@ -13,7 +13,7 @@ import { getAllProfiles } from '../redux/asyncActions/allprofiles';
 import { editNameTransfer, editPhoneTransfer, editUserIdTransfer } from '../redux/reducers/transfer';
 import { BeatLoader } from 'react-spinners';
 
-const DataProfile = ({ id, user_id, fullname, phonenumber }) => {
+const DataProfile = ({ id, user_id, fullname, phonenumber, picture }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const nextData = () => {
@@ -26,7 +26,7 @@ const DataProfile = ({ id, user_id, fullname, phonenumber }) => {
     <>
       <div onClick={nextData}
         className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-3 mb-2 bg-body rounded pointer" key={id}>
-        <Row><img src={Satu} alt="3.png" className='mar-right-20px' /></Row>
+        <Row><img src={picture || Satu} alt="3.png" className='mar-right-20px img-fluid' style={{ height: '60px' }} /></Row>
         <Col className="ms-3">
           <h1 className="mt-3 fs-16px fw-bold">{fullname}</h1>
           <p className="fs-14px">{phonenumber}</p>
@@ -93,7 +93,7 @@ const SearchReceiver = () => {
                             return val;
                           }
                         }).map((profile, id) => (
-                          <DataProfile key={id} id={profile.id} user_id={profile.user_id} fullname={profile.fullname} phonenumber={profile.phonenumber} />
+                          <DataProfile key={id} id={profile.id} user_id={profile.user_id} fullname={profile.fullname} phonenumber={profile.phonenumber} picture={profile.picture} />
                         ))}
                       </div>
                     )}

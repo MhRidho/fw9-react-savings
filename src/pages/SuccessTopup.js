@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Success1 from '../assets/img/success.png';
 import Sam70 from '../assets/img/sam70.png';
+import Mic80 from '../assets/img/mic80.png';
 import { Helmet } from 'react-helmet';
 import '../assets/css/stylesStartHome.css';
 import Nav from '../components/navbar';
@@ -11,21 +12,22 @@ import Footer from '../components/Footer';
 import { useSelector } from 'react-redux';
 
 const Success = () => {
-  const amount = useSelector(state => state.transfer.value);
   const fullname = useSelector(state => state.transfer.fullname);
   const phonenumber = useSelector(state => state.transfer.phonenumber);
   const profile = useSelector(state => state.profile.data);
-  const date = useSelector((state) => state.transfer.date);
-  const currentBalance = profile.balance
-  const notes = useSelector((state) => state.transfer.notes);
-  const balanceLeft = currentBalance - amount;
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  const date = mm + '-' + dd + '-' + yyyy;
+  console.log(profile)
   return (
     <>
       <Helmet>
         <title>Success</title>
       </Helmet>
       <div className='background-home'>
-        <Nav />
+        <Nav name={profile?.fullname ? profile.fullname : 'Your Name'} phone={profile?.phonenumber ? profile.phonenumber : 'Your Number'} picture={profile?.picture ? profile.picture : Mic80} />
         <section>
           <Container>
             <Row className="mx-5">
@@ -43,17 +45,9 @@ const Success = () => {
                       <div
                         className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-2 bg-body rounded">
                         <div className="col mar-right-40px">
-                          <p className="fs-16px">Amount
-                          </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">Rp {amount}</h1>
-                        </div>
-                      </div>
-                      <div
-                        className="nav justify-content-between d-flex align-items-center mt-4 shadow-sm p-2 bg-body rounded">
-                        <div className="col mar-right-40px">
                           <p className="fs-16px">Currently Balance
                           </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">Rp {balanceLeft}</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">Rp {profile?.balance ? profile.balance : 'Currently Balance'}</h1>
                         </div>
                       </div>
                       <div
@@ -61,7 +55,7 @@ const Success = () => {
                         <div className="col mar-right-40px">
                           <p className="fs-16px">Date & Time
                           </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">{date}May 11, 2020 - 12.20</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">{date}</h1>
                         </div>
                       </div>
                       <div
@@ -69,7 +63,7 @@ const Success = () => {
                         <div className="col mar-right-40px">
                           <p className="fs-16px">Notes
                           </p>
-                          <h1 className="fs-18px fw-bold color-web-dark-2">{notes}</h1>
+                          <h1 className="fs-18px fw-bold color-web-dark-2">Top Up</h1>
                         </div>
                       </div>
                       <div className="d-flex justify-content-between mt-5">
@@ -78,7 +72,7 @@ const Success = () => {
                       <div>
                         <div
                           className="nav justify-content-between d-flex align-items-center mt-1 shadow-sm p-3 mb-1 bg-body rounded">
-                          <Row><img src={Sam70} alt="3.png" className="mar-right-40px" /></Row>
+                          <Row><img src={profile?.picture ? profile.picture : Sam70} alt="3.png" className="mar-right-40px" /></Row>
                           <div className="col ms-3">
                             <h1 className="mt-3 fs-18px fw-bold">{fullname}</h1>
                             <p className="fs-16px">{phonenumber}
