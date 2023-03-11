@@ -11,7 +11,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { topup } from '../redux/asyncActions/topup';
-import { getAllProfiles } from '../redux/asyncActions/allprofiles';
 
 const topupSchema = Yup.object().shape({
   amount: Yup.number()

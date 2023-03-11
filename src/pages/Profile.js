@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react'
 import { Container, Row, Col, Button, Modal, Form, FormControl, Image } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Mic80 from '../assets/img/mic80.png';
 import { FiEdit2, FiArrowRight } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
